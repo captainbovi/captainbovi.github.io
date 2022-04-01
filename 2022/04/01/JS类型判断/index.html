@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Hello World |  点滴生活 点滴人生</title>
+      <title>JS类型判断 |  点滴生活 点滴人生</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.png" />
@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-hello-world"
+  id="post-JS类型判断"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Hello World
+  JS类型判断
 </h1>
  
 
@@ -73,15 +73,19 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/04/01/hello-world/" class="article-date">
-  <time datetime="2022-03-31T17:42:31.476Z" itemprop="datePublished">2022-04-01</time>
-</a>   
+      <a href="/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" class="article-date">
+  <time datetime="2022-04-01T12:40:23.000Z" itemprop="datePublished">2022-04-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">75</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -90,7 +94,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -105,19 +109,87 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+  <p>类型判断在 web 开发中有非常广泛的应用，简单的有判断数字还是字符串，进阶一点的有判断数组还是对象，再进阶一点的有判断日期、正则、错误类型，再再进阶一点还有比如判断 plainObject、空对象、Window 对象等等。</p>
+<span id="more"></span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><hr>
+<p>我们最最常用的莫过于 typeof，注意，尽管我们会看到诸如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(typeof(&#x27;yayu&#x27;)) // string</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>的写法，但是 typeof 可是一个正宗的运算符，就跟加减乘除一样！这就能解释为什么下面这种写法也是可行的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(typeof &#x27;yayu&#x27;) // string</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>引用《JavaScript权威指南》中对 typeof 的介绍：</p>
+<blockquote>
+<p>typeof 是一元操作符，放在其单个操作数的前面，操作数可以是任意类型。返回值为表示操作数类型的一个字符串。</p>
+</blockquote>
+<p>那我们都知道，在 ES6 前，JavaScript 共六种数据类型，分别是：</p>
+<p>Undefined、Null、Boolean、Number、String、Object</p>
+<p>然而当我们使用 typeof 对这些数据类型的值进行操作的时候，返回的结果却不是一一对应，分别是：</p>
+<p>undefined、object、boolean、number、string、object</p>
+<p>注意以上都是小写的字符串。Null 和 Object 类型都返回了 object 字符串。</p>
+<p>尽管不能一一对应，但是 typeof 却能检测出函数类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function a() &#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(typeof a); // function</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>所以 typeof 能检测出六种类型的值，但是，除此之外 Object 下还有很多细分的类型呐，如 Array、Function、Date、RegExp、Error 等。</p>
+<p>如果用 typeof 去检测这些类型，举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var date = new Date();</span><br><span class="line">var error = new Error();</span><br><span class="line">console.log(typeof date); // object</span><br><span class="line">console.log(typeof error); // object</span><br></pre></td></tr></table></figure>
+
+<p>返回的都是 object 呐，这可怎么区分~ 所以有没有更好的方法呢？</p>
+<h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><hr>
+<p>那 Object.protototype.toString 究竟是一个什么样的方法呢？</p>
+<p>为了更加细致的讲解这个函数，让我先献上 ES5 规范地址：<a target="_blank" rel="noopener" href="https://es5.github.io/#x15.2.4.2%E3%80%82">https://es5.github.io/#x15.2.4.2。</a></p>
+<p>在第 15.2.4.2 节讲的就是 Object.prototype.toString()，为了不误导大家，我先奉上英文版：</p>
+<blockquote>
+<p>When the toString method is called, the following steps are taken:</p>
+</blockquote>
+<ol>
+<li>If the <strong>this</strong> value is <strong>undefined</strong>, return “**[object Undefined]**“.</li>
+<li>If the <strong>this</strong> value is <strong>null</strong>, return “**[object Null]**“.</li>
+<li>Let <em>O</em> be the result of calling ToObject passing the <strong>this</strong> value as the argument.</li>
+<li>Let <em>class</em> be the value of the [[Class]] internal property of <em>O</em>.</li>
+<li>Return the String value that is the result of concatenating the three Strings “**[object** “, <em>class</em>, and “**]**“.</li>
+</ol>
+<p>凡是规范上加粗或者斜体的，在这里我也加粗或者斜体了，就是要让大家感受原汁原味的规范！</p>
+<p>如果没有看懂，就不妨看看我理解的：</p>
+<p>当 toString 方法被调用的时候，下面的步骤会被执行：</p>
+<ol>
+<li>如果 this 值是 undefined，就返回 [object Undefined]</li>
+<li>如果 this 的值是 null，就返回 [object Null]</li>
+<li>让 O 成为 ToObject(this) 的结果</li>
+<li>让 class 成为 O 的内部属性 [[Class]] 的值</li>
+<li>最后返回由 “[object ” 和 class 和 “]” 三个部分组成的字符串</li>
+</ol>
+<p>通过规范，我们至少知道了调用 Object.prototype.toString 会返回一个由 “[object ” 和 class 和 “]” 组成的字符串，而 class 是要判断的对象的内部属性。</p>
+<p>让我们写个 demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(undefined)) // [object Undefined]</span><br><span class="line">console.log(Object.prototype.toString.call(null)) // [object Null]</span><br><span class="line"></span><br><span class="line">var date = new Date();</span><br><span class="line">console.log(Object.prototype.toString.call(date)) // [object Date]</span><br></pre></td></tr></table></figure>
+
+<p>由此我们可以看到这个 class 值就是识别对象类型的关键！</p>
+<p>正是因为这种特性，我们可以用 Object.prototype.toString 方法识别出更多类型！</p>
+<p>那到底能识别多少种类型呢？</p>
+<p>至少 12 种！</p>
+<p>你咋知道的？</p>
+<p>我数的！</p>
+<p>……</p>
+<p>让我们看个 demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 以下是11种：</span><br><span class="line">var number = 1;          // [object Number]</span><br><span class="line">var string = &#x27;123&#x27;;      // [object String]</span><br><span class="line">var boolean = true;      // [object Boolean]</span><br><span class="line">var und = undefined;     // [object Undefined]</span><br><span class="line">var nul = null;          // [object Null]</span><br><span class="line">var obj = &#123;a: 1&#125;         // [object Object]</span><br><span class="line">var array = [1, 2, 3];   // [object Array]</span><br><span class="line">var date = new Date();   // [object Date]</span><br><span class="line">var error = new Error(); // [object Error]</span><br><span class="line">var reg = /a/g;          // [object RegExp]</span><br><span class="line">var func = function a()&#123;&#125;; // [object Function]</span><br><span class="line"></span><br><span class="line">function checkType() &#123;</span><br><span class="line">    for (var i = 0; i &lt; arguments.length; i++) &#123;</span><br><span class="line">        console.log(Object.prototype.toString.call(arguments[i]))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkType(number, string, boolean, und, nul, obj, array, date, error, reg, func)</span><br></pre></td></tr></table></figure>
+
+<p>除了以上 11 种之外，还有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(Math)); // [object Math]</span><br><span class="line">console.log(Object.prototype.toString.call(JSON)); // [object JSON]</span><br></pre></td></tr></table></figure>
+
+<p>除了以上 13 种之外，还有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function a() &#123;</span><br><span class="line">    console.log(Object.prototype.toString.call(arguments)); // [object Arguments]</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以识别至少 14 种类型，当然我们也可以算出来，[[class]] 属性至少有 12 个。</p>
+<h4 id="Window对象"><a href="#Window对象" class="headerlink" title="Window对象"></a>Window对象</h4><hr>
+<p>Window 对象作为客户端 JavaScript 的全局对象，它有一个 window 属性指向自身，这点在<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/5">《JavaScript深入之变量对象》</a>中讲到过。我们可以利用这个特性判断是否是 Window 对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function isWindow( obj ) &#123;</span><br><span class="line">    return obj != null &amp;&amp; obj === obj.window;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><hr>
+<p>instanceof 可以用于判断测试者和目标是不是同一个类型，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Car(make, model, year) &#123;</span><br><span class="line">  this.make = make;</span><br><span class="line">  this.model = model;</span><br><span class="line">  this.year = year;</span><br><span class="line">&#125;</span><br><span class="line">const auto = new Car(&#x27;Honda&#x27;, &#x27;Accord&#x27;, 1998);</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Car);</span><br><span class="line">// expected output: true</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Object);</span><br><span class="line">// expected output: true</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/28">JavaScript专题之类型判断(上) · Issue #28 · mqyqingfeng&#x2F;Blog · GitHub</a></p>
  
       <!-- reward -->
       
@@ -182,26 +254,24 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/01/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2022/04/01/home/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            home
-          
-        </div>
-      </a>
     
+      <a href="/2022/04/01/This%E7%90%86%E8%A7%A3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">This理解</div>
+      </a>
     
   </nav>
 
