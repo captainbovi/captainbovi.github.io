@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-01T13:15:22.595Z</updated>
+  <updated>2022-04-01T13:26:16.204Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,16 +21,10 @@
     <link href="http://example.com/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/"/>
     <id>http://example.com/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/</id>
     <published>2022-04-01T13:08:25.000Z</published>
-    <updated>2022-04-01T13:15:22.595Z</updated>
+    <updated>2022-04-01T13:26:16.204Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;display-none&quot;&gt;&lt;a href=&quot;#display-none&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;p&gt;display可是个神奇的东西，通过修改display可以帮助组件实现“逆天改命”，变成其他组件的“模样”，当然，修炼之路不乏贫困，让我们一起来看看都有些什么神奇的display可供更改。&lt;/p&gt;</summary>
     
     
     
@@ -46,11 +40,17 @@
     <link href="http://example.com/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/"/>
     <id>http://example.com/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/</id>
     <published>2022-04-01T13:08:06.000Z</published>
-    <updated>2022-04-01T13:08:06.118Z</updated>
+    <updated>2022-04-01T13:28:16.960Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过&lt;img&gt;组件。两种方式实现自适应的方式大同小异。&lt;/p&gt;</summary>
     
     
     
+    <category term="css" scheme="http://example.com/categories/css/"/>
     
+    
+    <category term="css" scheme="http://example.com/tags/css/"/>
     
   </entry>
   
@@ -59,11 +59,15 @@
     <link href="http://example.com/2022/04/01/%E5%B1%85%E4%B8%AD/"/>
     <id>http://example.com/2022/04/01/%E5%B1%85%E4%B8%AD/</id>
     <published>2022-04-01T13:07:47.000Z</published>
-    <updated>2022-04-01T13:07:47.934Z</updated>
+    <updated>2022-04-01T13:27:10.829Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中&lt;/p&gt;</summary>
     
     
     
     
+    <category term="css" scheme="http://example.com/tags/css/"/>
     
   </entry>
   
