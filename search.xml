@@ -1,205 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/04/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>欢迎来到我的博客</title>
+    <url>/2022/04/01/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>我的本意其实并不是打算搭一个个人网站，只是想找个地方记录一下自己的一些学习笔记罢了。后来经过一些机缘巧合，我接触到了个人网站这一神奇的东西，同时还要感谢我的好兄弟王力可对我赞助（在此再次感谢），才让这一网站顺利搭成。不过由于服务器雀食太贵了，所以连夜携博文跑路，投奔github page的怀抱。</p>
+<p>（原网站：<a href="http://capbv.top/">http://capbv.top</a>   不知道读者看到这儿的时候这个网站是否还存活</p>
+<blockquote>
+<p>没有斗争就没有功绩，没有功绩就没有奖赏，而没有行动就没有生活。</p>
+<p><em>别林斯基</em></p>
+</blockquote>
+<p>里面的每一篇博客，都是我对于学习上的记录，记录内容也均为我个人的所观所感,部分文章摘用了一些写的很好的文章，文章下部会有原文链接，各位看官如果感觉到又被冒犯到或者学习笔记中存在错误，还请联系我对文章进行更改！谢谢各位。</p>
+<p>人生活在希望之中，各位，愿世间安稳，岁月静好。</p>
+<h2 id="自我简介"><a href="#自我简介" class="headerlink" title="自我简介"></a>自我简介</h2><p>本人是来自天回镇&#x2F;安岳县的一名普通群众，目前本科在电子科技大学就读。平时爱好踢踢球、打篮球。求胜欲，是一个压力怪，经常同时对队友和对手一起输出（要找我玩的话，请QQ联系）。同时也比较喜欢去了解人文科普类的知识（尤其是喜欢看这方面的记录片）。最大的梦想是能快乐的活着。</p>
+<h2 id="不止生活"><a href="#不止生活" class="headerlink" title="不止生活"></a>不止生活</h2><p>本博客用来记录自己的学习以及感想</p>
+<p>这其实也是我的一个初衷，是建立这个博客的最初的出发点。</p>
 ]]></content>
   </entry>
   <entry>
-    <title>home</title>
-    <url>/2022/04/01/home/</url>
-    <content><![CDATA[<h1 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h1>]]></content>
+    <title>神奇的display</title>
+    <url>/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/</url>
+    <content><![CDATA[<p>display可是个神奇的东西，通过修改display可以帮助组件实现“逆天改命”，变成其他组件的“模样”，当然，修炼之路不乏贫困，让我们一起来看看都有些什么神奇的display可供更改。</p>
+<span id="more"></span>
+
+<h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
+<p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
+<hr>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/c6c6b6064cdd0484ebfb71a3dcae55ef-779x1024.jpeg" alt="img"></p>
+<blockquote>
+<p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
+<p>— Alan Turing, <em>Computer scientist</em></p>
+</blockquote>
+<hr>
+<h1 id="display-block、inline"><a href="#display-block、inline" class="headerlink" title="display:block、inline"></a>display:block、inline</h1><p>根据css的规定，一些组件有着其默认的display值，常用的div的默认display值为block，为“块级元素”(block-level ),而作为块级元素，其高度、宽度、内距以及外距都可以进行调整。</p>
+<p>块级元素特点：</p>
+<ol>
+<li>每个块级元素都从新的一行开始（一块霸占一行）</li>
+<li>在其本身的宽度不进行设置时，其宽度默认为其父级组件的宽度（body也算父级组件）。</li>
+<li>可以设置padding和margin</li>
+</ol>
+<p>常用的 块级元素有：</p>
+<p>div、p、h1…h6、ol、ul、dl、table、address、blockquote （块引用）、form</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div style=&#x27;display:inline’&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>而如链接元素a，其默认display值为inline，为“行内元素”，它是依附于其他块级元素存在的，故行内元素是无法设置高度、宽度等属性，在设置margin时只有left、right的时候，与此同时可以设置padding（若想设置，应该将其display强制转化为block）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;span style=&#x27;display:block’&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>常用的行内元素有：</p>
+<p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
+<h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
+<p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095231269-1572459142.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095240254-1054271047.png" alt="img"></p>
+<p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
+<h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
+<p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
+<p>我们来对对比一下display：inline-block和float的效果</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095247004-979551461.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095254066-1995956065.png" alt="img">设置overfloat:hidden防止父元素高度坍塌</p>
+<p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095302926-2090422648.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095312144-2092703645-1.png" alt="img"></p>
+<p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
+<h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
+<p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095321754-1704124919.png" alt="img"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
+<h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
+<p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/20200811233531648.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）</p>
+<h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li>flex-direction</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>flex-wrap</li>
+<li>align-content</li>
+<li>flex-flow</li>
+</ul>
+<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1.flex-direction"></a>1.flex-direction</h4><p>项目（flex item)默认情况下是沿着主轴从main start 开始往main end 方向进行排序。而属性flex-direction决定了主轴的方向。其中flex-direction有四个取值（row(默认值)、row-reverse、column(自上而下）、column-reverse)</p>
+<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2.justify-content"></a>2.justify-content</h4><p>这个属性主要用来排列主轴上各个项目(item)的位置，决定了项目在主轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>flex-start(默认值):与main start对齐</li>
+<li>flex-end：与main end对齐</li>
+<li>center：居中</li>
+<li>space-between：flex items 之间的距离相等，与main start、main end两端对齐</li>
+<li>space-evenly: flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p>值得注意的是这些都<strong>是容器的属性</strong></p>
+<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3.align-items"></a>3.align-items</h4><p>这个属性是用于决定项目（items)在纵轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>normal：在弹性布局中，效果和stretch一样</li>
+<li>stretch：前提是items不设置高度，当flex items 在cross axis 方向的size为auto时，会自动拉伸至填充flex container(或者换句话说：如果项目未设置高度或设为auto，将占满整个容器的高度。)</li>
+<li>flex-satrt:与cross start 对齐</li>
+<li>flex-end:与cross end 对齐</li>
+<li>center:居中对齐</li>
+<li>baseline:与基准线对齐</li>
+</ul>
+<h4 id="4-flex-wrap"><a href="#4-flex-wrap" class="headerlink" title="4.flex-wrap"></a>4.flex-wrap</h4><p>决定了flex container 是单行还是多行,默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+<p>属性值：</p>
+<ul>
+<li>nowrap(默认)：单行</li>
+<li>warp：多行 &#x2F;&#x2F;这个比较少用</li>
+<li>wrap-reverse:多行（对比wrap，cross start 与cross end相反）</li>
+</ul>
+<h4 id="5-align-content"><a href="#5-align-content" class="headerlink" title="5.align-content"></a>5.align-content</h4><p>决定了多行flex items 在cross axis的对齐方式 用法与justify-content相似 一个是横轴。一个控制竖轴</p>
+<p>属性值：</p>
+<ul>
+<li>stretch(默认值)：与align-items的stretch类似，当items有高度的时候，无效果</li>
+<li>flex-start:与cross start 对齐</li>
+<li>flex-end :与cross end 对齐</li>
+<li>center：居中对齐</li>
+<li>space-between:flex items 之间的距离相等，与cross start、cross end两端对齐</li>
+<li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/rock-4739036_1920-1024x640.jpg" alt="img"></p>
+<h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
+<h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
+<h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
+<p>如果所有flex items 的flex-grow 综合sum不超过1，这直接乘以剩余size就是扩展大小、<br>如果超过1 扩展size&#x3D;剩余size*flex-grow&#x2F;sum</p>
+<p><strong>当设置flex:1时，每个子组件将会均匀的分布（水平）在flex容器中</strong></p>
+<h4 id="4-flex-shrink"><a href="#4-flex-shrink" class="headerlink" title="4.flex-shrink"></a>4.flex-shrink</h4><p>flex-shrink (shrink 缩小，收缩)与flex-grow相似，一个扩展，一个伸缩<br>可以设置为任意非父数字（小数，整数 0），默认为1<br>当flex items在main axis 方向上超过了flex container 的size flex-shrink属性才会生效、<br>如果所有flex items 的flex-shrink 总和sum超过1，每个flex item 收缩的size为：<br>flex item 超出flex container 的size*收缩比例&#x2F;每个flex items 的收缩比例之和<br>如果sum不超过1，每个flex item 收缩的size为：<br>size &#x3D; 超出的size * flex-shrink值<br>flex items收缩后的最终size不能小于min-width\min-height</p>
+<h4 id="5-flex-basis"><a href="#5-flex-basis" class="headerlink" title="5.flex-basis"></a>5.flex-basis</h4><p>用来设置flex items 在 main axis方向上的base size<br>默认为auto，可以设置具体的宽度数值 决定flex items最终base size 的因素，优先级从高到低</p>
+<ul>
+<li>max-width\max-height\min-width\min-height</li>
+<li>flex-basis width\height</li>
+<li>内容本身的size</li>
+</ul>
+]]></content>
       <categories>
-        <category>intro</category>
+        <category>css</category>
       </categories>
       <tags>
-        <tag>intro</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
-    <title>谈谈表单</title>
-    <url>/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/</url>
-    <content><![CDATA[<p>表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。</p>
+    <title>图片自适应大小</title>
+    <url>/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/</url>
+    <content><![CDATA[<p>在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过<img>组件。两种方式实现自适应的方式大同小异。</p>
 <span id="more"></span>
 
-<h4 id="表单控件：-input-select-textarea-button"><a href="#表单控件：-input-select-textarea-button" class="headerlink" title="表单控件： input select textarea button"></a>表单控件： input select textarea button</h4><p>包含了具体的表单功能项：单行文本输入框、密码输入框、复选框、按钮</p>
-<h4 id="提示信息：label"><a href="#提示信息：label" class="headerlink" title="提示信息：label"></a>提示信息：label</h4><p>表单中的说明性文字，提示用户进行填写和操作，可以绑定表单控件，扩大选择区域，label中的属性 for 可以用于绑定的表单控件，绑定方式：绑定id值与for值相同的表单控件</p>
-<h4 id="表单域：form"><a href="#表单域：form" class="headerlink" title="表单域：form"></a>表单域：form</h4><p>类比一个容器，用于容纳所有表单组件和提示信息，可以通过他定义处理表单数据所用程序的url地址以及数据提交到服务器的方法（如果不定义，表单的数据将无法传送到后台服务器）,创建表单的基本语法格式如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&#x27;url地址&#x27; method=&#x27;提交方式&#x27; name=&#x27;表单名称&#x27;&gt;</span><br><span class="line">  表单控件...</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="背景图适应大小"><a href="#背景图适应大小" class="headerlink" title="背景图适应大小"></a>背景图适应大小</h3><p>当外层容器的宽高比跟图片宽高比一致时到没啥问题，但在一些特定的业务场景，如九宫格图片展示时，展示的原始图片它们的大小，宽高比很有可能是不一样的，但外层容器的大小是固定的。此时如果按照上面的做法会导致图片被拉伸或者压缩。为了让图片显示的自然，我们可以让图片中的一部分去填充整个容器，虽然这样做无法让图片显示完整，但也避免了因图片的拉伸或压缩导致的变形。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;</span><br><span class="line">width: 200px；</span><br><span class="line">height: 200px;</span><br><span class="line">background: url(&#x27;xxxx.png&#x27;) no-repeat;</span><br><span class="line">background-size: cover;</span><br><span class="line">background-position: center center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
-<p>其常用的属性如下：</p>
+<h3 id="图片自适应容器宽高"><a href="#图片自适应容器宽高" class="headerlink" title="图片自适应容器宽高"></a>图片自适应容器宽高</h3><p>css实现图片自适应容器宽高的做法一般如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;width: 200px; height: 200px&#125;</span><br><span class="line">div img&#123;width: 100%; height: 100%&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;img src=&quot;xxxx.png&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>居中</title>
+    <url>/2022/04/01/%E5%B1%85%E4%B8%AD/</url>
+    <content><![CDATA[<p>居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中</p>
+<span id="more"></span>
+
+<h3 id="绝对位置居中"><a href="#绝对位置居中" class="headerlink" title="绝对位置居中"></a>绝对位置居中</h3><p>绝对位置居中的核心思想就是通过绝对定位的方式实现居中，具体操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">style&#123;</span><br><span class="line">    //给父体一个绝对定位</span><br><span class="line">    .div&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    //给子体相对定位</span><br><span class="line">    .object&#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        left: 50%;</span><br><span class="line">        top:50%;</span><br><span class="line">        transform: translate(-50%,-50%);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>top: 50%;left: 50%;， 是以左上角为原点，故不处于中心位置，<br>translate(-50%,-50%) 作用是，往上（x轴）,左（y轴）移动自身长宽的 50%，以使其居于中心位置。</p>
+<h3 id="弹性盒子居中"><a href="#弹性盒子居中" class="headerlink" title="弹性盒子居中"></a>弹性盒子居中</h3><p>弹性盒子居中主要使用justify-content、 align-items 属性，</p>
+<p>justify-content:center;&#x2F;* 子元素水平居中 *&#x2F;</p>
+<p>align-items:center;&#x2F;* 子元素垂直居中 *&#x2F;</p>
+<p>其中justify-content是flex布局中父项的一个比较常见的属性，justify-content 属性定义了项目在主轴上的对齐方式。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/image.png" alt="img"></p>
+<p><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-items</a>属性可以应用于所有的flex容器，它的作用是设置flex子项在每个flex行的交叉轴上的默认对齐方式。不同取值的效果如下所示：<br><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-item</a></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/image-1.png" alt="img"></p>
+<p>align-items属性是针对单独的每一个flex子项起作用，它的基本单位是每一个子项，在所有情况下都有效果（当然要看具体的属性值）。</p>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS的原型和原型链</title>
+    <url>/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
+    <content><![CDATA[<p>讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：</p>
+<span id="more"></span>
+
+<p>1、所有的引用类型（数组、函数、对象）可以自由扩展属性（除null以外）。</p>
+<p>2、所有的引用类型都有一个’_ _ proto_ _’属性(也叫隐式原型，它是一个普通的对象)。</p>
+<p>3、所有的函数都有一个’prototype’属性(这也叫显式原型，它也是一个普通的对象)。</p>
+<p>4、所有引用类型，它的’_ _ proto_ _’属性指向它的构造函数的’prototype’属性。</p>
+<p>5、当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它的’_ _ proto_ _’属性(也就是它的构造函数的’prototype’属性)中去寻找。</p>
+<p>那么要点说完了，我们就根据这些要点来理解原型和原型链。</p>
+<p>原型<br>我们先来看一个原型的例子。</p>
+<pre><code>    //这是一个构造函数
+    function Foo(name,age)&#123;
+        this.name=name;
+        this.age=age;
+    &#125;
+    /*根据要点3，所有的函数都有一个prototype属性，这个属性是一个对象
+    再根据要点1，所有的对象可以自由扩展属性
+    于是就有了以下写法*/
+    Foo.prototype=&#123;
+        // prototype对象里面又有其他的属性
+        showName:function()&#123;
+            console.log(&quot;I&#39;m &quot;+this.name);//this是什么要看执行的时候谁调用了这个函数
+        &#125;,
+        showAge:function()&#123;
+            console.log(&quot;And I&#39;m &quot;+this.age);//this是什么要看执行的时候谁调用了这个函数
+        &#125;
+    &#125;
+    var fn=new Foo(&#39;小明&#39;,19)
+    /*当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它
+    构造函数的&#39;prototype&#39;属性中去找*/
+    fn.showName(); //I&#39;m 小明
+    fn.showAge(); //And I&#39;m 19
+这就是原型，很好理解。那为什么要使用原型呢？
+</code></pre>
+<p>试想如果我们要通过Foo()来创建很多很多个对象，如果我们是这样子写的话：</p>
+<pre><code>function Foo(name,age)&#123;
+        this.name=name;
+        this.age=age;
+        this.showName=function()&#123;
+            console.log(&quot;I&#39;m &quot;+this.name);
+        &#125;
+        this.showAge=function()&#123;
+            console.log(&quot;And I&#39;m &quot;+this.age);
+        &#125;
+    &#125;
+那么我们创建出来的每一个对象，里面都有showName和showAge方法，这样就会占用很多的资源。
+而通过原型来实现的话，只需要在构造函数里面给属性赋值，而把方法写在Foo.prototype属性(这个属性是唯一的)里面。这样每个对象都可以使用prototype属性里面的showName、showAge方法，并且节省了不少的资源。
+</code></pre>
+<p>原型链<br>理解了原型，那么原型链就更好理解了。</p>
+<p>下面这段话可以帮助理解原型链<br>根据要点5，当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它构造函数的’prototype’属性中去寻找。那又因为’prototype’属性是一个对象，所以它也有一个’_ _ proto_ _’属性。</p>
+<p>那么我们来看一个例子：</p>
+<pre><code>    // 构造函数
+    function Foo(name,age)&#123;
+         this.name=name;
+         this.age=age;
+    &#125;
+    Object.prototype.toString=function()&#123;
+        //this是什么要看执行的时候谁调用了这个函数。
+        console.log(&quot;I&#39;m &quot;+this.name+&quot; And I&#39;m &quot;+this.age);
+    &#125;
+    var fn=new Foo(&#39;小明&#39;,19);
+    fn.toString(); //I&#39;m 小明 And I&#39;m 19
+    console.log(fn.toString===Foo.prototype.__proto__.toString); //true
+    
+    console.log(fn.__proto__ ===Foo.prototype)//true
+    console.log(Foo.prototype.__proto__===Object.prototype)//true
+    console.log(Object.prototype.__proto__===null)//true
+是不是觉得有点奇怪？我们来分析一下。
+</code></pre>
+<p>首先，fn的构造函数是Foo()。所以：<br>fn._ _ proto _ <em>&#x3D;&#x3D;&#x3D; Foo.prototype<br>又因为Foo.prototype是一个普通的对象，它的构造函数是Object，所以：<br>Foo.prototype.</em> _ proto _ _&#x3D;&#x3D;&#x3D; Object.prototype<br>通过上面的代码，我们知道这个toString()方法是在Object.prototype里面的，当调用这个对象的本身并不存在的方法时，它会一层一层地往上去找，一直到null为止。</p>
+<p>所以当fn调用toString()时，JS发现fn中没有这个方法，于是它就去Foo.prototype中去找，发现还是没有这个方法，然后就去Object.prototype中去找，找到了，就调用Object.prototype中的toString()方法。</p>
+<p>这就是原型链，fn能够调用Object.prototype中的方法正是因为存在原型链的机制。</p>
+<p>另外，在使用原型的时候，一般推荐将需要扩展的方法写在构造函数的prototype属性中，避免写在_ _ proto _ _属性里面。</p>
+<p><a href="https://blog.csdn.net/qq_36996271/article/details/82527256">https://blog.csdn.net/qq_36996271/article/details/82527256</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS高阶函数使用</title>
+    <url>/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>首先是for循环的一种简化写法，主要针对数组遍历</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.常规for循环</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i = 0;i&lt;this.books.length;i++)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;</span><br><span class="line">            return price;</span><br><span class="line">            2.for(let i in this.books)</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i in this.books)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;return price;</span><br><span class="line">           3.for(let i of this.books)</span><br><span class="line">           let price=0;</span><br><span class="line">           for(let book of this.books)&#123;</span><br><span class="line">               price+=book.price*book.count;</span><br><span class="line">           &#125;return price;</span><br></pre></td></tr></table></figure>
+
+<p><strong>filter函数</strong>（过滤函数）：中有一个回调函数，每读入数组中的一个元素便调用一次（返回一个Boolean值），当返回值为true时，函数内部将会自动将这次的回调的n加入新的数组，若为false，则过滤掉这次的n</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.filter(function(n)&#123;</span><br><span class="line">      return n&lt;6;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法：</span><br><span class="line">let newNums = nums.filter(n =&gt; n&lt;6);</span><br><span class="line">//最后获得结果[1,2,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>map函数</strong>（遍历函数）：中有一个回调函数， 每读入数组中的一个元素便调用一次 ，并将返回值自动加入新的数组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.map(function(n)&#123;</span><br><span class="line">      return n*2;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNums=nums.map(n =&gt; n*2)</span><br><span class="line">//最后获得结果[2,4,8,10,20,64,88]</span><br></pre></td></tr></table></figure>
+
+<p><strong>reduce函数</strong>（汇总函数）：中有两个传入参数—-reduce（参数一,参数二）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5];</span><br><span class="line">let  newNum = nums.reduce(function(preValue,n)&#123;</span><br><span class="line">      return preValue+n;</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(newNum)</span><br><span class="line">第一次：preValue 0 n 1</span><br><span class="line">第二次：preValue 1 n 2</span><br><span class="line">第三次：preValue 3 n 4</span><br><span class="line">第四次：preValue 7 n 5</span><br><span class="line">第五次：preValue 12</span><br><span class="line">最后输出12</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNum = nums.reduce((preValue,n) =&gt; preValue+n)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>箭头函数</title>
+    <url>/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const aaa = function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">cost bbb = ()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//aaa与bbb等效</span><br></pre></td></tr></table></figure>
+
+<p>通过简单的&#x3D;&gt;就可以生成一个函数，确实会比之前的方式简单许多，箭头函数的格式如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（参数列表）=&gt; &#123;</span><br><span class="line">//代码块</span><br><span class="line">&#125;</span><br><span class="line">//如果参数只有一个，则小括号可以省略</span><br><span class="line">//如果代码块中的代码只有一行，则可以省略大括号，并将该代码置于箭头后，计算机将会运行改行代码，并自动将其运行结果作为返回值</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是在箭头函数中应用this，此时this指向的是 一层层往外层作用域寻找，直到找到最近的this定义</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS中的回调函数</title>
+    <url>/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p>
+<span id="more"></span>
+
+<p>一个简单的案例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//定义主函数，回调函数作为参数</span><br><span class="line">function A(callback) &#123;</span><br><span class="line">    callback();  </span><br><span class="line">    console.log(&#x27;我是主函数&#x27;);      </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义回调函数</span><br><span class="line">function B()&#123;</span><br><span class="line">    setTimeout(&quot;console.log(&#x27;我是回调函数&#x27;)&quot;, 5000);//模仿异步操作  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用主函数，将函数B传进去</span><br><span class="line">A(B);</span><br><span class="line"></span><br><span class="line">//输出结果</span><br><span class="line">我是主函数</span><br><span class="line">我是回调函数</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，我们先定义了主函数和回调函数，然后再去调用主函数，将回调函数传进去。定义主函数的时候，我们让代码先去执行callback()回调函数，但输出结果却是后输出回调函数的内容。也就是说<strong>主函数不用等待回调函数执行完，可以接着执行自己的代码</strong>。所以一般回调函数都用在异步操作上面。比如ajax请求，比如处理文件等。</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS类型判断</title>
+    <url>/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/</url>
+    <content><![CDATA[<p>类型判断在 web 开发中有非常广泛的应用，简单的有判断数字还是字符串，进阶一点的有判断数组还是对象，再进阶一点的有判断日期、正则、错误类型，再再进阶一点还有比如判断 plainObject、空对象、Window 对象等等。</p>
+<span id="more"></span>
+
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><hr>
+<p>我们最最常用的莫过于 typeof，注意，尽管我们会看到诸如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(typeof(&#x27;yayu&#x27;)) // string</span><br></pre></td></tr></table></figure>
+
+<p>的写法，但是 typeof 可是一个正宗的运算符，就跟加减乘除一样！这就能解释为什么下面这种写法也是可行的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(typeof &#x27;yayu&#x27;) // string</span><br></pre></td></tr></table></figure>
+
+<p>引用《JavaScript权威指南》中对 typeof 的介绍：</p>
+<blockquote>
+<p>typeof 是一元操作符，放在其单个操作数的前面，操作数可以是任意类型。返回值为表示操作数类型的一个字符串。</p>
+</blockquote>
+<p>那我们都知道，在 ES6 前，JavaScript 共六种数据类型，分别是：</p>
+<p>Undefined、Null、Boolean、Number、String、Object</p>
+<p>然而当我们使用 typeof 对这些数据类型的值进行操作的时候，返回的结果却不是一一对应，分别是：</p>
+<p>undefined、object、boolean、number、string、object</p>
+<p>注意以上都是小写的字符串。Null 和 Object 类型都返回了 object 字符串。</p>
+<p>尽管不能一一对应，但是 typeof 却能检测出函数类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function a() &#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(typeof a); // function</span><br></pre></td></tr></table></figure>
+
+<p>所以 typeof 能检测出六种类型的值，但是，除此之外 Object 下还有很多细分的类型呐，如 Array、Function、Date、RegExp、Error 等。</p>
+<p>如果用 typeof 去检测这些类型，举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var date = new Date();</span><br><span class="line">var error = new Error();</span><br><span class="line">console.log(typeof date); // object</span><br><span class="line">console.log(typeof error); // object</span><br></pre></td></tr></table></figure>
+
+<p>返回的都是 object 呐，这可怎么区分~ 所以有没有更好的方法呢？</p>
+<h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><hr>
+<p>那 Object.protototype.toString 究竟是一个什么样的方法呢？</p>
+<p>为了更加细致的讲解这个函数，让我先献上 ES5 规范地址：<a href="https://es5.github.io/#x15.2.4.2%E3%80%82">https://es5.github.io/#x15.2.4.2。</a></p>
+<p>在第 15.2.4.2 节讲的就是 Object.prototype.toString()，为了不误导大家，我先奉上英文版：</p>
+<blockquote>
+<p>When the toString method is called, the following steps are taken:</p>
+</blockquote>
+<ol>
+<li>If the <strong>this</strong> value is <strong>undefined</strong>, return “**[object Undefined]**“.</li>
+<li>If the <strong>this</strong> value is <strong>null</strong>, return “**[object Null]**“.</li>
+<li>Let <em>O</em> be the result of calling ToObject passing the <strong>this</strong> value as the argument.</li>
+<li>Let <em>class</em> be the value of the [[Class]] internal property of <em>O</em>.</li>
+<li>Return the String value that is the result of concatenating the three Strings “**[object** “, <em>class</em>, and “**]**“.</li>
+</ol>
+<p>凡是规范上加粗或者斜体的，在这里我也加粗或者斜体了，就是要让大家感受原汁原味的规范！</p>
+<p>如果没有看懂，就不妨看看我理解的：</p>
+<p>当 toString 方法被调用的时候，下面的步骤会被执行：</p>
+<ol>
+<li>如果 this 值是 undefined，就返回 [object Undefined]</li>
+<li>如果 this 的值是 null，就返回 [object Null]</li>
+<li>让 O 成为 ToObject(this) 的结果</li>
+<li>让 class 成为 O 的内部属性 [[Class]] 的值</li>
+<li>最后返回由 “[object ” 和 class 和 “]” 三个部分组成的字符串</li>
+</ol>
+<p>通过规范，我们至少知道了调用 Object.prototype.toString 会返回一个由 “[object ” 和 class 和 “]” 组成的字符串，而 class 是要判断的对象的内部属性。</p>
+<p>让我们写个 demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(undefined)) // [object Undefined]</span><br><span class="line">console.log(Object.prototype.toString.call(null)) // [object Null]</span><br><span class="line"></span><br><span class="line">var date = new Date();</span><br><span class="line">console.log(Object.prototype.toString.call(date)) // [object Date]</span><br></pre></td></tr></table></figure>
+
+<p>由此我们可以看到这个 class 值就是识别对象类型的关键！</p>
+<p>正是因为这种特性，我们可以用 Object.prototype.toString 方法识别出更多类型！</p>
+<p>那到底能识别多少种类型呢？</p>
+<p>至少 12 种！</p>
+<p>你咋知道的？</p>
+<p>我数的！</p>
+<p>……</p>
+<p>让我们看个 demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 以下是11种：</span><br><span class="line">var number = 1;          // [object Number]</span><br><span class="line">var string = &#x27;123&#x27;;      // [object String]</span><br><span class="line">var boolean = true;      // [object Boolean]</span><br><span class="line">var und = undefined;     // [object Undefined]</span><br><span class="line">var nul = null;          // [object Null]</span><br><span class="line">var obj = &#123;a: 1&#125;         // [object Object]</span><br><span class="line">var array = [1, 2, 3];   // [object Array]</span><br><span class="line">var date = new Date();   // [object Date]</span><br><span class="line">var error = new Error(); // [object Error]</span><br><span class="line">var reg = /a/g;          // [object RegExp]</span><br><span class="line">var func = function a()&#123;&#125;; // [object Function]</span><br><span class="line"></span><br><span class="line">function checkType() &#123;</span><br><span class="line">    for (var i = 0; i &lt; arguments.length; i++) &#123;</span><br><span class="line">        console.log(Object.prototype.toString.call(arguments[i]))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkType(number, string, boolean, und, nul, obj, array, date, error, reg, func)</span><br></pre></td></tr></table></figure>
+
+<p>除了以上 11 种之外，还有：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(Math)); // [object Math]</span><br><span class="line">console.log(Object.prototype.toString.call(JSON)); // [object JSON]</span><br></pre></td></tr></table></figure>
+
+<p>除了以上 13 种之外，还有：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function a() &#123;</span><br><span class="line">    console.log(Object.prototype.toString.call(arguments)); // [object Arguments]</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+
+<p>所以我们可以识别至少 14 种类型，当然我们也可以算出来，[[class]] 属性至少有 12 个。</p>
+<h4 id="Window对象"><a href="#Window对象" class="headerlink" title="Window对象"></a>Window对象</h4><hr>
+<p>Window 对象作为客户端 JavaScript 的全局对象，它有一个 window 属性指向自身，这点在<a href="https://github.com/mqyqingfeng/Blog/issues/5">《JavaScript深入之变量对象》</a>中讲到过。我们可以利用这个特性判断是否是 Window 对象</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function isWindow( obj ) &#123;</span><br><span class="line">    return obj != null &amp;&amp; obj === obj.window;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><hr>
+<p>instanceof 可以用于判断测试者和目标是不是同一个类型，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Car(make, model, year) &#123;</span><br><span class="line">  this.make = make;</span><br><span class="line">  this.model = model;</span><br><span class="line">  this.year = year;</span><br><span class="line">&#125;</span><br><span class="line">const auto = new Car(&#x27;Honda&#x27;, &#x27;Accord&#x27;, 1998);</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Car);</span><br><span class="line">// expected output: true</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Object);</span><br><span class="line">// expected output: true</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://github.com/mqyqingfeng/Blog/issues/28">JavaScript专题之类型判断(上) · Issue #28 · mqyqingfeng&#x2F;Blog · GitHub</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>This理解</title>
+    <url>/2022/04/01/This%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>this，从字面意思上来讲，即这个。但这个，又是哪个呢？ 在使用this的时候常常会遇到一些问题，时常会出现this指向不明的问题（你以为的this并不是真正的this）。那让我们溯源一下，到底什么是this。</p>
+<span id="more"></span>
+
 <ul>
-<li>action:在表单收集到信息后，需要将信息传递给服务器，action属性用于指定接受并处理表单数据的服务器程序的url地址</li>
-<li>method:用于设置表单数据的提交方式(get&#x2F;post)</li>
-<li>name:用于指定表单的名称，以区别同一页面的多个表单</li>
+<li>this是JavaScript的关键字之一。它是 对象 自动生成的一个内部对象，只能在 对象 内部使用。随着函数使用场合的不同，this的值会发生变化。</li>
+<li><strong>this指向什么，完全取决于 什么地方以什么方式调用，而不是 创建时</strong>。（比较多人误解的地方）（它非常语义化，this在英文中的含义就是 <strong>这，这个</strong> ，但这其实起到了一定的误导作用，因为this并不是一成不变的，并不一定一直指向当前 <strong>这个</strong>）</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最上方组成</span><br><span class="line">网址（action的值）？请求内容名称（input中的name属性值）=请求值（input中的value属性值）&amp;请求内容=请求值</span><br></pre></td></tr></table></figure>
+<h4 id="this的绑定规则"><a href="#this的绑定规则" class="headerlink" title="this的绑定规则"></a>this的绑定规则</h4><p><strong>1.默认绑定</strong></p>
+<p>说完了this是什么，最重要的一点就是他是如何绑定的，来看下面例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = 1 ;</span><br><span class="line">    console.log(this.a);    // 10</span><br><span class="line">&#125;</span><br><span class="line">var a = 10;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
 
-<h2 id="input控件（最常用）"><a href="#input控件（最常用）" class="headerlink" title="input控件（最常用）"></a>input控件（最常用）</h2><p>input标签为单标签，其常用属性如下表</p>
-<table>
-<thead>
-<tr>
-<th><strong>常用属性</strong></th>
-<th><strong>属性值</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>自定义</td>
-<td>绑定对应label</td>
-</tr>
-<tr>
-<td>type</td>
-<td>见下表</td>
-<td>控制input的类型</td>
-</tr>
-<tr>
-<td>name</td>
-<td>自定义</td>
-<td>控件名称  作为提交数据时的key</td>
-</tr>
-<tr>
-<td>value</td>
-<td>自定义 输入</td>
-<td>input控件中的默认文本</td>
-</tr>
-<tr>
-<td>size</td>
-<td>正整数</td>
-<td>input在页面中的显示宽度</td>
-</tr>
-<tr>
-<td>checked</td>
-<td>checked（状态属性）</td>
-<td>定义选择控件默认被选中的项</td>
-</tr>
-<tr>
-<td>maxlength</td>
-<td>正整数</td>
-<td>规定空间容许输入的最大字符数</td>
-</tr>
-<tr>
-<td>required</td>
-<td>required</td>
-<td>必填</td>
-</tr>
-<tr>
-<td>readonly</td>
-<td>readonly</td>
-<td>内容只读</td>
-</tr>
-<tr>
-<td>placeholder</td>
-<td>文本</td>
-<td>用户输入提示文本</td>
-</tr>
-<tr>
-<td>multiple</td>
-<td>multiple</td>
-<td>文件上传可选多文件</td>
-</tr>
-</tbody></table>
-<p>﻿</p>
-<p>type常规值如下图：</p>
-<table>
-<thead>
-<tr>
-<th><strong>常用类型属性</strong></th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>email</td>
-<td>电子邮件（非有效限制）</td>
-</tr>
-<tr>
-<td>search</td>
-<td>查询框（点击x课清除内容）</td>
-</tr>
-<tr>
-<td>text</td>
-<td>单行文本输入框（明文）使用频率最高</td>
-</tr>
-<tr>
-<td>password</td>
-<td>密码输入框（密文）</td>
-</tr>
-<tr>
-<td>radio</td>
-<td>单选按钮</td>
-</tr>
-<tr>
-<td>checkbox</td>
-<td>复选框（多选）</td>
-</tr>
-<tr>
-<td>button</td>
-<td>按钮，主要通过js进行互动</td>
-</tr>
-<tr>
-<td>submit</td>
-<td>提交按钮，将表单数据发送至服务器</td>
-</tr>
-<tr>
-<td>reset</td>
-<td>重置按钮，清除表单中的所有数据</td>
-</tr>
-<tr>
-<td>image</td>
-<td>图像形式的提交按钮，需要添加url属性（图片的地址）</td>
-</tr>
-<tr>
-<td>hidden</td>
-<td>隐藏的输入文本（输入不显示、防窥屏）</td>
-</tr>
-<tr>
-<td>file</td>
-<td>供文件上传（multiple属性可以开启多文件选择）</td>
-</tr>
-<tr>
-<td>number</td>
-<td>只能输入数字</td>
-</tr>
-<tr>
-<td>date</td>
-<td>日期选择（年月日）</td>
-</tr>
-<tr>
-<td>tel</td>
-<td>电话号码（非有效限制）</td>
-</tr>
-<tr>
-<td>time</td>
-<td>时间选择</td>
-</tr>
-</tbody></table>
-<p>﻿</p>
-<p>text属性的常见css设置：</p>
-<ul>
-<li>outline:点击时的聚焦边框效果，如果想要去除可以设置outline:0;同时还可以设置颜色、边框宽度以及边框样式，即outline-color、outline-width和outline-style;</li>
-</ul>
-<h3 id="textarea控件"><a href="#textarea控件" class="headerlink" title="textarea控件"></a>textarea控件</h3><p>如果需要输入大量信息，需要使用textarea标签，能够轻松地创建多行文本输入框，基本语法如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;textarea cols=&#x27;每行中的字符数&#x27; rows=&#x27;显示的行数&#x27;&gt;</span><br><span class="line">  文本内容</span><br><span class="line">&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+<p>这种就是典型的<strong>默认绑定</strong>，我们看看foo调用的位置，”光杆司令“，像 <strong>这种直接使用而不带任何修饰的函数调用</strong> ，就 <strong>默认且只能</strong> 应用 默认绑定。那默认绑定到哪呢，一般是<code>window</code>上，严格模式下 是<code>undefined</code>。</p>
+<p><strong>2.隐性绑定</strong></p>
+<p>直接上例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10,</span><br><span class="line">    foo : foo</span><br><span class="line">&#125;</span><br><span class="line">foo();                // undefined</span><br><span class="line"></span><br><span class="line">obj.foo();            // 10</span><br></pre></td></tr></table></figure>
 
-<p>textarea默认情况下是可以进行拖动延展的，可以在css中设置resize:none取消拖动。</p>
-<h3 id="select控件"><a href="#select控件" class="headerlink" title="select控件"></a>select控件</h3><p>select控件，就是非常常见的下拉选择框，基本语法格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option&gt;选项一&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项二&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项三&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p><code>foo()</code>的这个写法熟悉吗，就是我们刚刚写的默认绑定,等价于打印<code>window.a</code>,故输出<code>undefined</code> ,下面<code>obj.foo()</code>这种大家应该经常写，这其实就是我们马上要讨论的 <strong>隐性绑定</strong> 。函数foo执行的时候有了<strong>上下文对象</strong>，即 <code>obj</code>。这种情况下，<strong>函数里的this默认绑定为上下文对象</strong>，等价于打印<code>obj.a</code>,故输出<code>10</code> 。如果是链性的关系，比如 <code>aa.bb.obj.foo();</code>上下文取函数的直接上级，即紧挨着的那个，或者说对象链的最后一个。</p>
+<p><strong>3.显性绑定</strong></p>
+<p>隐性绑定存在一个致命的限制：<strong>上下文中必须包含该函数</strong>，例：<code>var obj = &#123; foo : foo &#125;</code>,如果上下文不包含我们的函数用隐性绑定明显是要出错的，<strong>不可能每个对象都要加这个函数</strong> ,那样的话扩展,维护性太差了，我们接下来聊的就是直接 <strong>给函数强制性绑定this</strong>。而这里我们就要用到js提供的函数call和apply了。<strong>他们的作用都是改变函数this的指向，第一个参数都是设置this对象</strong>。</p>
+<p>两个函数的区别：</p>
+<ol>
+<li>call从第二个参数开始所有的参数都是 原函数的参数。</li>
+<li>apply只接受两个参数，且第二个参数必须是数组，这个数组代表原函数的参数列表。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo(a,b)&#123;</span><br><span class="line">    console.log(a+b);</span><br><span class="line">&#125;</span><br><span class="line">foo.call(null,&#x27;海洋&#x27;,&#x27;饼干&#x27;);        // 海洋饼干  这里this指向不重要就写null了</span><br><span class="line">foo.apply(null, [&#x27;海洋&#x27;,&#x27;饼干&#x27;] );     // 海洋饼干</span><br></pre></td></tr></table></figure>
 
-<p>类似于ul与li的关系，select中至少包含一对option，在option中定义selected&#x3D;’selected’时，当前项即为默认选中项。同样的，可以设置select的border和outline以及background-color等样式</p>
+<p>除了 call，apply函数以外，还有一个改变this的函数 bind ，它和call,apply都不同。<strong>bind只有一个函数，且不会立刻执行，只是将一个值绑定到函数的this上,并将绑定好的函数返回</strong>。例:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123; a : 10 &#125;;</span><br><span class="line"></span><br><span class="line">foo = foo.bind(obj);</span><br><span class="line">foo();                    // 10</span><br></pre></td></tr></table></figure>
+
+<p>显性绑定就是通过<strong>call,apply,bind</strong>这三个函数实现this的指向改变的，例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10           </span><br><span class="line">&#125;</span><br><span class="line">//将this指向obj</span><br><span class="line">foo.call(obj);        // 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.new绑定</strong></p>
+<p>js的new和传统的面向对象语言的new的作用都是创建一个新的对象，但是他们的机制完全不同。创建一个新对象少不了一个概念，那就是<code>构造函数</code>，传统的面向对象 构造函数 是类里的一种特殊函数，要创建对象时使用<code>new 类名()</code>的形式去调用类中的构造函数，而js中就不一样了。<strong>js中的只要用new修饰的 函数就是’构造函数’</strong>，准确来说是 **函数的<code>构造调用</code>**，因为在js中并不存在所谓的’构造函数’。那么用new 做到函数的<code>构造调用</code>后，js帮我们做了什么工作呢:</p>
+<ol>
+<li>创建一个新对象。</li>
+<li>把这个新对象的<code>__proto__</code>属性指向 原函数的<code>prototype</code>属性。(即继承原函数的原型)</li>
+<li><strong>将这个新对象绑定到 此函数的this上</strong> 。</li>
+<li>返回新对象，如果这个函数没有返回其他<strong>对象</strong>。</li>
+</ol>
+<p>上例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">foo();                    // window对象</span><br><span class="line">console.log(window.a);    // 10   默认绑定</span><br><span class="line"></span><br><span class="line">var obj = new foo();      // foo&#123; a : 10 &#125;  创建的新对象的默认名为函数名</span><br><span class="line">                          // 然后等价于 foo &#123; a : 10 &#125;;  var obj = foo;</span><br><span class="line">console.log(obj.a);       // 10    new绑定</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用new调用函数后，函数会 *以自己的名字 命名 和 创建* 一个新的对象，并返回。</strong></p>
+<p>特别注意 : 如果原函数返回一个对象类型，那么将无法返回新对象,你将丢失绑定this的新对象，例:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    return new String(&quot;捣蛋鬼&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var obj = new foo();</span><br><span class="line">console.log(obj.a);       // undefined</span><br><span class="line">console.log(obj);         // &quot;捣蛋鬼&quot;</span><br></pre></td></tr></table></figure>
+
+<p>this绑定优先级：<strong>new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</strong></p>
+<p><a href="https://segmentfault.com/a/1190000011194676">深入理解 js this 绑定 ( 无需死记硬背，尾部有总结和面试题解析 ) – SegmentFault 思否</a></p>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -564,57 +835,176 @@
       </tags>
   </entry>
   <entry>
-    <title>This理解</title>
-    <url>/2022/04/01/This%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<p>this，从字面意思上来讲，即这个。但这个，又是哪个呢？ 在使用this的时候常常会遇到一些问题，时常会出现this指向不明的问题（你以为的this并不是真正的this）。那让我们溯源一下，到底什么是this。</p>
+    <title>谈谈表单</title>
+    <url>/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/</url>
+    <content><![CDATA[<p>表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。</p>
 <span id="more"></span>
 
+<h4 id="表单控件：-input-select-textarea-button"><a href="#表单控件：-input-select-textarea-button" class="headerlink" title="表单控件： input select textarea button"></a>表单控件： input select textarea button</h4><p>包含了具体的表单功能项：单行文本输入框、密码输入框、复选框、按钮</p>
+<h4 id="提示信息：label"><a href="#提示信息：label" class="headerlink" title="提示信息：label"></a>提示信息：label</h4><p>表单中的说明性文字，提示用户进行填写和操作，可以绑定表单控件，扩大选择区域，label中的属性 for 可以用于绑定的表单控件，绑定方式：绑定id值与for值相同的表单控件</p>
+<h4 id="表单域：form"><a href="#表单域：form" class="headerlink" title="表单域：form"></a>表单域：form</h4><p>类比一个容器，用于容纳所有表单组件和提示信息，可以通过他定义处理表单数据所用程序的url地址以及数据提交到服务器的方法（如果不定义，表单的数据将无法传送到后台服务器）,创建表单的基本语法格式如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&#x27;url地址&#x27; method=&#x27;提交方式&#x27; name=&#x27;表单名称&#x27;&gt;</span><br><span class="line">  表单控件...</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其常用的属性如下：</p>
 <ul>
-<li>this是JavaScript的关键字之一。它是 对象 自动生成的一个内部对象，只能在 对象 内部使用。随着函数使用场合的不同，this的值会发生变化。</li>
-<li><strong>this指向什么，完全取决于 什么地方以什么方式调用，而不是 创建时</strong>。（比较多人误解的地方）（它非常语义化，this在英文中的含义就是 <strong>这，这个</strong> ，但这其实起到了一定的误导作用，因为this并不是一成不变的，并不一定一直指向当前 <strong>这个</strong>）</li>
+<li>action:在表单收集到信息后，需要将信息传递给服务器，action属性用于指定接受并处理表单数据的服务器程序的url地址</li>
+<li>method:用于设置表单数据的提交方式(get&#x2F;post)</li>
+<li>name:用于指定表单的名称，以区别同一页面的多个表单</li>
 </ul>
-<h4 id="this的绑定规则"><a href="#this的绑定规则" class="headerlink" title="this的绑定规则"></a>this的绑定规则</h4><p><strong>1.默认绑定</strong></p>
-<p>说完了this是什么，最重要的一点就是他是如何绑定的，来看下面例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = 1 ;</span><br><span class="line">    console.log(this.a);    // 10</span><br><span class="line">&#125;</span><br><span class="line">var a = 10;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最上方组成</span><br><span class="line">网址（action的值）？请求内容名称（input中的name属性值）=请求值（input中的value属性值）&amp;请求内容=请求值</span><br></pre></td></tr></table></figure>
 
-<p>这种就是典型的<strong>默认绑定</strong>，我们看看foo调用的位置，”光杆司令“，像 <strong>这种直接使用而不带任何修饰的函数调用</strong> ，就 <strong>默认且只能</strong> 应用 默认绑定。那默认绑定到哪呢，一般是<code>window</code>上，严格模式下 是<code>undefined</code>。</p>
-<p><strong>2.隐性绑定</strong></p>
-<p>直接上例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10,</span><br><span class="line">    foo : foo</span><br><span class="line">&#125;</span><br><span class="line">foo();                // undefined</span><br><span class="line"></span><br><span class="line">obj.foo();            // 10</span><br></pre></td></tr></table></figure>
+<h2 id="input控件（最常用）"><a href="#input控件（最常用）" class="headerlink" title="input控件（最常用）"></a>input控件（最常用）</h2><p>input标签为单标签，其常用属性如下表</p>
+<table>
+<thead>
+<tr>
+<th><strong>常用属性</strong></th>
+<th><strong>属性值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>自定义</td>
+<td>绑定对应label</td>
+</tr>
+<tr>
+<td>type</td>
+<td>见下表</td>
+<td>控制input的类型</td>
+</tr>
+<tr>
+<td>name</td>
+<td>自定义</td>
+<td>控件名称  作为提交数据时的key</td>
+</tr>
+<tr>
+<td>value</td>
+<td>自定义 输入</td>
+<td>input控件中的默认文本</td>
+</tr>
+<tr>
+<td>size</td>
+<td>正整数</td>
+<td>input在页面中的显示宽度</td>
+</tr>
+<tr>
+<td>checked</td>
+<td>checked（状态属性）</td>
+<td>定义选择控件默认被选中的项</td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>正整数</td>
+<td>规定空间容许输入的最大字符数</td>
+</tr>
+<tr>
+<td>required</td>
+<td>required</td>
+<td>必填</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>readonly</td>
+<td>内容只读</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>文本</td>
+<td>用户输入提示文本</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>multiple</td>
+<td>文件上传可选多文件</td>
+</tr>
+</tbody></table>
+<p>﻿</p>
+<p>type常规值如下图：</p>
+<table>
+<thead>
+<tr>
+<th><strong>常用类型属性</strong></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>email</td>
+<td>电子邮件（非有效限制）</td>
+</tr>
+<tr>
+<td>search</td>
+<td>查询框（点击x课清除内容）</td>
+</tr>
+<tr>
+<td>text</td>
+<td>单行文本输入框（明文）使用频率最高</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码输入框（密文）</td>
+</tr>
+<tr>
+<td>radio</td>
+<td>单选按钮</td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>复选框（多选）</td>
+</tr>
+<tr>
+<td>button</td>
+<td>按钮，主要通过js进行互动</td>
+</tr>
+<tr>
+<td>submit</td>
+<td>提交按钮，将表单数据发送至服务器</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>重置按钮，清除表单中的所有数据</td>
+</tr>
+<tr>
+<td>image</td>
+<td>图像形式的提交按钮，需要添加url属性（图片的地址）</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>隐藏的输入文本（输入不显示、防窥屏）</td>
+</tr>
+<tr>
+<td>file</td>
+<td>供文件上传（multiple属性可以开启多文件选择）</td>
+</tr>
+<tr>
+<td>number</td>
+<td>只能输入数字</td>
+</tr>
+<tr>
+<td>date</td>
+<td>日期选择（年月日）</td>
+</tr>
+<tr>
+<td>tel</td>
+<td>电话号码（非有效限制）</td>
+</tr>
+<tr>
+<td>time</td>
+<td>时间选择</td>
+</tr>
+</tbody></table>
+<p>﻿</p>
+<p>text属性的常见css设置：</p>
+<ul>
+<li>outline:点击时的聚焦边框效果，如果想要去除可以设置outline:0;同时还可以设置颜色、边框宽度以及边框样式，即outline-color、outline-width和outline-style;</li>
+</ul>
+<h3 id="textarea控件"><a href="#textarea控件" class="headerlink" title="textarea控件"></a>textarea控件</h3><p>如果需要输入大量信息，需要使用textarea标签，能够轻松地创建多行文本输入框，基本语法如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;textarea cols=&#x27;每行中的字符数&#x27; rows=&#x27;显示的行数&#x27;&gt;</span><br><span class="line">  文本内容</span><br><span class="line">&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
 
-<p><code>foo()</code>的这个写法熟悉吗，就是我们刚刚写的默认绑定,等价于打印<code>window.a</code>,故输出<code>undefined</code> ,下面<code>obj.foo()</code>这种大家应该经常写，这其实就是我们马上要讨论的 <strong>隐性绑定</strong> 。函数foo执行的时候有了<strong>上下文对象</strong>，即 <code>obj</code>。这种情况下，<strong>函数里的this默认绑定为上下文对象</strong>，等价于打印<code>obj.a</code>,故输出<code>10</code> 。如果是链性的关系，比如 <code>aa.bb.obj.foo();</code>上下文取函数的直接上级，即紧挨着的那个，或者说对象链的最后一个。</p>
-<p><strong>3.显性绑定</strong></p>
-<p>隐性绑定存在一个致命的限制：<strong>上下文中必须包含该函数</strong>，例：<code>var obj = &#123; foo : foo &#125;</code>,如果上下文不包含我们的函数用隐性绑定明显是要出错的，<strong>不可能每个对象都要加这个函数</strong> ,那样的话扩展,维护性太差了，我们接下来聊的就是直接 <strong>给函数强制性绑定this</strong>。而这里我们就要用到js提供的函数call和apply了。<strong>他们的作用都是改变函数this的指向，第一个参数都是设置this对象</strong>。</p>
-<p>两个函数的区别：</p>
-<ol>
-<li>call从第二个参数开始所有的参数都是 原函数的参数。</li>
-<li>apply只接受两个参数，且第二个参数必须是数组，这个数组代表原函数的参数列表。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo(a,b)&#123;</span><br><span class="line">    console.log(a+b);</span><br><span class="line">&#125;</span><br><span class="line">foo.call(null,&#x27;海洋&#x27;,&#x27;饼干&#x27;);        // 海洋饼干  这里this指向不重要就写null了</span><br><span class="line">foo.apply(null, [&#x27;海洋&#x27;,&#x27;饼干&#x27;] );     // 海洋饼干</span><br></pre></td></tr></table></figure>
+<p>textarea默认情况下是可以进行拖动延展的，可以在css中设置resize:none取消拖动。</p>
+<h3 id="select控件"><a href="#select控件" class="headerlink" title="select控件"></a>select控件</h3><p>select控件，就是非常常见的下拉选择框，基本语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option&gt;选项一&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项二&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项三&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
 
-<p>除了 call，apply函数以外，还有一个改变this的函数 bind ，它和call,apply都不同。<strong>bind只有一个函数，且不会立刻执行，只是将一个值绑定到函数的this上,并将绑定好的函数返回</strong>。例:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123; a : 10 &#125;;</span><br><span class="line"></span><br><span class="line">foo = foo.bind(obj);</span><br><span class="line">foo();                    // 10</span><br></pre></td></tr></table></figure>
-
-<p>显性绑定就是通过<strong>call,apply,bind</strong>这三个函数实现this的指向改变的，例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10           </span><br><span class="line">&#125;</span><br><span class="line">//将this指向obj</span><br><span class="line">foo.call(obj);        // 10</span><br></pre></td></tr></table></figure>
-
-<p><strong>4.new绑定</strong></p>
-<p>js的new和传统的面向对象语言的new的作用都是创建一个新的对象，但是他们的机制完全不同。创建一个新对象少不了一个概念，那就是<code>构造函数</code>，传统的面向对象 构造函数 是类里的一种特殊函数，要创建对象时使用<code>new 类名()</code>的形式去调用类中的构造函数，而js中就不一样了。<strong>js中的只要用new修饰的 函数就是’构造函数’</strong>，准确来说是 **函数的<code>构造调用</code>**，因为在js中并不存在所谓的’构造函数’。那么用new 做到函数的<code>构造调用</code>后，js帮我们做了什么工作呢:</p>
-<ol>
-<li>创建一个新对象。</li>
-<li>把这个新对象的<code>__proto__</code>属性指向 原函数的<code>prototype</code>属性。(即继承原函数的原型)</li>
-<li><strong>将这个新对象绑定到 此函数的this上</strong> 。</li>
-<li>返回新对象，如果这个函数没有返回其他<strong>对象</strong>。</li>
-</ol>
-<p>上例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">foo();                    // window对象</span><br><span class="line">console.log(window.a);    // 10   默认绑定</span><br><span class="line"></span><br><span class="line">var obj = new foo();      // foo&#123; a : 10 &#125;  创建的新对象的默认名为函数名</span><br><span class="line">                          // 然后等价于 foo &#123; a : 10 &#125;;  var obj = foo;</span><br><span class="line">console.log(obj.a);       // 10    new绑定</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用new调用函数后，函数会 *以自己的名字 命名 和 创建* 一个新的对象，并返回。</strong></p>
-<p>特别注意 : 如果原函数返回一个对象类型，那么将无法返回新对象,你将丢失绑定this的新对象，例:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    return new String(&quot;捣蛋鬼&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var obj = new foo();</span><br><span class="line">console.log(obj.a);       // undefined</span><br><span class="line">console.log(obj);         // &quot;捣蛋鬼&quot;</span><br></pre></td></tr></table></figure>
-
-<p>this绑定优先级：<strong>new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</strong></p>
-<p><a href="https://segmentfault.com/a/1190000011194676">深入理解 js this 绑定 ( 无需死记硬背，尾部有总结和面试题解析 ) – SegmentFault 思否</a></p>
+<p>类似于ul与li的关系，select中至少包含一对option，在option中定义selected&#x3D;’selected’时，当前项即为默认选中项。同样的，可以设置select的border和outline以及background-color等样式</p>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -624,406 +1014,32 @@
       </tags>
   </entry>
   <entry>
-    <title>JS类型判断</title>
-    <url>/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/</url>
-    <content><![CDATA[<p>类型判断在 web 开发中有非常广泛的应用，简单的有判断数字还是字符串，进阶一点的有判断数组还是对象，再进阶一点的有判断日期、正则、错误类型，再再进阶一点还有比如判断 plainObject、空对象、Window 对象等等。</p>
-<span id="more"></span>
-
-<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><hr>
-<p>我们最最常用的莫过于 typeof，注意，尽管我们会看到诸如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(typeof(&#x27;yayu&#x27;)) // string</span><br></pre></td></tr></table></figure>
-
-<p>的写法，但是 typeof 可是一个正宗的运算符，就跟加减乘除一样！这就能解释为什么下面这种写法也是可行的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(typeof &#x27;yayu&#x27;) // string</span><br></pre></td></tr></table></figure>
-
-<p>引用《JavaScript权威指南》中对 typeof 的介绍：</p>
-<blockquote>
-<p>typeof 是一元操作符，放在其单个操作数的前面，操作数可以是任意类型。返回值为表示操作数类型的一个字符串。</p>
-</blockquote>
-<p>那我们都知道，在 ES6 前，JavaScript 共六种数据类型，分别是：</p>
-<p>Undefined、Null、Boolean、Number、String、Object</p>
-<p>然而当我们使用 typeof 对这些数据类型的值进行操作的时候，返回的结果却不是一一对应，分别是：</p>
-<p>undefined、object、boolean、number、string、object</p>
-<p>注意以上都是小写的字符串。Null 和 Object 类型都返回了 object 字符串。</p>
-<p>尽管不能一一对应，但是 typeof 却能检测出函数类型：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function a() &#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(typeof a); // function</span><br></pre></td></tr></table></figure>
-
-<p>所以 typeof 能检测出六种类型的值，但是，除此之外 Object 下还有很多细分的类型呐，如 Array、Function、Date、RegExp、Error 等。</p>
-<p>如果用 typeof 去检测这些类型，举个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var date = new Date();</span><br><span class="line">var error = new Error();</span><br><span class="line">console.log(typeof date); // object</span><br><span class="line">console.log(typeof error); // object</span><br></pre></td></tr></table></figure>
-
-<p>返回的都是 object 呐，这可怎么区分~ 所以有没有更好的方法呢？</p>
-<h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><hr>
-<p>那 Object.protototype.toString 究竟是一个什么样的方法呢？</p>
-<p>为了更加细致的讲解这个函数，让我先献上 ES5 规范地址：<a href="https://es5.github.io/#x15.2.4.2%E3%80%82">https://es5.github.io/#x15.2.4.2。</a></p>
-<p>在第 15.2.4.2 节讲的就是 Object.prototype.toString()，为了不误导大家，我先奉上英文版：</p>
-<blockquote>
-<p>When the toString method is called, the following steps are taken:</p>
-</blockquote>
-<ol>
-<li>If the <strong>this</strong> value is <strong>undefined</strong>, return “**[object Undefined]**“.</li>
-<li>If the <strong>this</strong> value is <strong>null</strong>, return “**[object Null]**“.</li>
-<li>Let <em>O</em> be the result of calling ToObject passing the <strong>this</strong> value as the argument.</li>
-<li>Let <em>class</em> be the value of the [[Class]] internal property of <em>O</em>.</li>
-<li>Return the String value that is the result of concatenating the three Strings “**[object** “, <em>class</em>, and “**]**“.</li>
-</ol>
-<p>凡是规范上加粗或者斜体的，在这里我也加粗或者斜体了，就是要让大家感受原汁原味的规范！</p>
-<p>如果没有看懂，就不妨看看我理解的：</p>
-<p>当 toString 方法被调用的时候，下面的步骤会被执行：</p>
-<ol>
-<li>如果 this 值是 undefined，就返回 [object Undefined]</li>
-<li>如果 this 的值是 null，就返回 [object Null]</li>
-<li>让 O 成为 ToObject(this) 的结果</li>
-<li>让 class 成为 O 的内部属性 [[Class]] 的值</li>
-<li>最后返回由 “[object ” 和 class 和 “]” 三个部分组成的字符串</li>
-</ol>
-<p>通过规范，我们至少知道了调用 Object.prototype.toString 会返回一个由 “[object ” 和 class 和 “]” 组成的字符串，而 class 是要判断的对象的内部属性。</p>
-<p>让我们写个 demo:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(undefined)) // [object Undefined]</span><br><span class="line">console.log(Object.prototype.toString.call(null)) // [object Null]</span><br><span class="line"></span><br><span class="line">var date = new Date();</span><br><span class="line">console.log(Object.prototype.toString.call(date)) // [object Date]</span><br></pre></td></tr></table></figure>
-
-<p>由此我们可以看到这个 class 值就是识别对象类型的关键！</p>
-<p>正是因为这种特性，我们可以用 Object.prototype.toString 方法识别出更多类型！</p>
-<p>那到底能识别多少种类型呢？</p>
-<p>至少 12 种！</p>
-<p>你咋知道的？</p>
-<p>我数的！</p>
-<p>……</p>
-<p>让我们看个 demo:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 以下是11种：</span><br><span class="line">var number = 1;          // [object Number]</span><br><span class="line">var string = &#x27;123&#x27;;      // [object String]</span><br><span class="line">var boolean = true;      // [object Boolean]</span><br><span class="line">var und = undefined;     // [object Undefined]</span><br><span class="line">var nul = null;          // [object Null]</span><br><span class="line">var obj = &#123;a: 1&#125;         // [object Object]</span><br><span class="line">var array = [1, 2, 3];   // [object Array]</span><br><span class="line">var date = new Date();   // [object Date]</span><br><span class="line">var error = new Error(); // [object Error]</span><br><span class="line">var reg = /a/g;          // [object RegExp]</span><br><span class="line">var func = function a()&#123;&#125;; // [object Function]</span><br><span class="line"></span><br><span class="line">function checkType() &#123;</span><br><span class="line">    for (var i = 0; i &lt; arguments.length; i++) &#123;</span><br><span class="line">        console.log(Object.prototype.toString.call(arguments[i]))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkType(number, string, boolean, und, nul, obj, array, date, error, reg, func)</span><br></pre></td></tr></table></figure>
-
-<p>除了以上 11 种之外，还有：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(Object.prototype.toString.call(Math)); // [object Math]</span><br><span class="line">console.log(Object.prototype.toString.call(JSON)); // [object JSON]</span><br></pre></td></tr></table></figure>
-
-<p>除了以上 13 种之外，还有：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function a() &#123;</span><br><span class="line">    console.log(Object.prototype.toString.call(arguments)); // [object Arguments]</span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
-
-<p>所以我们可以识别至少 14 种类型，当然我们也可以算出来，[[class]] 属性至少有 12 个。</p>
-<h4 id="Window对象"><a href="#Window对象" class="headerlink" title="Window对象"></a>Window对象</h4><hr>
-<p>Window 对象作为客户端 JavaScript 的全局对象，它有一个 window 属性指向自身，这点在<a href="https://github.com/mqyqingfeng/Blog/issues/5">《JavaScript深入之变量对象》</a>中讲到过。我们可以利用这个特性判断是否是 Window 对象</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function isWindow( obj ) &#123;</span><br><span class="line">    return obj != null &amp;&amp; obj === obj.window;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><hr>
-<p>instanceof 可以用于判断测试者和目标是不是同一个类型，例如</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Car(make, model, year) &#123;</span><br><span class="line">  this.make = make;</span><br><span class="line">  this.model = model;</span><br><span class="line">  this.year = year;</span><br><span class="line">&#125;</span><br><span class="line">const auto = new Car(&#x27;Honda&#x27;, &#x27;Accord&#x27;, 1998);</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Car);</span><br><span class="line">// expected output: true</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Object);</span><br><span class="line">// expected output: true</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a href="https://github.com/mqyqingfeng/Blog/issues/28">JavaScript专题之类型判断(上) · Issue #28 · mqyqingfeng&#x2F;Blog · GitHub</a></p>
-]]></content>
+    <title>home</title>
+    <url>/2022/04/01/home/</url>
+    <content><![CDATA[<h1 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h1>]]></content>
       <categories>
-        <category>javascript</category>
+        <category>intro</category>
       </categories>
       <tags>
-        <tag>js</tag>
+        <tag>intro</tag>
       </tags>
   </entry>
   <entry>
-    <title>JS中的回调函数</title>
-    <url>/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p>
-<span id="more"></span>
+    <title>Hello World</title>
+    <url>/2022/04/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>一个简单的案例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//定义主函数，回调函数作为参数</span><br><span class="line">function A(callback) &#123;</span><br><span class="line">    callback();  </span><br><span class="line">    console.log(&#x27;我是主函数&#x27;);      </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义回调函数</span><br><span class="line">function B()&#123;</span><br><span class="line">    setTimeout(&quot;console.log(&#x27;我是回调函数&#x27;)&quot;, 5000);//模仿异步操作  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用主函数，将函数B传进去</span><br><span class="line">A(B);</span><br><span class="line"></span><br><span class="line">//输出结果</span><br><span class="line">我是主函数</span><br><span class="line">我是回调函数</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>上面的代码中，我们先定义了主函数和回调函数，然后再去调用主函数，将回调函数传进去。定义主函数的时候，我们让代码先去执行callback()回调函数，但输出结果却是后输出回调函数的内容。也就是说<strong>主函数不用等待回调函数执行完，可以接着执行自己的代码</strong>。所以一般回调函数都用在异步操作上面。比如ajax请求，比如处理文件等。</p>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>箭头函数</title>
-    <url>/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const aaa = function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">cost bbb = ()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//aaa与bbb等效</span><br></pre></td></tr></table></figure>
-
-<p>通过简单的&#x3D;&gt;就可以生成一个函数，确实会比之前的方式简单许多，箭头函数的格式如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（参数列表）=&gt; &#123;</span><br><span class="line">//代码块</span><br><span class="line">&#125;</span><br><span class="line">//如果参数只有一个，则小括号可以省略</span><br><span class="line">//如果代码块中的代码只有一行，则可以省略大括号，并将该代码置于箭头后，计算机将会运行改行代码，并自动将其运行结果作为返回值</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是在箭头函数中应用this，此时this指向的是 一层层往外层作用域寻找，直到找到最近的this定义</p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS的原型和原型链</title>
-    <url>/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
-    <content><![CDATA[<p>讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：</p>
-<span id="more"></span>
-
-<p>1、所有的引用类型（数组、函数、对象）可以自由扩展属性（除null以外）。</p>
-<p>2、所有的引用类型都有一个’_ _ proto_ _’属性(也叫隐式原型，它是一个普通的对象)。</p>
-<p>3、所有的函数都有一个’prototype’属性(这也叫显式原型，它也是一个普通的对象)。</p>
-<p>4、所有引用类型，它的’_ _ proto_ _’属性指向它的构造函数的’prototype’属性。</p>
-<p>5、当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它的’_ _ proto_ _’属性(也就是它的构造函数的’prototype’属性)中去寻找。</p>
-<p>那么要点说完了，我们就根据这些要点来理解原型和原型链。</p>
-<p>原型<br>我们先来看一个原型的例子。</p>
-<pre><code>    //这是一个构造函数
-    function Foo(name,age)&#123;
-        this.name=name;
-        this.age=age;
-    &#125;
-    /*根据要点3，所有的函数都有一个prototype属性，这个属性是一个对象
-    再根据要点1，所有的对象可以自由扩展属性
-    于是就有了以下写法*/
-    Foo.prototype=&#123;
-        // prototype对象里面又有其他的属性
-        showName:function()&#123;
-            console.log(&quot;I&#39;m &quot;+this.name);//this是什么要看执行的时候谁调用了这个函数
-        &#125;,
-        showAge:function()&#123;
-            console.log(&quot;And I&#39;m &quot;+this.age);//this是什么要看执行的时候谁调用了这个函数
-        &#125;
-    &#125;
-    var fn=new Foo(&#39;小明&#39;,19)
-    /*当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它
-    构造函数的&#39;prototype&#39;属性中去找*/
-    fn.showName(); //I&#39;m 小明
-    fn.showAge(); //And I&#39;m 19
-这就是原型，很好理解。那为什么要使用原型呢？
-</code></pre>
-<p>试想如果我们要通过Foo()来创建很多很多个对象，如果我们是这样子写的话：</p>
-<pre><code>function Foo(name,age)&#123;
-        this.name=name;
-        this.age=age;
-        this.showName=function()&#123;
-            console.log(&quot;I&#39;m &quot;+this.name);
-        &#125;
-        this.showAge=function()&#123;
-            console.log(&quot;And I&#39;m &quot;+this.age);
-        &#125;
-    &#125;
-那么我们创建出来的每一个对象，里面都有showName和showAge方法，这样就会占用很多的资源。
-而通过原型来实现的话，只需要在构造函数里面给属性赋值，而把方法写在Foo.prototype属性(这个属性是唯一的)里面。这样每个对象都可以使用prototype属性里面的showName、showAge方法，并且节省了不少的资源。
-</code></pre>
-<p>原型链<br>理解了原型，那么原型链就更好理解了。</p>
-<p>下面这段话可以帮助理解原型链<br>根据要点5，当试图得到一个对象的属性时，如果这个对象本身不存在这个属性，那么就会去它构造函数的’prototype’属性中去寻找。那又因为’prototype’属性是一个对象，所以它也有一个’_ _ proto_ _’属性。</p>
-<p>那么我们来看一个例子：</p>
-<pre><code>    // 构造函数
-    function Foo(name,age)&#123;
-         this.name=name;
-         this.age=age;
-    &#125;
-    Object.prototype.toString=function()&#123;
-        //this是什么要看执行的时候谁调用了这个函数。
-        console.log(&quot;I&#39;m &quot;+this.name+&quot; And I&#39;m &quot;+this.age);
-    &#125;
-    var fn=new Foo(&#39;小明&#39;,19);
-    fn.toString(); //I&#39;m 小明 And I&#39;m 19
-    console.log(fn.toString===Foo.prototype.__proto__.toString); //true
-    
-    console.log(fn.__proto__ ===Foo.prototype)//true
-    console.log(Foo.prototype.__proto__===Object.prototype)//true
-    console.log(Object.prototype.__proto__===null)//true
-是不是觉得有点奇怪？我们来分析一下。
-</code></pre>
-<p>首先，fn的构造函数是Foo()。所以：<br>fn._ _ proto _ <em>&#x3D;&#x3D;&#x3D; Foo.prototype<br>又因为Foo.prototype是一个普通的对象，它的构造函数是Object，所以：<br>Foo.prototype.</em> _ proto _ _&#x3D;&#x3D;&#x3D; Object.prototype<br>通过上面的代码，我们知道这个toString()方法是在Object.prototype里面的，当调用这个对象的本身并不存在的方法时，它会一层一层地往上去找，一直到null为止。</p>
-<p>所以当fn调用toString()时，JS发现fn中没有这个方法，于是它就去Foo.prototype中去找，发现还是没有这个方法，然后就去Object.prototype中去找，找到了，就调用Object.prototype中的toString()方法。</p>
-<p>这就是原型链，fn能够调用Object.prototype中的方法正是因为存在原型链的机制。</p>
-<p>另外，在使用原型的时候，一般推荐将需要扩展的方法写在构造函数的prototype属性中，避免写在_ _ proto _ _属性里面。</p>
-<p><a href="https://blog.csdn.net/qq_36996271/article/details/82527256">https://blog.csdn.net/qq_36996271/article/details/82527256</a></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS高阶函数使用</title>
-    <url>/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>首先是for循环的一种简化写法，主要针对数组遍历</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.常规for循环</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i = 0;i&lt;this.books.length;i++)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;</span><br><span class="line">            return price;</span><br><span class="line">            2.for(let i in this.books)</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i in this.books)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;return price;</span><br><span class="line">           3.for(let i of this.books)</span><br><span class="line">           let price=0;</span><br><span class="line">           for(let book of this.books)&#123;</span><br><span class="line">               price+=book.price*book.count;</span><br><span class="line">           &#125;return price;</span><br></pre></td></tr></table></figure>
-
-<p><strong>filter函数</strong>（过滤函数）：中有一个回调函数，每读入数组中的一个元素便调用一次（返回一个Boolean值），当返回值为true时，函数内部将会自动将这次的回调的n加入新的数组，若为false，则过滤掉这次的n</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.filter(function(n)&#123;</span><br><span class="line">      return n&lt;6;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法：</span><br><span class="line">let newNums = nums.filter(n =&gt; n&lt;6);</span><br><span class="line">//最后获得结果[1,2,4,5]</span><br></pre></td></tr></table></figure>
-
-<p><strong>map函数</strong>（遍历函数）：中有一个回调函数， 每读入数组中的一个元素便调用一次 ，并将返回值自动加入新的数组</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.map(function(n)&#123;</span><br><span class="line">      return n*2;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNums=nums.map(n =&gt; n*2)</span><br><span class="line">//最后获得结果[2,4,8,10,20,64,88]</span><br></pre></td></tr></table></figure>
-
-<p><strong>reduce函数</strong>（汇总函数）：中有两个传入参数—-reduce（参数一,参数二）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5];</span><br><span class="line">let  newNum = nums.reduce(function(preValue,n)&#123;</span><br><span class="line">      return preValue+n;</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(newNum)</span><br><span class="line">第一次：preValue 0 n 1</span><br><span class="line">第二次：preValue 1 n 2</span><br><span class="line">第三次：preValue 3 n 4</span><br><span class="line">第四次：preValue 7 n 5</span><br><span class="line">第五次：preValue 12</span><br><span class="line">最后输出12</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNum = nums.reduce((preValue,n) =&gt; preValue+n)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图片自适应大小</title>
-    <url>/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/</url>
-    <content><![CDATA[<p>在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过<img>组件。两种方式实现自适应的方式大同小异。</p>
-<span id="more"></span>
-
-<h3 id="背景图适应大小"><a href="#背景图适应大小" class="headerlink" title="背景图适应大小"></a>背景图适应大小</h3><p>当外层容器的宽高比跟图片宽高比一致时到没啥问题，但在一些特定的业务场景，如九宫格图片展示时，展示的原始图片它们的大小，宽高比很有可能是不一样的，但外层容器的大小是固定的。此时如果按照上面的做法会导致图片被拉伸或者压缩。为了让图片显示的自然，我们可以让图片中的一部分去填充整个容器，虽然这样做无法让图片显示完整，但也避免了因图片的拉伸或压缩导致的变形。代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;</span><br><span class="line">width: 200px；</span><br><span class="line">height: 200px;</span><br><span class="line">background: url(&#x27;xxxx.png&#x27;) no-repeat;</span><br><span class="line">background-size: cover;</span><br><span class="line">background-position: center center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="图片自适应容器宽高"><a href="#图片自适应容器宽高" class="headerlink" title="图片自适应容器宽高"></a>图片自适应容器宽高</h3><p>css实现图片自适应容器宽高的做法一般如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;width: 200px; height: 200px&#125;</span><br><span class="line">div img&#123;width: 100%; height: 100%&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;img src=&quot;xxxx.png&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>居中</title>
-    <url>/2022/04/01/%E5%B1%85%E4%B8%AD/</url>
-    <content><![CDATA[<p>居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中</p>
-<span id="more"></span>
-
-<h3 id="绝对位置居中"><a href="#绝对位置居中" class="headerlink" title="绝对位置居中"></a>绝对位置居中</h3><p>绝对位置居中的核心思想就是通过绝对定位的方式实现居中，具体操作如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">style&#123;</span><br><span class="line">    //给父体一个绝对定位</span><br><span class="line">    .div&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    //给子体相对定位</span><br><span class="line">    .object&#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        left: 50%;</span><br><span class="line">        top:50%;</span><br><span class="line">        transform: translate(-50%,-50%);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>top: 50%;left: 50%;， 是以左上角为原点，故不处于中心位置，<br>translate(-50%,-50%) 作用是，往上（x轴）,左（y轴）移动自身长宽的 50%，以使其居于中心位置。</p>
-<h3 id="弹性盒子居中"><a href="#弹性盒子居中" class="headerlink" title="弹性盒子居中"></a>弹性盒子居中</h3><p>弹性盒子居中主要使用justify-content、 align-items 属性，</p>
-<p>justify-content:center;&#x2F;* 子元素水平居中 *&#x2F;</p>
-<p>align-items:center;&#x2F;* 子元素垂直居中 *&#x2F;</p>
-<p>其中justify-content是flex布局中父项的一个比较常见的属性，justify-content 属性定义了项目在主轴上的对齐方式。</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/image.png" alt="img"></p>
-<p><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-items</a>属性可以应用于所有的flex容器，它的作用是设置flex子项在每个flex行的交叉轴上的默认对齐方式。不同取值的效果如下所示：<br><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-item</a></p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/image-1.png" alt="img"></p>
-<p>align-items属性是针对单独的每一个flex子项起作用，它的基本单位是每一个子项，在所有情况下都有效果（当然要看具体的属性值）。</p>
-]]></content>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>神奇的display</title>
-    <url>/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/</url>
-    <content><![CDATA[<p>display可是个神奇的东西，通过修改display可以帮助组件实现“逆天改命”，变成其他组件的“模样”，当然，修炼之路不乏贫困，让我们一起来看看都有些什么神奇的display可供更改。</p>
-<span id="more"></span>
-
-<h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
-<p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
-<hr>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/c6c6b6064cdd0484ebfb71a3dcae55ef-779x1024.jpeg" alt="img"></p>
-<blockquote>
-<p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
-<p>— Alan Turing, <em>Computer scientist</em></p>
-</blockquote>
-<hr>
-<h1 id="display-block、inline"><a href="#display-block、inline" class="headerlink" title="display:block、inline"></a>display:block、inline</h1><p>根据css的规定，一些组件有着其默认的display值，常用的div的默认display值为block，为“块级元素”(block-level ),而作为块级元素，其高度、宽度、内距以及外距都可以进行调整。</p>
-<p>块级元素特点：</p>
-<ol>
-<li>每个块级元素都从新的一行开始（一块霸占一行）</li>
-<li>在其本身的宽度不进行设置时，其宽度默认为其父级组件的宽度（body也算父级组件）。</li>
-<li>可以设置padding和margin</li>
-</ol>
-<p>常用的 块级元素有：</p>
-<p>div、p、h1…h6、ol、ul、dl、table、address、blockquote （块引用）、form</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div style=&#x27;display:inline’&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>而如链接元素a，其默认display值为inline，为“行内元素”，它是依附于其他块级元素存在的，故行内元素是无法设置高度、宽度等属性，在设置margin时只有left、right的时候，与此同时可以设置padding（若想设置，应该将其display强制转化为block）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;span style=&#x27;display:block’&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
-
-<p>常用的行内元素有：</p>
-<p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
-<h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
-<p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095231269-1572459142.png" alt="img"></p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095240254-1054271047.png" alt="img"></p>
-<p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
-<h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
-<p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
-<p>我们来对对比一下display：inline-block和float的效果</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095247004-979551461.png" alt="img"></p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095254066-1995956065.png" alt="img">设置overfloat:hidden防止父元素高度坍塌</p>
-<p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095302926-2090422648.png" alt="img"></p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095312144-2092703645-1.png" alt="img"></p>
-<p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
-<h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
-<p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095321754-1704124919.png" alt="img"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
-<h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
-<p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/20200811233531648.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）</p>
-<h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
-<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
-<li>flex-direction</li>
-<li>justify-content</li>
-<li>align-items</li>
-<li>flex-wrap</li>
-<li>align-content</li>
-<li>flex-flow</li>
-</ul>
-<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1.flex-direction"></a>1.flex-direction</h4><p>项目（flex item)默认情况下是沿着主轴从main start 开始往main end 方向进行排序。而属性flex-direction决定了主轴的方向。其中flex-direction有四个取值（row(默认值)、row-reverse、column(自上而下）、column-reverse)</p>
-<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2.justify-content"></a>2.justify-content</h4><p>这个属性主要用来排列主轴上各个项目(item)的位置，决定了项目在主轴上的对齐方式</p>
-<p>属性值：</p>
-<ul>
-<li>flex-start(默认值):与main start对齐</li>
-<li>flex-end：与main end对齐</li>
-<li>center：居中</li>
-<li>space-between：flex items 之间的距离相等，与main start、main end两端对齐</li>
-<li>space-evenly: flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离</li>
-<li>space-around :flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离的一半</li>
-</ul>
-<p>值得注意的是这些都<strong>是容器的属性</strong></p>
-<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3.align-items"></a>3.align-items</h4><p>这个属性是用于决定项目（items)在纵轴上的对齐方式</p>
-<p>属性值：</p>
-<ul>
-<li>normal：在弹性布局中，效果和stretch一样</li>
-<li>stretch：前提是items不设置高度，当flex items 在cross axis 方向的size为auto时，会自动拉伸至填充flex container(或者换句话说：如果项目未设置高度或设为auto，将占满整个容器的高度。)</li>
-<li>flex-satrt:与cross start 对齐</li>
-<li>flex-end:与cross end 对齐</li>
-<li>center:居中对齐</li>
-<li>baseline:与基准线对齐</li>
-</ul>
-<h4 id="4-flex-wrap"><a href="#4-flex-wrap" class="headerlink" title="4.flex-wrap"></a>4.flex-wrap</h4><p>决定了flex container 是单行还是多行,默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
-<p>属性值：</p>
-<ul>
-<li>nowrap(默认)：单行</li>
-<li>warp：多行 &#x2F;&#x2F;这个比较少用</li>
-<li>wrap-reverse:多行（对比wrap，cross start 与cross end相反）</li>
-</ul>
-<h4 id="5-align-content"><a href="#5-align-content" class="headerlink" title="5.align-content"></a>5.align-content</h4><p>决定了多行flex items 在cross axis的对齐方式 用法与justify-content相似 一个是横轴。一个控制竖轴</p>
-<p>属性值：</p>
-<ul>
-<li>stretch(默认值)：与align-items的stretch类似，当items有高度的时候，无效果</li>
-<li>flex-start:与cross start 对齐</li>
-<li>flex-end :与cross end 对齐</li>
-<li>center：居中对齐</li>
-<li>space-between:flex items 之间的距离相等，与cross start、cross end两端对齐</li>
-<li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
-<li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
-</ul>
-<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/rock-4739036_1920-1024x640.jpg" alt="img"></p>
-<h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
-<h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
-<h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
-<p>如果所有flex items 的flex-grow 综合sum不超过1，这直接乘以剩余size就是扩展大小、<br>如果超过1 扩展size&#x3D;剩余size*flex-grow&#x2F;sum</p>
-<p><strong>当设置flex:1时，每个子组件将会均匀的分布（水平）在flex容器中</strong></p>
-<h4 id="4-flex-shrink"><a href="#4-flex-shrink" class="headerlink" title="4.flex-shrink"></a>4.flex-shrink</h4><p>flex-shrink (shrink 缩小，收缩)与flex-grow相似，一个扩展，一个伸缩<br>可以设置为任意非父数字（小数，整数 0），默认为1<br>当flex items在main axis 方向上超过了flex container 的size flex-shrink属性才会生效、<br>如果所有flex items 的flex-shrink 总和sum超过1，每个flex item 收缩的size为：<br>flex item 超出flex container 的size*收缩比例&#x2F;每个flex items 的收缩比例之和<br>如果sum不超过1，每个flex item 收缩的size为：<br>size &#x3D; 超出的size * flex-shrink值<br>flex items收缩后的最终size不能小于min-width\min-height</p>
-<h4 id="5-flex-basis"><a href="#5-flex-basis" class="headerlink" title="5.flex-basis"></a>5.flex-basis</h4><p>用来设置flex items 在 main axis方向上的base size<br>默认为auto，可以设置具体的宽度数值 决定flex items最终base size 的因素，优先级从高到低</p>
-<ul>
-<li>max-width\max-height\min-width\min-height</li>
-<li>flex-basis width\height</li>
-<li>内容本身的size</li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
   </entry>
 </search>
