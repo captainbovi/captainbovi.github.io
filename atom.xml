@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-01T05:59:58.696Z</updated>
+  <updated>2022-04-01T07:19:23.332Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>javascript类型转换</title>
+    <link href="http://example.com/2022/04/01/javascript%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://example.com/2022/04/01/javascript%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</id>
+    <published>2022-04-01T07:10:10.000Z</published>
+    <updated>2022-04-01T07:19:23.332Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Number() 转换为数字， String() 转换为字符串， Boolean() 转化为布尔值。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈谈表单</title>
+    <link href="http://example.com/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/"/>
+    <id>http://example.com/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/</id>
+    <published>2022-04-01T06:04:05.000Z</published>
+    <updated>2022-04-01T07:20:32.054Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>home</title>

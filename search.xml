@@ -29,4 +29,538 @@
         <tag>intro</tag>
       </tags>
   </entry>
+  <entry>
+    <title>谈谈表单</title>
+    <url>/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/</url>
+    <content><![CDATA[<p>表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。</p>
+<span id="more"></span>
+
+<h4 id="表单控件：-input-select-textarea-button"><a href="#表单控件：-input-select-textarea-button" class="headerlink" title="表单控件： input select textarea button"></a>表单控件： input select textarea button</h4><p>包含了具体的表单功能项：单行文本输入框、密码输入框、复选框、按钮</p>
+<h4 id="提示信息：label"><a href="#提示信息：label" class="headerlink" title="提示信息：label"></a>提示信息：label</h4><p>表单中的说明性文字，提示用户进行填写和操作，可以绑定表单控件，扩大选择区域，label中的属性 for 可以用于绑定的表单控件，绑定方式：绑定id值与for值相同的表单控件</p>
+<h4 id="表单域：form"><a href="#表单域：form" class="headerlink" title="表单域：form"></a>表单域：form</h4><p>类比一个容器，用于容纳所有表单组件和提示信息，可以通过他定义处理表单数据所用程序的url地址以及数据提交到服务器的方法（如果不定义，表单的数据将无法传送到后台服务器）,创建表单的基本语法格式如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&#x27;url地址&#x27; method=&#x27;提交方式&#x27; name=&#x27;表单名称&#x27;&gt;</span><br><span class="line">  表单控件...</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其常用的属性如下：</p>
+<ul>
+<li>action:在表单收集到信息后，需要将信息传递给服务器，action属性用于指定接受并处理表单数据的服务器程序的url地址</li>
+<li>method:用于设置表单数据的提交方式(get&#x2F;post)</li>
+<li>name:用于指定表单的名称，以区别同一页面的多个表单</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">最上方组成</span><br><span class="line">网址（action的值）？请求内容名称（input中的name属性值）=请求值（input中的value属性值）&amp;请求内容=请求值</span><br></pre></td></tr></table></figure>
+
+<h2 id="input控件（最常用）"><a href="#input控件（最常用）" class="headerlink" title="input控件（最常用）"></a>input控件（最常用）</h2><p>input标签为单标签，其常用属性如下表</p>
+<table>
+<thead>
+<tr>
+<th><strong>常用属性</strong></th>
+<th><strong>属性值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>自定义</td>
+<td>绑定对应label</td>
+</tr>
+<tr>
+<td>type</td>
+<td>见下表</td>
+<td>控制input的类型</td>
+</tr>
+<tr>
+<td>name</td>
+<td>自定义</td>
+<td>控件名称  作为提交数据时的key</td>
+</tr>
+<tr>
+<td>value</td>
+<td>自定义 输入</td>
+<td>input控件中的默认文本</td>
+</tr>
+<tr>
+<td>size</td>
+<td>正整数</td>
+<td>input在页面中的显示宽度</td>
+</tr>
+<tr>
+<td>checked</td>
+<td>checked（状态属性）</td>
+<td>定义选择控件默认被选中的项</td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>正整数</td>
+<td>规定空间容许输入的最大字符数</td>
+</tr>
+<tr>
+<td>required</td>
+<td>required</td>
+<td>必填</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>readonly</td>
+<td>内容只读</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>文本</td>
+<td>用户输入提示文本</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>multiple</td>
+<td>文件上传可选多文件</td>
+</tr>
+</tbody></table>
+<p>﻿</p>
+<p>type常规值如下图：</p>
+<table>
+<thead>
+<tr>
+<th><strong>常用类型属性</strong></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>email</td>
+<td>电子邮件（非有效限制）</td>
+</tr>
+<tr>
+<td>search</td>
+<td>查询框（点击x课清除内容）</td>
+</tr>
+<tr>
+<td>text</td>
+<td>单行文本输入框（明文）使用频率最高</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码输入框（密文）</td>
+</tr>
+<tr>
+<td>radio</td>
+<td>单选按钮</td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>复选框（多选）</td>
+</tr>
+<tr>
+<td>button</td>
+<td>按钮，主要通过js进行互动</td>
+</tr>
+<tr>
+<td>submit</td>
+<td>提交按钮，将表单数据发送至服务器</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>重置按钮，清除表单中的所有数据</td>
+</tr>
+<tr>
+<td>image</td>
+<td>图像形式的提交按钮，需要添加url属性（图片的地址）</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>隐藏的输入文本（输入不显示、防窥屏）</td>
+</tr>
+<tr>
+<td>file</td>
+<td>供文件上传（multiple属性可以开启多文件选择）</td>
+</tr>
+<tr>
+<td>number</td>
+<td>只能输入数字</td>
+</tr>
+<tr>
+<td>date</td>
+<td>日期选择（年月日）</td>
+</tr>
+<tr>
+<td>tel</td>
+<td>电话号码（非有效限制）</td>
+</tr>
+<tr>
+<td>time</td>
+<td>时间选择</td>
+</tr>
+</tbody></table>
+<p>﻿</p>
+<p>text属性的常见css设置：</p>
+<ul>
+<li>outline:点击时的聚焦边框效果，如果想要去除可以设置outline:0;同时还可以设置颜色、边框宽度以及边框样式，即outline-color、outline-width和outline-style;</li>
+</ul>
+<h3 id="textarea控件"><a href="#textarea控件" class="headerlink" title="textarea控件"></a>textarea控件</h3><p>如果需要输入大量信息，需要使用textarea标签，能够轻松地创建多行文本输入框，基本语法如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;textarea cols=&#x27;每行中的字符数&#x27; rows=&#x27;显示的行数&#x27;&gt;</span><br><span class="line">  文本内容</span><br><span class="line">&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+
+<p>textarea默认情况下是可以进行拖动延展的，可以在css中设置resize:none取消拖动。</p>
+<h3 id="select控件"><a href="#select控件" class="headerlink" title="select控件"></a>select控件</h3><p>select控件，就是非常常见的下拉选择框，基本语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option&gt;选项一&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项二&lt;/option&gt;</span><br><span class="line">  &lt;option&gt;选项三&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p>类似于ul与li的关系，select中至少包含一对option，在option中定义selected&#x3D;’selected’时，当前项即为默认选中项。同样的，可以设置select的border和outline以及background-color等样式</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript类型转换</title>
+    <url>/2022/04/01/javascript%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>Number() 转换为数字， String() 转换为字符串， Boolean() 转化为布尔值。</p>
+<span id="more"></span>
+
+<h2 id="JavaScript-数据类型"><a href="#JavaScript-数据类型" class="headerlink" title="JavaScript 数据类型"></a>JavaScript 数据类型</h2><p>在 JavaScript 中有 5 种不同的数据类型：</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>object</li>
+<li>function</li>
+</ul>
+<p>3 种对象类型：</p>
+<ul>
+<li>Object</li>
+<li>Date</li>
+<li>Array</li>
+</ul>
+<p>2 个不包含任何值的数据类型：</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h2 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h2><p>你可以使用 <strong>typeof</strong> 操作符来查看 JavaScript 变量的数据类型。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typeof` `&quot;John&quot;`         `// 返回 string``typeof` `3.14          ``// 返回 number``typeof` `NaN          ``// 返回 number``typeof` `false`         `// 返回 boolean``typeof` `[1,2,3,4]       ``// 返回 object``typeof` `&#123;name:``&#x27;John&#x27;``, age:34&#125; ``// 返回 object``typeof` `new` `Date()       ``// 返回 object``typeof` `function` `() &#123;&#125;     ``// 返回 function``typeof` `myCar         ``// 返回 undefined (如果 myCar 没有声明)``typeof` `null`          `// 返回 object</span><br></pre></td></tr></table></figure>
+
+<p>请注意：</p>
+<ul>
+<li>NaN 的数据类型是 number</li>
+<li>数组(Array)的数据类型是 object</li>
+<li>日期(Date)的数据类型为 object</li>
+<li>null 的数据类型是 object</li>
+<li>未定义变量的数据类型为 undefined</li>
+</ul>
+<p>如果对象是 JavaScript Array 或 JavaScript Date ，我们就无法通过 <strong>typeof</strong> 来判断他们的类型，因为都是 返回 object。</p>
+<h2 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h2><p><strong>constructor</strong> 属性返回所有 JavaScript 变量的构造函数。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;John&quot;``.constructor         ``// 返回函数 String() &#123; [native code] &#125;``(3.14).constructor         ``// 返回函数 Number() &#123; [native code] &#125;``false``.constructor         ``// 返回函数 Boolean() &#123; [native code] &#125;``[1,2,3,4].constructor       ``// 返回函数 Array()  &#123; [native code] &#125;``&#123;name:``&#x27;John&#x27;``, age:34&#125;.constructor ``// 返回函数 Object() &#123; [native code] &#125;``new` `Date().constructor       ``// 返回函数 Date()  &#123; [native code] &#125;``function` `() &#123;&#125;.constructor     ``// 返回函数 Function()&#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 constructor 属性来查看对象是否为数组 (包含字符串 “Array”)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function` `isArray(myArray) &#123;``  ``return` `myArray.constructor.toString().indexOf(``&quot;Array&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>你可以使用 constructor 属性来查看对象是否为日期 (包含字符串 “Date”)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function` `isDate(myDate) &#123;``  ``return` `myDate.constructor.toString().indexOf(``&quot;Date&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JavaScript-类型转换"><a href="#JavaScript-类型转换" class="headerlink" title="JavaScript 类型转换"></a>JavaScript 类型转换</h2><p>JavaScript 变量可以转换为新变量或其他数据类型：</p>
+<ul>
+<li>通过使用 JavaScript 函数</li>
+<li>通过 JavaScript 自身自动转换</li>
+</ul>
+<h2 id="将数字转换为字符串"><a href="#将数字转换为字符串" class="headerlink" title="将数字转换为字符串"></a>将数字转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将数字转换为字符串。</p>
+<p>该方法可用于任何类型的数字，字母，变量，表达式：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String(x)     ``// 将变量 x 转换为字符串并返回``String(123)    ``// 将数字 123 转换为字符串并返回``String(100 + 23) ``// 将数字表达式转换为字符串并返回</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Number 方法 <strong>toString()</strong> 也是有同样的效果。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x.toString()``(123).toString()``(100 + 23).toString()</span><br></pre></td></tr></table></figure>
+
+<p>在 <a href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以找到更多数字转换为字符串的方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">toExponential()</td>
+<td align="center">把对象的值转换为指数计数法。</td>
+</tr>
+<tr>
+<td align="center">toFixed()</td>
+<td align="center">把数字转换为字符串，结果的小数点后有指定位数的数字。</td>
+</tr>
+<tr>
+<td align="center">toPrecision()</td>
+<td align="center">把数字格式化为指定的长度。</td>
+</tr>
+</tbody></table>
+<h2 id="将布尔值转换为字符串"><a href="#将布尔值转换为字符串" class="headerlink" title="将布尔值转换为字符串"></a>将布尔值转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将布尔值转换为字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String(``false``)    ``// 返回 &quot;false&quot;``String(``true``)     ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Boolean 方法 <strong>toString()</strong> 也有相同的效果。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">false``.toString()   ``// 返回 &quot;false&quot;``true``.toString()   ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将日期转换为字符串"><a href="#将日期转换为字符串" class="headerlink" title="将日期转换为字符串"></a>将日期转换为字符串</h2><p>Date() 返回字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Date() ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>全局方法 String() 可以将日期对象转换为字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String(``new` `Date()) ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>Date 方法 <strong>toString()</strong> 也有相同的效果。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">obj = ``new` `Date()``obj.toString()  ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>在 <a href="https://www.nowcoder.com/tutorial/10009/cef9e4a498c14ec5a9cf897eac36f3bf">Date 方法</a> 章节中，你可以查看更多关于日期转换为字符串的函数：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">getDate()</td>
+<td align="center">从 Date 对象返回一个月中的某一天 (1 ~ 31)。</td>
+</tr>
+<tr>
+<td align="center">getDay()</td>
+<td align="center">从 Date 对象返回一周中的某一天 (0 ~ 6)。</td>
+</tr>
+<tr>
+<td align="center">getFullYear()</td>
+<td align="center">从 Date 对象以四位数字返回年份。</td>
+</tr>
+<tr>
+<td align="center">getHours()</td>
+<td align="center">返回 Date 对象的小时 (0 ~ 23)。</td>
+</tr>
+<tr>
+<td align="center">getMilliseconds()</td>
+<td align="center">返回 Date 对象的毫秒(0 ~ 999)。</td>
+</tr>
+<tr>
+<td align="center">getMinutes()</td>
+<td align="center">返回 Date 对象的分钟 (0 ~ 59)。</td>
+</tr>
+<tr>
+<td align="center">getMonth()</td>
+<td align="center">从 Date 对象返回月份 (0 ~ 11)。</td>
+</tr>
+<tr>
+<td align="center">getSeconds()</td>
+<td align="center">返回 Date 对象的秒数 (0 ~ 59)。</td>
+</tr>
+<tr>
+<td align="center">getTime()</td>
+<td align="center">返回 1970 年 1 月 1 日至今的毫秒数。</td>
+</tr>
+</tbody></table>
+<h2 id="将字符串转换为数字"><a href="#将字符串转换为数字" class="headerlink" title="将字符串转换为数字"></a>将字符串转换为数字</h2><p>全局方法 <strong>Number()</strong> 可以将字符串转换为数字。</p>
+<p>字符串包含数字(如 “3.14”) 转换为数字 (如 3.14).</p>
+<p>空字符串转换为 0。</p>
+<p>其他的字符串会转换为 NaN (不是个数字)。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Number(``&quot;3.14&quot;``)  ``// 返回 3.14``Number(``&quot; &quot;``)    ``// 返回 0``Number(``&quot;&quot;``)    ``// 返回 0``Number(``&quot;99 88&quot;``)  ``// 返回 NaN</span><br></pre></td></tr></table></figure>
+
+<p>在 <a href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以查看到更多关于字符串转为数字的方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">parseFloat()</td>
+<td align="center">解析一个字符串，并返回一个浮点数。</td>
+</tr>
+<tr>
+<td align="center">parseInt()</td>
+<td align="center">解析一个字符串，并返回一个整数。</td>
+</tr>
+</tbody></table>
+<h2 id="一元运算符"><a href="#一元运算符" class="headerlink" title="一元运算符 +"></a>一元运算符 +</h2><p><strong>Operator +</strong> 可用于将变量转换为数字：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var` `y = ``&quot;5&quot;``;   ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果变量不能转换，它仍然会是一个数字，但值为 NaN (不是一个数字)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var` `y = ``&quot;John&quot;``;  ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字 (NaN)</span><br></pre></td></tr></table></figure>
+
+<h2 id="将布尔值转换为数字"><a href="#将布尔值转换为数字" class="headerlink" title="将布尔值转换为数字"></a>将布尔值转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将布尔值转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Number(``false``)   ``// 返回 0``Number(``true``)   ``// 返回 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="将日期转换为数字"><a href="#将日期转换为数字" class="headerlink" title="将日期转换为数字"></a>将日期转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将日期转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">d = ``new` `Date();``Number(d)     ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+
+<p>日期方法 <strong>getTime()</strong> 也有相同的效果。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">d = ``new` `Date();``d.getTime()    ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动转换类型"><a href="#自动转换类型" class="headerlink" title="自动转换类型"></a>自动转换类型</h2><p>当 JavaScript 尝试操作一个 “错误” 的数据类型时，会自动转换为 “正确” 的数据类型。</p>
+<p>以下输出结果不是你所期望的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5 + ``null`  `// 返回 5     null 转换为 0``&quot;5&quot;` `+ ``null` `// 返回&quot;5null&quot;  null 转换为 &quot;null&quot;``&quot;5&quot;` `+ 1   ``// 返回 &quot;51&quot;   1 转换为 &quot;1&quot;``&quot;5&quot;` `- 1   ``// 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动转换为字符串"><a href="#自动转换为字符串" class="headerlink" title="自动转换为字符串"></a>自动转换为字符串</h2><p>当你尝试输出一个对象或一个变量时 JavaScript 会自动调用变量的 toString() 方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">document.getElementById(``&quot;demo&quot;``).innerHTML = myVar;` `myVar = &#123;name:``&quot;Fjohn&quot;``&#125; ``// toString 转换为 &quot;[object Object]&quot;``myVar = [1,2,3,4]    ``// toString 转换为 &quot;1,2,3,4&quot;``myVar = ``new` `Date()   ``// toString 转换为 &quot;Fri Jul 18 2014 09:08:55 GMT+0200&quot;</span><br></pre></td></tr></table></figure>
+
+<p>数字和布尔值也经常相互转换：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">myVar = 123       ``// toString 转换为 &quot;123&quot;``myVar = ``true`      `// toString 转换为 &quot;true&quot;``myVar = ``false`      `// toString 转换为 &quot;false&quot;</span><br></pre></td></tr></table></figure>
+
+<p>下表展示了使用不同的数值转换为数字(Number), 字符串(String), 布尔值(Boolean)：</p>
+<table>
+<thead>
+<tr>
+<th align="center">原始值</th>
+<th align="center">转换为数字</th>
+<th align="center">转换为字符串</th>
+<th align="center">转换为布尔值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">false</td>
+<td align="center">0</td>
+<td align="center">“false”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">true</td>
+<td align="center">1</td>
+<td align="center">“true”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">“0”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">“1”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“0”</td>
+<td align="center">0</td>
+<td align="center">“0”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“000”</td>
+<td align="center">0</td>
+<td align="center">“000”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“1”</td>
+<td align="center">1</td>
+<td align="center">“1”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">NaN</td>
+<td align="center">NaN</td>
+<td align="center">“NaN”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">Infinity</td>
+<td align="center">Infinity</td>
+<td align="center">“Infinity”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">-Infinity</td>
+<td align="center">-Infinity</td>
+<td align="center">“-Infinity”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“”</td>
+<td align="center">0</td>
+<td align="center">“”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">“20”</td>
+<td align="center">20</td>
+<td align="center">“20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“Nowcoder”</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[ ]</td>
+<td align="center">0</td>
+<td align="center">“”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[20]</td>
+<td align="center">20</td>
+<td align="center">“20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[10,20]</td>
+<td align="center">NaN</td>
+<td align="center">“10,20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[“Nowcoder”]</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[“Nowcoder”,”Google”]</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder,Google”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">function(){}</td>
+<td align="center">NaN</td>
+<td align="center">“function(){}”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">{ }</td>
+<td align="center">NaN</td>
+<td align="center">“[object Object]”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">0</td>
+<td align="center">“null”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">undefined</td>
+<td align="center">NaN</td>
+<td align="center">“undefined”</td>
+<td align="center">false</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
 </search>
