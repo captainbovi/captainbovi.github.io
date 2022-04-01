@@ -563,4 +563,62 @@
         <tag>js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>This理解</title>
+    <url>/2022/04/01/This%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>this，从字面意思上来讲，即这个。但这个，又是哪个呢？ 在使用this的时候常常会遇到一些问题，时常会出现this指向不明的问题（你以为的this并不是真正的this）。那让我们溯源一下，到底什么是this。</p>
+<ul>
+<li>this是JavaScript的关键字之一。它是 对象 自动生成的一个内部对象，只能在 对象 内部使用。随着函数使用场合的不同，this的值会发生变化。</li>
+<li><strong>this指向什么，完全取决于 什么地方以什么方式调用，而不是 创建时</strong>。（比较多人误解的地方）（它非常语义化，this在英文中的含义就是 <strong>这，这个</strong> ，但这其实起到了一定的误导作用，因为this并不是一成不变的，并不一定一直指向当前 <strong>这个</strong>）</li>
+</ul>
+<h4 id="this的绑定规则"><a href="#this的绑定规则" class="headerlink" title="this的绑定规则"></a>this的绑定规则</h4><p><strong>1.默认绑定</strong></p>
+<p>说完了this是什么，最重要的一点就是他是如何绑定的，来看下面例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = 1 ;</span><br><span class="line">    console.log(this.a);    // 10</span><br><span class="line">&#125;</span><br><span class="line">var a = 10;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p>这种就是典型的<strong>默认绑定</strong>，我们看看foo调用的位置，”光杆司令“，像 <strong>这种直接使用而不带任何修饰的函数调用</strong> ，就 <strong>默认且只能</strong> 应用 默认绑定。那默认绑定到哪呢，一般是<code>window</code>上，严格模式下 是<code>undefined</code>。</p>
+<p><strong>2.隐性绑定</strong></p>
+<p>直接上例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10,</span><br><span class="line">    foo : foo</span><br><span class="line">&#125;</span><br><span class="line">foo();                // undefined</span><br><span class="line"></span><br><span class="line">obj.foo();            // 10</span><br></pre></td></tr></table></figure>
+
+<p><code>foo()</code>的这个写法熟悉吗，就是我们刚刚写的默认绑定,等价于打印<code>window.a</code>,故输出<code>undefined</code> ,下面<code>obj.foo()</code>这种大家应该经常写，这其实就是我们马上要讨论的 <strong>隐性绑定</strong> 。函数foo执行的时候有了<strong>上下文对象</strong>，即 <code>obj</code>。这种情况下，<strong>函数里的this默认绑定为上下文对象</strong>，等价于打印<code>obj.a</code>,故输出<code>10</code> 。如果是链性的关系，比如 <code>aa.bb.obj.foo();</code>上下文取函数的直接上级，即紧挨着的那个，或者说对象链的最后一个。</p>
+<p><strong>3.显性绑定</strong></p>
+<p>隐性绑定存在一个致命的限制：<strong>上下文中必须包含该函数</strong>，例：<code>var obj = &#123; foo : foo &#125;</code>,如果上下文不包含我们的函数用隐性绑定明显是要出错的，<strong>不可能每个对象都要加这个函数</strong> ,那样的话扩展,维护性太差了，我们接下来聊的就是直接 <strong>给函数强制性绑定this</strong>。而这里我们就要用到js提供的函数call和apply了。<strong>他们的作用都是改变函数this的指向，第一个参数都是设置this对象</strong>。</p>
+<p>两个函数的区别：</p>
+<ol>
+<li>call从第二个参数开始所有的参数都是 原函数的参数。</li>
+<li>apply只接受两个参数，且第二个参数必须是数组，这个数组代表原函数的参数列表。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo(a,b)&#123;</span><br><span class="line">    console.log(a+b);</span><br><span class="line">&#125;</span><br><span class="line">foo.call(null,&#x27;海洋&#x27;,&#x27;饼干&#x27;);        // 海洋饼干  这里this指向不重要就写null了</span><br><span class="line">foo.apply(null, [&#x27;海洋&#x27;,&#x27;饼干&#x27;] );     // 海洋饼干</span><br></pre></td></tr></table></figure>
+
+<p>除了 call，apply函数以外，还有一个改变this的函数 bind ，它和call,apply都不同。<strong>bind只有一个函数，且不会立刻执行，只是将一个值绑定到函数的this上,并将绑定好的函数返回</strong>。例:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123; a : 10 &#125;;</span><br><span class="line"></span><br><span class="line">foo = foo.bind(obj);</span><br><span class="line">foo();                    // 10</span><br></pre></td></tr></table></figure>
+
+<p>显性绑定就是通过<strong>call,apply,bind</strong>这三个函数实现this的指向改变的，例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a : 10           </span><br><span class="line">&#125;</span><br><span class="line">//将this指向obj</span><br><span class="line">foo.call(obj);        // 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.new绑定</strong></p>
+<p>js的new和传统的面向对象语言的new的作用都是创建一个新的对象，但是他们的机制完全不同。创建一个新对象少不了一个概念，那就是<code>构造函数</code>，传统的面向对象 构造函数 是类里的一种特殊函数，要创建对象时使用<code>new 类名()</code>的形式去调用类中的构造函数，而js中就不一样了。<strong>js中的只要用new修饰的 函数就是’构造函数’</strong>，准确来说是 **函数的<code>构造调用</code>**，因为在js中并不存在所谓的’构造函数’。那么用new 做到函数的<code>构造调用</code>后，js帮我们做了什么工作呢:</p>
+<ol>
+<li>创建一个新对象。</li>
+<li>把这个新对象的<code>__proto__</code>属性指向 原函数的<code>prototype</code>属性。(即继承原函数的原型)</li>
+<li><strong>将这个新对象绑定到 此函数的this上</strong> 。</li>
+<li>返回新对象，如果这个函数没有返回其他<strong>对象</strong>。</li>
+</ol>
+<p>上例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">foo();                    // window对象</span><br><span class="line">console.log(window.a);    // 10   默认绑定</span><br><span class="line"></span><br><span class="line">var obj = new foo();      // foo&#123; a : 10 &#125;  创建的新对象的默认名为函数名</span><br><span class="line">                          // 然后等价于 foo &#123; a : 10 &#125;;  var obj = foo;</span><br><span class="line">console.log(obj.a);       // 10    new绑定</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用new调用函数后，函数会 *以自己的名字 命名 和 创建* 一个新的对象，并返回。</strong></p>
+<p>特别注意 : 如果原函数返回一个对象类型，那么将无法返回新对象,你将丢失绑定this的新对象，例:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    this.a = 10;</span><br><span class="line">    return new String(&quot;捣蛋鬼&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var obj = new foo();</span><br><span class="line">console.log(obj.a);       // undefined</span><br><span class="line">console.log(obj);         // &quot;捣蛋鬼&quot;</span><br></pre></td></tr></table></figure>
+
+<p>this绑定优先级：<strong>new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</strong></p>
+<p><a href="https://segmentfault.com/a/1190000011194676">深入理解 js this 绑定 ( 无需死记硬背，尾部有总结和面试题解析 ) – SegmentFault 思否</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
 </search>
