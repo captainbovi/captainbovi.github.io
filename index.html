@@ -155,6 +155,258 @@
     
     
     <article
+  id="post-神奇的display"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/"
+    >神奇的display</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/" class="article-date">
+  <time datetime="2022-04-01T13:08:25.000Z" itemprop="datePublished">2022-04-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
+<p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
+<hr>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/c6c6b6064cdd0484ebfb71a3dcae55ef-779x1024.jpeg" alt="img"></p>
+<blockquote>
+<p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
+<p>— Alan Turing, <em>Computer scientist</em></p>
+</blockquote>
+<hr>
+<h1 id="display-block、inline"><a href="#display-block、inline" class="headerlink" title="display:block、inline"></a>display:block、inline</h1><p>根据css的规定，一些组件有着其默认的display值，常用的div的默认display值为block，为“块级元素”(block-level ),而作为块级元素，其高度、宽度、内距以及外距都可以进行调整。</p>
+<p>块级元素特点：</p>
+<ol>
+<li>每个块级元素都从新的一行开始（一块霸占一行）</li>
+<li>在其本身的宽度不进行设置时，其宽度默认为其父级组件的宽度（body也算父级组件）。</li>
+<li>可以设置padding和margin</li>
+</ol>
+<p>常用的 块级元素有：</p>
+<p>div、p、h1…h6、ol、ul、dl、table、address、blockquote （块引用）、form</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&#x27;display:inline’&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>而如链接元素a，其默认display值为inline，为“行内元素”，它是依附于其他块级元素存在的，故行内元素是无法设置高度、宽度等属性，在设置margin时只有left、right的时候，与此同时可以设置padding（若想设置，应该将其display强制转化为block）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=&#x27;display:block’&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>常用的行内元素有：</p>
+<p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
+<h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
+<p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095231269-1572459142.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095240254-1054271047.png" alt="img"></p>
+<p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
+<h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
+<p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
+<p>我们来对对比一下display：inline-block和float的效果</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095247004-979551461.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095254066-1995956065.png" alt="img">设置overfloat:hidden防止父元素高度坍塌</p>
+<p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095302926-2090422648.png" alt="img"></p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095312144-2092703645-1.png" alt="img"></p>
+<p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
+<h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
+<p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/1144006-20170513095321754-1704124919.png" alt="img"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
+<h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
+<p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/20200811233531648.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）</p>
+<h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li>flex-direction</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>flex-wrap</li>
+<li>align-content</li>
+<li>flex-flow</li>
+</ul>
+<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1.flex-direction"></a>1.flex-direction</h4><p>项目（flex item)默认情况下是沿着主轴从main start 开始往main end 方向进行排序。而属性flex-direction决定了主轴的方向。其中flex-direction有四个取值（row(默认值)、row-reverse、column(自上而下）、column-reverse)</p>
+<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2.justify-content"></a>2.justify-content</h4><p>这个属性主要用来排列主轴上各个项目(item)的位置，决定了项目在主轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>flex-start(默认值):与main start对齐</li>
+<li>flex-end：与main end对齐</li>
+<li>center：居中</li>
+<li>space-between：flex items 之间的距离相等，与main start、main end两端对齐</li>
+<li>space-evenly: flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p>值得注意的是这些都<strong>是容器的属性</strong></p>
+<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3.align-items"></a>3.align-items</h4><p>这个属性是用于决定项目（items)在纵轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>normal：在弹性布局中，效果和stretch一样</li>
+<li>stretch：前提是items不设置高度，当flex items 在cross axis 方向的size为auto时，会自动拉伸至填充flex container(或者换句话说：如果项目未设置高度或设为auto，将占满整个容器的高度。)</li>
+<li>flex-satrt:与cross start 对齐</li>
+<li>flex-end:与cross end 对齐</li>
+<li>center:居中对齐</li>
+<li>baseline:与基准线对齐</li>
+</ul>
+<h4 id="4-flex-wrap"><a href="#4-flex-wrap" class="headerlink" title="4.flex-wrap"></a>4.flex-wrap</h4><p>决定了flex container 是单行还是多行,默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+<p>属性值：</p>
+<ul>
+<li>nowrap(默认)：单行</li>
+<li>warp：多行 &#x2F;&#x2F;这个比较少用</li>
+<li>wrap-reverse:多行（对比wrap，cross start 与cross end相反）</li>
+</ul>
+<h4 id="5-align-content"><a href="#5-align-content" class="headerlink" title="5.align-content"></a>5.align-content</h4><p>决定了多行flex items 在cross axis的对齐方式 用法与justify-content相似 一个是横轴。一个控制竖轴</p>
+<p>属性值：</p>
+<ul>
+<li>stretch(默认值)：与align-items的stretch类似，当items有高度的时候，无效果</li>
+<li>flex-start:与cross start 对齐</li>
+<li>flex-end :与cross end 对齐</li>
+<li>center：居中对齐</li>
+<li>space-between:flex items 之间的距离相等，与cross start、cross end两端对齐</li>
+<li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p><img src="http://47.106.127.43/wp-content/uploads/2021/08/rock-4739036_1920-1024x640.jpg" alt="img"></p>
+<h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
+<h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
+<h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
+<p>如果所有flex items 的flex-grow 综合sum不超过1，这直接乘以剩余size就是扩展大小、<br>如果超过1 扩展size&#x3D;剩余size*flex-grow&#x2F;sum</p>
+<p><strong>当设置flex:1时，每个子组件将会均匀的分布（水平）在flex容器中</strong></p>
+<h4 id="4-flex-shrink"><a href="#4-flex-shrink" class="headerlink" title="4.flex-shrink"></a>4.flex-shrink</h4><p>flex-shrink (shrink 缩小，收缩)与flex-grow相似，一个扩展，一个伸缩<br>可以设置为任意非父数字（小数，整数 0），默认为1<br>当flex items在main axis 方向上超过了flex container 的size flex-shrink属性才会生效、<br>如果所有flex items 的flex-shrink 总和sum超过1，每个flex item 收缩的size为：<br>flex item 超出flex container 的size*收缩比例&#x2F;每个flex items 的收缩比例之和<br>如果sum不超过1，每个flex item 收缩的size为：<br>size &#x3D; 超出的size * flex-shrink值<br>flex items收缩后的最终size不能小于min-width\min-height</p>
+<h4 id="5-flex-basis"><a href="#5-flex-basis" class="headerlink" title="5.flex-basis"></a>5.flex-basis</h4><p>用来设置flex items 在 main axis方向上的base size<br>默认为auto，可以设置具体的宽度数值 决定flex items最终base size 的因素，优先级从高到低</p>
+<ul>
+<li>max-width\max-height\min-width\min-height</li>
+<li>flex-basis width\height</li>
+<li>内容本身的size</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-图片自适应大小"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/"
+    >图片自适应大小</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/" class="article-date">
+  <time datetime="2022-04-01T13:08:06.000Z" itemprop="datePublished">2022-04-01</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-居中"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/01/%E5%B1%85%E4%B8%AD/"
+    >居中</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/01/%E5%B1%85%E4%B8%AD/" class="article-date">
+  <time datetime="2022-04-01T13:07:47.000Z" itemprop="datePublished">2022-04-01</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-JS的原型和原型链"
   class="article article-type-post"
   itemscope
@@ -546,176 +798,14 @@
 </article>
 
     
-    <article
-  id="post-谈谈表单"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/"
-    >谈谈表单</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/" class="article-date">
-  <time datetime="2022-04-01T06:04:05.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。</p> 
-      <a class="article-more-link" href="/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-home"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/home/"
-    >home</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/home/" class="article-date">
-  <time datetime="2022-04-01T05:39:52.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/intro/">intro</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h1> 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intro/" rel="tag">intro</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/hello-world/" class="article-date">
-  <time datetime="2022-03-31T17:42:31.476Z" itemprop="datePublished">2022-04-01</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>
