@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-01T12:41:55.072Z</updated>
+  <updated>2022-04-01T13:05:08.957Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,82 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS的原型和原型链</title>
+    <link href="http://example.com/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    <id>http://example.com/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/</id>
+    <published>2022-04-01T12:59:07.000Z</published>
+    <updated>2022-04-01T13:05:08.957Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS高阶函数使用</title>
+    <link href="http://example.com/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</id>
+    <published>2022-04-01T12:58:08.000Z</published>
+    <updated>2022-04-01T13:05:18.316Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;首先是for循环的一种简化写法，主要针对数组遍历&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>箭头函数</title>
+    <link href="http://example.com/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
+    <id>http://example.com/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</id>
+    <published>2022-04-01T12:57:54.000Z</published>
+    <updated>2022-04-01T13:04:57.097Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中的回调函数</title>
+    <link href="http://example.com/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"/>
+    <id>http://example.com/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</id>
+    <published>2022-04-01T12:57:40.000Z</published>
+    <updated>2022-04-01T13:04:47.619Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说&lt;strong&gt;主函数的事先干完，回头再调用传进来的那个函数&lt;/strong&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>JS类型判断</title>
