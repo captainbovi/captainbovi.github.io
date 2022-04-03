@@ -184,17 +184,10 @@
     <link href="http://example.com/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/"/>
     <id>http://example.com/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/</id>
     <published>2022-04-03T17:55:24.000Z</published>
-    <updated>2022-04-03T17:55:51.869Z</updated>
+    <updated>2022-04-03T18:56:29.391Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;当我们想要实现在父组件上进行操作后访问子组件的功能或者数据时，可以使用 refs或refs 或refs或children 来实现。同样的，先注册一个实例以及一个子组件&lt;/p&gt;
-&lt;figure class=&quot;highlight</summary>
-        
-      
+    <summary type="html">&lt;p&gt;当我们想要实现在父组件上进行操作后访问子组件的功能或者数据时，可以使用 refs或refs 或refs或children 来实现。同样的，先注册一个实例以及一个子组件&lt;/p&gt;</summary>
     
     
     
