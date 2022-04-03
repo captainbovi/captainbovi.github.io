@@ -178,6 +178,75 @@
 
     
     <article
+  id="post-父子组件通信双向绑定"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"
+    >父子组件通信双向绑定</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="article-date">
+  <time datetime="2022-04-03T17:52:34.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据</p>
+<p>同样的，先注册子组件和父组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line"></span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line"></span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">   &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//将父组件中的数据绑定到子组件上   </span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是使用:value中不能直接绑定props中的属性，以免出现数据紊乱，故需要在data中重新注册数据，然后对data中的数据进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>然后子组件中自定义事件，发射给父组件，这里我们把v-model拆开也是为了方便自定义事件( v-model 等于 :value&#x3D;”+ @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ ),故我们将 @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ 定义为一个新事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">                num1Input(event)&#123;</span><br><span class="line">                    this.dnumber1 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line"></span><br><span class="line">                &#125;,</span><br><span class="line">                num2Input(event)&#123;</span><br><span class="line">                    this.dnumber2 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num2change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line">            &lt;!-- &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;dnumber1=$event.target.value&#x27;&gt; --&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>发射事件后，需要在父组件中监听，并在父组件中声明做出反应，将dnumber的值付给number,同时number的值就是num的值，故最后实现number和num的值相同并实现实时绑定。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line"></span><br><span class="line">//监听事件</span><br><span class="line">        @num1change =&#x27;num1change&#x27;</span><br><span class="line">        @num2change =&#x27;num2change&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                num1change(value)&#123;</span><br><span class="line"></span><br><span class="line">//传入的value的类型默认为字符串，通过parsInt()可以将value的类型转化为int类型</span><br><span class="line">                    this.number1 = parseInt(value),</span><br><span class="line">                    //this.number2 = parseInt(value)/10</span><br><span class="line">                &#125;,</span><br><span class="line">                num2change(value)&#123;</span><br><span class="line">                    this.number2 = parseInt(value),</span><br><span class="line">                    //this.number1 = parseInt(value)*10</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然了，我们还可以使用watch来简化整个过程，我们回到将v-model拆开的部门。如果我们还是想要使用v-model的话，可以使用watch属性来对dnumber进行监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">            watch:&#123;</span><br><span class="line">                // 检测到dnumber发生变化后就触发事件</span><br><span class="line">                dnumber1(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line">                &#125;,</span><br><span class="line">                dnumber2(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>其余操作相同。<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082436147279822879">https://juejin.cn/post/7082436147279822879</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-父子组件传值"
   class="article article-type-post"
   itemscope
@@ -658,62 +727,6 @@
        
   <p>首先是for循环的一种简化写法，主要针对数组遍历</p> 
       <a class="article-more-link" href="/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-箭头函数"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"
-    >箭头函数</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" class="article-date">
-  <time datetime="2022-04-01T12:57:54.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p> 
-      <a class="article-more-link" href="/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"
         >阅读更多...</a
       >
        

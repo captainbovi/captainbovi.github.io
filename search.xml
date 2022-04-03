@@ -1,21 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JS中的回调函数</title>
-    <url>/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p>
-<span id="more"></span>
+    <title>欢迎来到我的博客</title>
+    <url>/2022/04/01/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>我的本意其实并不是打算搭一个个人网站，只是想找个地方记录一下自己的一些学习笔记罢了。后来经过一些机缘巧合，我接触到了个人网站这一神奇的东西，同时还要感谢我的好兄弟王力可对我赞助（在此再次感谢），才让这一网站顺利搭成。不过由于服务器雀食太贵了，所以连夜携博文跑路，投奔github page的怀抱。不过github page中的博文中的图片总是会加载超时，将图片路径从网络移步到相对路径后（将图片存至github中），依然没有改观，所以部分文章也正搬至掘金社区里（文章下方有链接）。</p>
+<p>（原网站：<a href="http://capbv.top/">http://capbv.top</a>   不知道读者看到这儿的时候这个网站是否还存活</p>
+<blockquote>
+<p>没有斗争就没有功绩，没有功绩就没有奖赏，而没有行动就没有生活。</p>
+<p><em>别林斯基</em></p>
+</blockquote>
+<p>里面的每一篇博客，都是我对于学习上的记录，记录内容也均为我个人的所观所感,部分文章摘用了一些写的很好的文章，文章下部会有原文链接，各位看官如果感觉到又被冒犯到或者学习笔记中存在错误，还请联系我对文章进行更改！谢谢各位。</p>
+<p>人生活在希望之中，各位，愿世间安稳，岁月静好。</p>
+<h2 id="自我简介"><a href="#自我简介" class="headerlink" title="自我简介"></a>自我简介</h2><p>本人是来自天回镇&#x2F;安岳县的一名普通群众，目前本科在电子科技大学就读。平时爱好踢踢球、打篮球。求胜欲，是一个压力怪，经常同时对队友和对手一起输出（要找我玩的话，请QQ联系）。同时也比较喜欢去了解人文科普类的知识（尤其是喜欢看这方面的记录片）。最大的梦想是能快乐的活着。</p>
+<h2 id="不止生活"><a href="#不止生活" class="headerlink" title="不止生活"></a>不止生活</h2><p>本博客用来记录自己的学习以及感想</p>
+<p>这其实也是我的一个初衷，是建立这个博客的最初的出发点。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>父子组件通信双向绑定</title>
+    <url>/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<p>将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据</p>
+<p>同样的，先注册子组件和父组件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line"></span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line"></span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">   &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//将父组件中的数据绑定到子组件上   </span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>一个简单的案例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//定义主函数，回调函数作为参数</span><br><span class="line">function A(callback) &#123;</span><br><span class="line">    callback();  </span><br><span class="line">    console.log(&#x27;我是主函数&#x27;);      </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义回调函数</span><br><span class="line">function B()&#123;</span><br><span class="line">    setTimeout(&quot;console.log(&#x27;我是回调函数&#x27;)&quot;, 5000);//模仿异步操作  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用主函数，将函数B传进去</span><br><span class="line">A(B);</span><br><span class="line"></span><br><span class="line">//输出结果</span><br><span class="line">我是主函数</span><br><span class="line">我是回调函数</span><br></pre></td></tr></table></figure>
+<p>需要注意的是使用:value中不能直接绑定props中的属性，以免出现数据紊乱，故需要在data中重新注册数据，然后对data中的数据进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>上面的代码中，我们先定义了主函数和回调函数，然后再去调用主函数，将回调函数传进去。定义主函数的时候，我们让代码先去执行callback()回调函数，但输出结果却是后输出回调函数的内容。也就是说<strong>主函数不用等待回调函数执行完，可以接着执行自己的代码</strong>。所以一般回调函数都用在异步操作上面。比如ajax请求，比如处理文件等。</p>
+<p>然后子组件中自定义事件，发射给父组件，这里我们把v-model拆开也是为了方便自定义事件( v-model 等于 :value&#x3D;”+ @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ ),故我们将 @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ 定义为一个新事件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">                num1Input(event)&#123;</span><br><span class="line">                    this.dnumber1 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line"></span><br><span class="line">                &#125;,</span><br><span class="line">                num2Input(event)&#123;</span><br><span class="line">                    this.dnumber2 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num2change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line">            &lt;!-- &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;dnumber1=$event.target.value&#x27;&gt; --&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>发射事件后，需要在父组件中监听，并在父组件中声明做出反应，将dnumber的值付给number,同时number的值就是num的值，故最后实现number和num的值相同并实现实时绑定。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line"></span><br><span class="line">//监听事件</span><br><span class="line">        @num1change =&#x27;num1change&#x27;</span><br><span class="line">        @num2change =&#x27;num2change&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                num1change(value)&#123;</span><br><span class="line"></span><br><span class="line">//传入的value的类型默认为字符串，通过parsInt()可以将value的类型转化为int类型</span><br><span class="line">                    this.number1 = parseInt(value),</span><br><span class="line">                    //this.number2 = parseInt(value)/10</span><br><span class="line">                &#125;,</span><br><span class="line">                num2change(value)&#123;</span><br><span class="line">                    this.number2 = parseInt(value),</span><br><span class="line">                    //this.number1 = parseInt(value)*10</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然了，我们还可以使用watch来简化整个过程，我们回到将v-model拆开的部门。如果我们还是想要使用v-model的话，可以使用watch属性来对dnumber进行监听</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">            watch:&#123;</span><br><span class="line">                // 检测到dnumber发生变化后就触发事件</span><br><span class="line">                dnumber1(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line">                &#125;,</span><br><span class="line">                dnumber2(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>其余操作相同。<br>链接：<a href="https://juejin.cn/post/7082436147279822879">https://juejin.cn/post/7082436147279822879</a></p>
 ]]></content>
       <categories>
-        <category>javascript</category>
+        <category>Vue</category>
       </categories>
       <tags>
-        <tag>js</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>父子组件传值</title>
+    <url>/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</url>
+    <content><![CDATA[<p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6f28be593d14051a679c01760bf859a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>Vue提供的传输方法</p>
+<h2 id="（父传子）props传输数据"><a href="#（父传子）props传输数据" class="headerlink" title="（父传子）props传输数据"></a>（父传子）props传输数据</h2><p>这里，我们不妨将实例app当做父组件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//生成一个实例</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我爱你&#x27;,</span><br><span class="line">                array:[1,2,3,4]</span><br><span class="line">            &#125;,</span><br><span class="line">            components:&#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">//注册组件cpn</span><br><span class="line">//需要注意的是我们在使用props传入数据时，需要在子组件外围设置一个根（一个包裹如div）</span><br><span class="line"> &lt;template id=&quot;cnp&quot; &gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;carray&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;cmessage&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line"> const cpn=&#123;</span><br><span class="line">            template:&#x27;#cnp&#x27;,</span><br><span class="line">//注册的组件的data必须是一个函数（用于返回对象）</span><br><span class="line">            data()&#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">//声明props</span><br><span class="line">传入父组件数据</span><br><span class="line">            props:&#123;</span><br><span class="line">                carray:Array,</span><br><span class="line">                cmessage:&#123;</span><br><span class="line">                    type:String,</span><br><span class="line">                    default:&quot;我日你先人&quot;,</span><br><span class="line">                    // 是否必须传值</span><br><span class="line">                    // required:true</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">//使用v-bind语法糖</span><br><span class="line"></span><br><span class="line">//将array中的值绑定到carray中</span><br><span class="line">//将message中的值绑定到cmessage中</span><br><span class="line">        &lt;cpn :cArray=&quot;array&quot; :cMessage=&quot;message&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>至此，最简单的传值操作就已经完成了</p>
+<p>值得注意的是，v-bind语句不支持驼峰命名法，若在props中的元素使用驼峰命名法，则需要在绑定值时使用 -分割线</p>
+<h2 id="（子传父）自定义事件传递数据"><a href="#（子传父）自定义事件传递数据" class="headerlink" title="（子传父）自定义事件传递数据"></a>（子传父）自定义事件传递数据</h2><p>父传子时是通过props属性来完成的，而当我们遇到子传父时，则需要注册自定义事件</p>
+<p>一般情况下，子组件发生了某个事件，我们希望父组件根据该事件做出相应的一个调整与反映。</p>
+<p>同样的我，我们先创建一个子组件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">                &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line"></span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>子传父的应用场景比较多的是子组件中发生了某些事件，我们希望父组件知道并且作出反映。在此，我们模拟一个简单的传输过程。现将整个子组件丰富一下，然后在此我们将自定义事件在子组件中进行一个注册</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    categories:[</span><br><span class="line">                        &#123;id:&#x27;111&#x27;,name:&#x27;apple&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;112&#x27;,name:&#x27;iphone&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;113&#x27;,name:&#x27;ipad&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;114&#x27;,name:&#x27;huawei&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;115&#x27;,name:&#x27;xiaomi&#x27;&#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                itemClick(item)&#123;</span><br><span class="line">                    // console.log(item);</span><br><span class="line">                    // 发射(事件,参数)</span><br><span class="line">                    this.$emit(&#x27;item-click&#x27;,item) </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line"></span><br><span class="line">//注册点击事件</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>子组件发射事件后，父组件需要对该事件进行监听，监听方式：在父组件的模板上使用v-on绑定事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//以前我们使用v-on绑定的事件都是默认注册好的事件，自定义事件注册后，便可以在其作用域（父组件）内进行监听、绑定</span><br><span class="line">//监听的自定义事件的命名需要从驼峰命名法进行转化（使用脚手架可忽略）</span><br><span class="line">//若在监听事件时没有传入参数（如cpnClick(item)传入参数），将会默认传入子组件发射的参数，在这里为item</span><br><span class="line">        &lt;cpn @item-click=&quot;cpnClick&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;div&gt;我爱&#123;&#123; things &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>在父组件中注册监听后，还需要在父组件内部注册事件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &#x27;我爱你&#x27;,</span><br><span class="line">                array: [1, 2, 3, 4],</span><br><span class="line">                things:&quot;NONE&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                cpnClick(item)&#123;</span><br><span class="line">                    console.log(item.id);</span><br><span class="line">                    this.things = item.name;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们完成了对父传子操作的全过程。运行截图如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e832e4a99eab43c2a96cbdd4463aa1c3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10b4140fe8c0488d8cee57b2161d38ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/682923a1b22f408b8fc7725b72ea3f12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>作者：用户4721573403919<br>链接：<a href="https://juejin.cn/post/7082435003316961311">https://juejin.cn/post/7082435003316961311</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>v-model的常用事件修饰符</title>
+    <url>/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/</url>
+    <content><![CDATA[<h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。<strong>使用方法：v-model.lazy&#x3D;”（绑定的数据）”</strong></p>
+<h4 id="number修饰符"><a href="#number修饰符" class="headerlink" title="number修饰符"></a>number修饰符</h4><p>默认情况下，在输入框中无论是输入字符还是数字，v-model绑定数据时均会按照字符串进行处理。当我们希望处理的时数字类型时（可以在input 的type属性中设置为number），使用number修饰符可以将其自动转化为数字类型，便于处理。<strong>使用方法：v-model.number&#x3D;”(绑定的数据)”</strong></p>
+<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title="trim修饰符"></a>trim修饰符</h4><p>当输入的数据中左右两端存在很多的空格时，可以通过trim修饰符将左右两端的空格进行删除。<strong>使用方法：v-model.trim&#x3D;”(绑定的数据)”</strong></p>
+<p>链接：<a href="https://juejin.cn/post/7082428951708041247">https://juejin.cn/post/7082428951708041247</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue初步</title>
+    <url>/2022/04/04/Vue%E5%88%9D%E6%AD%A5/</url>
+    <content><![CDATA[<h2 id="什么是工程化"><a href="#什么是工程化" class="headerlink" title="什么是工程化"></a>什么是工程化</h2><p>你以为的前端开发：老三样，需要美化页面：bootstrap!,需要实现网页布局：Layui（然后最后写出个DEMO）</p>
+<p>实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）</p>
+<p>那到底什么是前端工程化呢？前端工程化指的是，把前端开发所需的工具、技术、流程、经验等进行规范化、标准化。（说了半天还是不清楚）</p>
+<h2 id="什么是VUE"><a href="#什么是VUE" class="headerlink" title="什么是VUE"></a>什么是VUE</h2><p>Vue是一款前端渐进式框架，可以提高前端开发效率。Vue通过MVVM模式,能够实现视图与模型的双向绑定。简单来说，就是数据变化的时候, 页面会自动刷新, 页面变化的时候，数据也会自动变化.</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f579a76fad6d43e88fcaee49fc5d8e97~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h3 id="webpack的登场"><a href="#webpack的登场" class="headerlink" title="webpack的登场"></a>webpack的登场</h3><p>webpack是前端项目工程化的具体解决方案，它主要提供了友好的前端模块化开发支持以及代码压缩混淆处理（将多行代码压缩到一行，清除全部注释，压缩用以节约空间）、处理浏览器端的JavaScript的兼容性、性能优化等强大的功能。提高开发效率和可维护性（总而言之，就是webpack，行！）</p>
+<p>目前，比较主流的前端开发框架如react、Vue都是基于webpack进行工程化开发的</p>
+<h3 id="webpack的安装与配置"><a href="#webpack的安装与配置" class="headerlink" title="webpack的安装与配置"></a>webpack的安装与配置</h3><p>在终端运行如下命令，安装webpack相关的两个包：</p>
+<p>npm install webpack webpack-cli -D</p>
+<p>安装完webpack，vue的基本环节就算安装结束了。</p>
+<h2 id="Vue实例"><a href="#Vue实例" class="headerlink" title="Vue实例"></a>Vue实例</h2><p>在初学Vue，写demo的时候，我们常常会看见以下代码 <code>const app = new Vue(&#123;          el:#app,          data:&#123;&#125;          &#125;)</code> 这就是一个最简单的Vue实例，其中<strong>el:挂载点</strong>，他是用来设置Vue实例挂载的元素（在这里挂载的就是id为app的一个div），Vue会管理el挂载的元素以及其内部的元素。可以使用其他的选择器，但是建议使用<strong>ID选择器</strong>。<strong>data:数据库</strong>，Vue中用到的数据都定义在data中，在渲染复杂类型的数据时，遵循js的语法。</p>
+<h2 id="Vue指令与事件"><a href="#Vue指令与事件" class="headerlink" title="Vue指令与事件"></a>Vue指令与事件</h2><p>vue中提供了以下指令：</p>
+<h3 id="V-on"><a href="#V-on" class="headerlink" title="V-on"></a>V-on</h3><p>V-on 用于给元素绑定事件，不多bb，直接看demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;你再点一下试试&quot; @click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;别点了别点了！&quot; v-on:click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;再点要破防惹！&quot; @dblclick = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;#&quot; v-html = &quot;message&quot; @click = &quot;nt&quot; style=&quot;text-decoration:none;&quot;&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:&quot;我是真的无语&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function()&#123;</span><br><span class="line">                alert(&quot;哭了&quot;);</span><br><span class="line">            &#125;,</span><br><span class="line">            nt:function()&#123;</span><br><span class="line">                this.message +=&quot; 别戳了QAQ&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;`</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>值得一提的是，指令可以简写为@，平时在写代码的时候，鼓励大家使用这个语法糖。绑定的方法定义在<strong>methods</strong>属性中，方法内部可以通过<strong>this</strong>关键字访问在data中的数据。 除此之外，还可以将绑定的方法写成函数调用的形式，并传入自定义参数。 另外还有事件修饰符，例子如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt; </span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;点我&quot; @click =&quot;doIt(6666,&#x27;ohNo&#x27;)&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; @keyup.enter=&quot;sayHi&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function(p1,p2)&#123;</span><br><span class="line">                console.log(p1);</span><br><span class="line">                console.log(p2);</span><br><span class="line">            &#125;,</span><br><span class="line">            sayHi:function()&#123;</span><br><span class="line">                alert(&quot;您真是个大可爱&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>更多的事件修饰符见vue官方文<a href="https://link.juejin.cn/?target=https://cn.vuejs.org/v2/api%23v-on">cn.vuejs.org&#x2F;v2&#x2F;api#v-on</a> 。</p>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p>v-for，类似于python中的for，可以实时生成。它一般用作：根据数据生成列表结构（常常和数组结合使用），语法是<code>（item,index）in data </code>item是data中的属性，如果data是数组的话,item就是数组中的每个数值，index是item的索引,v-for的使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li v-for=&quot;item in Arr&quot;&gt;&#123;&#123; item &#125;&#125;&lt;/li&gt;</span><br><span class="line">            &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;add&quot; @click = &quot;add&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;remove&quot; @click = &quot;remove&quot; &gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;    </span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app =new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                Arr:[&#x27;北京&#x27;,&#x27;天津&#x27;,&#x27;成都&#x27;,&#x27;上海&#x27;],</span><br><span class="line">                boys:[</span><br><span class="line">                    &#123;name:&quot;bovi&quot;,age:18&#125;,</span><br><span class="line">                    &#123;name:&quot;jeff&quot;,age:19&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                add:function()&#123;</span><br><span class="line">                    this.boys.push(&#123;name:&quot;kevin&quot;,age:12&#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                remove:function()&#123;</span><br><span class="line">                    this.boys.shift();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>数组长度的更新会同步到页面上，是<strong>响应式</strong>的，在上例中，如果点击第一个button，将会在页面中添加一个li，内容为kevin，同理，如果点击第二个button，页面中将会减少一个li。item和index可以结合其他指令一起使用。例如，在上例中我们获得的每个boy都是一个对象，可以通过boy.age获取拿到的boy中的age属性的值。</p>
+<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>v-if：根据值的真假切换元素的显示与隐藏（直接在dom树中移除、添加）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;p v-if = &quot;true&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是咋办&lt;/span&gt;</span><br><span class="line">        &lt;p v-if = &quot;isShow&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是span&lt;/span&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;改变可见度&quot; @dblclick =&quot;changeIsShow&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                isShow:false</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                changeIsShow:function()&#123;</span><br><span class="line">                    this.isShow = !this.isShow;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>和v-if相对应的就是v-show</p>
+<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>v-show:根据值的真假，切换元素的显示与隐藏（仅仅改变对象的display）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏，数据发生改变后，对应元素的显示状态将会同步更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;button value=&quot;点击切换&quot; @click = &quot;changeIsShow&quot;&gt;&lt;/button&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;true&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;isShow&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;age&gt;18&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            isShow:false,</span><br><span class="line">            age:17</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            changeIsShow:function()&#123;</span><br><span class="line">                this.isShow=!this.isShow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>如果经常切换，建议使用v-show（避免多次修改dom树），反之使用v-if（速度更快）。</p>
+<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>v-model:与数据绑定，实时进行修改（双方同时）。即： 绑定的数据&lt;–&gt;表单元素值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">        &lt;input type=&quot;text&quot; v-model=&quot;message&quot; @keyup.enter=&quot;getMessage&quot;&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123; message &#125;&#125;&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &quot;我是谁？&quot;,</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                getMessage:function()&#123;</span><br><span class="line">                    alert(this.message);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>v-model指令的作用是便于设置、获取表单元素的值</p>
+<p><a href="https://juejin.cn/post/7082426039946706975">https://juejin.cn/post/7082426039946706975</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>神奇的display</title>
+    <url>/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/</url>
+    <content><![CDATA[<p>display可是个神奇的东西，通过修改display可以帮助组件实现“逆天改命”，变成其他组件的“模样”，当然，修炼之路不乏贫困，让我们一起来看看都有些什么神奇的display可供更改。</p>
+<span id="more"></span>
+
+<h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
+<p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
+<hr>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C1.png" alt="img"></p>
+<blockquote>
+<p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
+<p>— Alan Turing, <em>Computer scientist</em></p>
+</blockquote>
+<hr>
+<h1 id="display-block、inline"><a href="#display-block、inline" class="headerlink" title="display:block、inline"></a>display:block、inline</h1><p>根据css的规定，一些组件有着其默认的display值，常用的div的默认display值为block，为“块级元素”(block-level ),而作为块级元素，其高度、宽度、内距以及外距都可以进行调整。</p>
+<p>块级元素特点：</p>
+<ol>
+<li>每个块级元素都从新的一行开始（一块霸占一行）</li>
+<li>在其本身的宽度不进行设置时，其宽度默认为其父级组件的宽度（body也算父级组件）。</li>
+<li>可以设置padding和margin</li>
+</ol>
+<p>常用的 块级元素有：</p>
+<p>div、p、h1…h6、ol、ul、dl、table、address、blockquote （块引用）、form</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div style=&#x27;display:inline’&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>而如链接元素a，其默认display值为inline，为“行内元素”，它是依附于其他块级元素存在的，故行内元素是无法设置高度、宽度等属性，在设置margin时只有left、right的时候，与此同时可以设置padding（若想设置，应该将其display强制转化为block）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;span style=&#x27;display:block’&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>常用的行内元素有：</p>
+<p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
+<h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
+<p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C2.png" alt="img"></p>
+<p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
+<h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
+<p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
+<p>我们来对对比一下display：inline-block和float的效果</p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C3.png" alt="img"></p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C4.png" alt="img"></p>
+<p>设置overfloat:hidden防止父元素高度坍塌</p>
+<p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C9.png" alt="img"></p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C8.png" alt="img"></p>
+<p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
+<h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
+<p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C5.png" alt="img"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
+<h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
+<p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C6.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis)</p>
+<h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li>flex-direction</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>flex-wrap</li>
+<li>align-content</li>
+<li>flex-flow</li>
+</ul>
+<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1.flex-direction"></a>1.flex-direction</h4><p>项目（flex item)默认情况下是沿着主轴从main start 开始往main end 方向进行排序。而属性flex-direction决定了主轴的方向。其中flex-direction有四个取值（row(默认值)、row-reverse、column(自上而下）、column-reverse)</p>
+<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2.justify-content"></a>2.justify-content</h4><p>这个属性主要用来排列主轴上各个项目(item)的位置，决定了项目在主轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>flex-start(默认值):与main start对齐</li>
+<li>flex-end：与main end对齐</li>
+<li>center：居中</li>
+<li>space-between：flex items 之间的距离相等，与main start、main end两端对齐</li>
+<li>space-evenly: flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p>值得注意的是这些都<strong>是容器的属性</strong></p>
+<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3.align-items"></a>3.align-items</h4><p>这个属性是用于决定项目（items)在纵轴上的对齐方式</p>
+<p>属性值：</p>
+<ul>
+<li>normal：在弹性布局中，效果和stretch一样</li>
+<li>stretch：前提是items不设置高度，当flex items 在cross axis 方向的size为auto时，会自动拉伸至填充flex container(或者换句话说：如果项目未设置高度或设为auto，将占满整个容器的高度。)</li>
+<li>flex-satrt:与cross start 对齐</li>
+<li>flex-end:与cross end 对齐</li>
+<li>center:居中对齐</li>
+<li>baseline:与基准线对齐</li>
+</ul>
+<h4 id="4-flex-wrap"><a href="#4-flex-wrap" class="headerlink" title="4.flex-wrap"></a>4.flex-wrap</h4><p>决定了flex container 是单行还是多行,默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+<p>属性值：</p>
+<ul>
+<li>nowrap(默认)：单行</li>
+<li>warp：多行 &#x2F;&#x2F;这个比较少用</li>
+<li>wrap-reverse:多行（对比wrap，cross start 与cross end相反）</li>
+</ul>
+<h4 id="5-align-content"><a href="#5-align-content" class="headerlink" title="5.align-content"></a>5.align-content</h4><p>决定了多行flex items 在cross axis的对齐方式 用法与justify-content相似 一个是横轴。一个控制竖轴</p>
+<p>属性值：</p>
+<ul>
+<li>stretch(默认值)：与align-items的stretch类似，当items有高度的时候，无效果</li>
+<li>flex-start:与cross start 对齐</li>
+<li>flex-end :与cross end 对齐</li>
+<li>center：居中对齐</li>
+<li>space-between:flex items 之间的距离相等，与cross start、cross end两端对齐</li>
+<li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
+<li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
+</ul>
+<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C7.jpg" alt="img"></p>
+<h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
+<h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
+<h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
+<p>如果所有flex items 的flex-grow 综合sum不超过1，这直接乘以剩余size就是扩展大小、<br>如果超过1 扩展size&#x3D;剩余size*flex-grow&#x2F;sum</p>
+<p><strong>当设置flex:1时，每个子组件将会均匀的分布（水平）在flex容器中</strong></p>
+<h4 id="4-flex-shrink"><a href="#4-flex-shrink" class="headerlink" title="4.flex-shrink"></a>4.flex-shrink</h4><p>flex-shrink (shrink 缩小，收缩)与flex-grow相似，一个扩展，一个伸缩<br>可以设置为任意非父数字（小数，整数 0），默认为1<br>当flex items在main axis 方向上超过了flex container 的size flex-shrink属性才会生效、<br>如果所有flex items 的flex-shrink 总和sum超过1，每个flex item 收缩的size为：<br>flex item 超出flex container 的size*收缩比例&#x2F;每个flex items 的收缩比例之和<br>如果sum不超过1，每个flex item 收缩的size为：<br>size &#x3D; 超出的size * flex-shrink值<br>flex items收缩后的最终size不能小于min-width\min-height</p>
+<h4 id="5-flex-basis"><a href="#5-flex-basis" class="headerlink" title="5.flex-basis"></a>5.flex-basis</h4><p>用来设置flex items 在 main axis方向上的base size<br>默认为auto，可以设置具体的宽度数值 决定flex items最终base size 的因素，优先级从高到低</p>
+<ul>
+<li>max-width\max-height\min-width\min-height</li>
+<li>flex-basis width\height</li>
+<li>内容本身的size</li>
+</ul>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图片自适应大小</title>
+    <url>/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/</url>
+    <content><![CDATA[<p>在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过<img>组件。两种方式实现自适应的方式大同小异。</p>
+<span id="more"></span>
+
+<h3 id="背景图适应大小"><a href="#背景图适应大小" class="headerlink" title="背景图适应大小"></a>背景图适应大小</h3><p>当外层容器的宽高比跟图片宽高比一致时到没啥问题，但在一些特定的业务场景，如九宫格图片展示时，展示的原始图片它们的大小，宽高比很有可能是不一样的，但外层容器的大小是固定的。此时如果按照上面的做法会导致图片被拉伸或者压缩。为了让图片显示的自然，我们可以让图片中的一部分去填充整个容器，虽然这样做无法让图片显示完整，但也避免了因图片的拉伸或压缩导致的变形。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;</span><br><span class="line">width: 200px；</span><br><span class="line">height: 200px;</span><br><span class="line">background: url(&#x27;xxxx.png&#x27;) no-repeat;</span><br><span class="line">background-size: cover;</span><br><span class="line">background-position: center center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="图片自适应容器宽高"><a href="#图片自适应容器宽高" class="headerlink" title="图片自适应容器宽高"></a>图片自适应容器宽高</h3><p>css实现图片自适应容器宽高的做法一般如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;width: 200px; height: 200px&#125;</span><br><span class="line">div img&#123;width: 100%; height: 100%&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;img src=&quot;xxxx.png&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>居中</title>
+    <url>/2022/04/01/%E5%B1%85%E4%B8%AD/</url>
+    <content><![CDATA[<p>居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中</p>
+<span id="more"></span>
+
+<h3 id="绝对位置居中"><a href="#绝对位置居中" class="headerlink" title="绝对位置居中"></a>绝对位置居中</h3><p>绝对位置居中的核心思想就是通过绝对定位的方式实现居中，具体操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">style&#123;</span><br><span class="line">    //给父体一个绝对定位</span><br><span class="line">    .div&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    //给子体相对定位</span><br><span class="line">    .object&#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        left: 50%;</span><br><span class="line">        top:50%;</span><br><span class="line">        transform: translate(-50%,-50%);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>top: 50%;left: 50%;， 是以左上角为原点，故不处于中心位置，<br>translate(-50%,-50%) 作用是，往上（x轴）,左（y轴）移动自身长宽的 50%，以使其居于中心位置。</p>
+<h3 id="弹性盒子居中"><a href="#弹性盒子居中" class="headerlink" title="弹性盒子居中"></a>弹性盒子居中</h3><p>弹性盒子居中主要使用justify-content、 align-items 属性，</p>
+<p>justify-content:center;&#x2F;* 子元素水平居中 *&#x2F;</p>
+<p>align-items:center;&#x2F;* 子元素垂直居中 *&#x2F;</p>
+<p>其中justify-content是flex布局中父项的一个比较常见的属性，justify-content 属性定义了项目在主轴上的对齐方式。</p>
+<p><img src="/2022/04/01/%E5%B1%85%E4%B8%AD/%E5%B1%85%E4%B8%AD%5C1.png" alt="img"></p>
+<p><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-items</a>属性可以应用于所有的flex容器，它的作用是设置flex子项在每个flex行的交叉轴上的默认对齐方式。不同取值的效果如下所示：<br><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-item</a></p>
+<p><img src="/2022/04/01/%E5%B1%85%E4%B8%AD/%E5%B1%85%E4%B8%AD%5C2.png" alt="img"></p>
+<p>align-items属性是针对单独的每一个flex子项起作用，它的基本单位是每一个子项，在所有情况下都有效果（当然要看具体的属性值）。</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -95,6 +388,68 @@
 <p>这就是原型链，fn能够调用Object.prototype中的方法正是因为存在原型链的机制。</p>
 <p>另外，在使用原型的时候，一般推荐将需要扩展的方法写在构造函数的prototype属性中，避免写在_ _ proto _ _属性里面。</p>
 <p><a href="https://blog.csdn.net/qq_36996271/article/details/82527256">https://blog.csdn.net/qq_36996271/article/details/82527256</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS高阶函数使用</title>
+    <url>/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>首先是for循环的一种简化写法，主要针对数组遍历</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.常规for循环</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i = 0;i&lt;this.books.length;i++)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;</span><br><span class="line">            return price;</span><br><span class="line">            2.for(let i in this.books)</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i in this.books)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;return price;</span><br><span class="line">           3.for(let i of this.books)</span><br><span class="line">           let price=0;</span><br><span class="line">           for(let book of this.books)&#123;</span><br><span class="line">               price+=book.price*book.count;</span><br><span class="line">           &#125;return price;</span><br></pre></td></tr></table></figure>
+
+<p><strong>filter函数</strong>（过滤函数）：中有一个回调函数，每读入数组中的一个元素便调用一次（返回一个Boolean值），当返回值为true时，函数内部将会自动将这次的回调的n加入新的数组，若为false，则过滤掉这次的n</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.filter(function(n)&#123;</span><br><span class="line">      return n&lt;6;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法：</span><br><span class="line">let newNums = nums.filter(n =&gt; n&lt;6);</span><br><span class="line">//最后获得结果[1,2,4,5]</span><br></pre></td></tr></table></figure>
+
+<p><strong>map函数</strong>（遍历函数）：中有一个回调函数， 每读入数组中的一个元素便调用一次 ，并将返回值自动加入新的数组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.map(function(n)&#123;</span><br><span class="line">      return n*2;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNums=nums.map(n =&gt; n*2)</span><br><span class="line">//最后获得结果[2,4,8,10,20,64,88]</span><br></pre></td></tr></table></figure>
+
+<p><strong>reduce函数</strong>（汇总函数）：中有两个传入参数—-reduce（参数一,参数二）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5];</span><br><span class="line">let  newNum = nums.reduce(function(preValue,n)&#123;</span><br><span class="line">      return preValue+n;</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(newNum)</span><br><span class="line">第一次：preValue 0 n 1</span><br><span class="line">第二次：preValue 1 n 2</span><br><span class="line">第三次：preValue 3 n 4</span><br><span class="line">第四次：preValue 7 n 5</span><br><span class="line">第五次：preValue 12</span><br><span class="line">最后输出12</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNum = nums.reduce((preValue,n) =&gt; preValue+n)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>箭头函数</title>
+    <url>/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const aaa = function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">cost bbb = ()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//aaa与bbb等效</span><br></pre></td></tr></table></figure>
+
+<p>通过简单的&#x3D;&gt;就可以生成一个函数，确实会比之前的方式简单许多，箭头函数的格式如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（参数列表）=&gt; &#123;</span><br><span class="line">//代码块</span><br><span class="line">&#125;</span><br><span class="line">//如果参数只有一个，则小括号可以省略</span><br><span class="line">//如果代码块中的代码只有一行，则可以省略大括号，并将该代码置于箭头后，计算机将会运行改行代码，并自动将其运行结果作为返回值</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是在箭头函数中应用this，此时this指向的是 一层层往外层作用域寻找，直到找到最近的this定义</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS中的回调函数</title>
+    <url>/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p>
+<span id="more"></span>
+
+<p>一个简单的案例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//定义主函数，回调函数作为参数</span><br><span class="line">function A(callback) &#123;</span><br><span class="line">    callback();  </span><br><span class="line">    console.log(&#x27;我是主函数&#x27;);      </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义回调函数</span><br><span class="line">function B()&#123;</span><br><span class="line">    setTimeout(&quot;console.log(&#x27;我是回调函数&#x27;)&quot;, 5000);//模仿异步操作  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用主函数，将函数B传进去</span><br><span class="line">A(B);</span><br><span class="line"></span><br><span class="line">//输出结果</span><br><span class="line">我是主函数</span><br><span class="line">我是回调函数</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，我们先定义了主函数和回调函数，然后再去调用主函数，将回调函数传进去。定义主函数的时候，我们让代码先去执行callback()回调函数，但输出结果却是后输出回调函数的内容。也就是说<strong>主函数不用等待回调函数执行完，可以接着执行自己的代码</strong>。所以一般回调函数都用在异步操作上面。比如ajax请求，比如处理文件等。</p>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -187,30 +542,6 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Car(make, model, year) &#123;</span><br><span class="line">  this.make = make;</span><br><span class="line">  this.model = model;</span><br><span class="line">  this.year = year;</span><br><span class="line">&#125;</span><br><span class="line">const auto = new Car(&#x27;Honda&#x27;, &#x27;Accord&#x27;, 1998);</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Car);</span><br><span class="line">// expected output: true</span><br><span class="line"></span><br><span class="line">console.log(auto instanceof Object);</span><br><span class="line">// expected output: true</span><br></pre></td></tr></table></figure>
 
 <p>原文链接：<a href="https://github.com/mqyqingfeng/Blog/issues/28">JavaScript专题之类型判断(上) · Issue #28 · mqyqingfeng&#x2F;Blog · GitHub</a></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS高阶函数使用</title>
-    <url>/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>首先是for循环的一种简化写法，主要针对数组遍历</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.常规for循环</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i = 0;i&lt;this.books.length;i++)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;</span><br><span class="line">            return price;</span><br><span class="line">            2.for(let i in this.books)</span><br><span class="line">            let price=0;</span><br><span class="line">            for(let i in this.books)&#123;</span><br><span class="line">                price+=this.books[i].price*this.books[i].count;</span><br><span class="line">            &#125;return price;</span><br><span class="line">           3.for(let i of this.books)</span><br><span class="line">           let price=0;</span><br><span class="line">           for(let book of this.books)&#123;</span><br><span class="line">               price+=book.price*book.count;</span><br><span class="line">           &#125;return price;</span><br></pre></td></tr></table></figure>
-
-<p><strong>filter函数</strong>（过滤函数）：中有一个回调函数，每读入数组中的一个元素便调用一次（返回一个Boolean值），当返回值为true时，函数内部将会自动将这次的回调的n加入新的数组，若为false，则过滤掉这次的n</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.filter(function(n)&#123;</span><br><span class="line">      return n&lt;6;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法：</span><br><span class="line">let newNums = nums.filter(n =&gt; n&lt;6);</span><br><span class="line">//最后获得结果[1,2,4,5]</span><br></pre></td></tr></table></figure>
-
-<p><strong>map函数</strong>（遍历函数）：中有一个回调函数， 每读入数组中的一个元素便调用一次 ，并将返回值自动加入新的数组</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5,10,32,44];</span><br><span class="line">let  newNums = nums.map(function(n)&#123;</span><br><span class="line">      return n*2;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(newNums)</span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNums=nums.map(n =&gt; n*2)</span><br><span class="line">//最后获得结果[2,4,8,10,20,64,88]</span><br></pre></td></tr></table></figure>
-
-<p><strong>reduce函数</strong>（汇总函数）：中有两个传入参数—-reduce（参数一,参数二）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const nums=[1,2,4,5];</span><br><span class="line">let  newNum = nums.reduce(function(preValue,n)&#123;</span><br><span class="line">      return preValue+n;</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(newNum)</span><br><span class="line">第一次：preValue 0 n 1</span><br><span class="line">第二次：preValue 1 n 2</span><br><span class="line">第三次：preValue 3 n 4</span><br><span class="line">第四次：preValue 7 n 5</span><br><span class="line">第五次：preValue 12</span><br><span class="line">最后输出12</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简洁写法:</span><br><span class="line">let newNum = nums.reduce((preValue,n) =&gt; preValue+n)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -635,209 +966,6 @@
       </tags>
   </entry>
   <entry>
-    <title>图片自适应大小</title>
-    <url>/2022/04/01/%E5%9B%BE%E7%89%87%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F/</url>
-    <content><![CDATA[<p>在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过<img>组件。两种方式实现自适应的方式大同小异。</p>
-<span id="more"></span>
-
-<h3 id="背景图适应大小"><a href="#背景图适应大小" class="headerlink" title="背景图适应大小"></a>背景图适应大小</h3><p>当外层容器的宽高比跟图片宽高比一致时到没啥问题，但在一些特定的业务场景，如九宫格图片展示时，展示的原始图片它们的大小，宽高比很有可能是不一样的，但外层容器的大小是固定的。此时如果按照上面的做法会导致图片被拉伸或者压缩。为了让图片显示的自然，我们可以让图片中的一部分去填充整个容器，虽然这样做无法让图片显示完整，但也避免了因图片的拉伸或压缩导致的变形。代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;</span><br><span class="line">width: 200px；</span><br><span class="line">height: 200px;</span><br><span class="line">background: url(&#x27;xxxx.png&#x27;) no-repeat;</span><br><span class="line">background-size: cover;</span><br><span class="line">background-position: center center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="图片自适应容器宽高"><a href="#图片自适应容器宽高" class="headerlink" title="图片自适应容器宽高"></a>图片自适应容器宽高</h3><p>css实现图片自适应容器宽高的做法一般如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">div&#123;width: 200px; height: 200px&#125;</span><br><span class="line">div img&#123;width: 100%; height: 100%&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;img src=&quot;xxxx.png&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>居中</title>
-    <url>/2022/04/01/%E5%B1%85%E4%B8%AD/</url>
-    <content><![CDATA[<p>居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中</p>
-<span id="more"></span>
-
-<h3 id="绝对位置居中"><a href="#绝对位置居中" class="headerlink" title="绝对位置居中"></a>绝对位置居中</h3><p>绝对位置居中的核心思想就是通过绝对定位的方式实现居中，具体操作如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">style&#123;</span><br><span class="line">    //给父体一个绝对定位</span><br><span class="line">    .div&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    //给子体相对定位</span><br><span class="line">    .object&#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        left: 50%;</span><br><span class="line">        top:50%;</span><br><span class="line">        transform: translate(-50%,-50%);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>top: 50%;left: 50%;， 是以左上角为原点，故不处于中心位置，<br>translate(-50%,-50%) 作用是，往上（x轴）,左（y轴）移动自身长宽的 50%，以使其居于中心位置。</p>
-<h3 id="弹性盒子居中"><a href="#弹性盒子居中" class="headerlink" title="弹性盒子居中"></a>弹性盒子居中</h3><p>弹性盒子居中主要使用justify-content、 align-items 属性，</p>
-<p>justify-content:center;&#x2F;* 子元素水平居中 *&#x2F;</p>
-<p>align-items:center;&#x2F;* 子元素垂直居中 *&#x2F;</p>
-<p>其中justify-content是flex布局中父项的一个比较常见的属性，justify-content 属性定义了项目在主轴上的对齐方式。</p>
-<p><img src="/2022/04/01/%E5%B1%85%E4%B8%AD/%E5%B1%85%E4%B8%AD%5C1.png" alt="img"></p>
-<p><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-items</a>属性可以应用于所有的flex容器，它的作用是设置flex子项在每个flex行的交叉轴上的默认对齐方式。不同取值的效果如下所示：<br><a href="https://www.w3.org/TR/css-flexbox-1/#propdef-align-items">align-item</a></p>
-<p><img src="/2022/04/01/%E5%B1%85%E4%B8%AD/%E5%B1%85%E4%B8%AD%5C2.png" alt="img"></p>
-<p>align-items属性是针对单独的每一个flex子项起作用，它的基本单位是每一个子项，在所有情况下都有效果（当然要看具体的属性值）。</p>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>欢迎来到我的博客</title>
-    <url>/2022/04/01/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>我的本意其实并不是打算搭一个个人网站，只是想找个地方记录一下自己的一些学习笔记罢了。后来经过一些机缘巧合，我接触到了个人网站这一神奇的东西，同时还要感谢我的好兄弟王力可对我赞助（在此再次感谢），才让这一网站顺利搭成。不过由于服务器雀食太贵了，所以连夜携博文跑路，投奔github page的怀抱。不过github page中的博文中的图片总是会加载超时，将图片路径从网络移步到相对路径后（将图片存至github中），依然没有改观，所以部分文章也正搬至掘金社区里（文章下方有链接）。</p>
-<p>（原网站：<a href="http://capbv.top/">http://capbv.top</a>   不知道读者看到这儿的时候这个网站是否还存活</p>
-<blockquote>
-<p>没有斗争就没有功绩，没有功绩就没有奖赏，而没有行动就没有生活。</p>
-<p><em>别林斯基</em></p>
-</blockquote>
-<p>里面的每一篇博客，都是我对于学习上的记录，记录内容也均为我个人的所观所感,部分文章摘用了一些写的很好的文章，文章下部会有原文链接，各位看官如果感觉到又被冒犯到或者学习笔记中存在错误，还请联系我对文章进行更改！谢谢各位。</p>
-<p>人生活在希望之中，各位，愿世间安稳，岁月静好。</p>
-<h2 id="自我简介"><a href="#自我简介" class="headerlink" title="自我简介"></a>自我简介</h2><p>本人是来自天回镇&#x2F;安岳县的一名普通群众，目前本科在电子科技大学就读。平时爱好踢踢球、打篮球。求胜欲，是一个压力怪，经常同时对队友和对手一起输出（要找我玩的话，请QQ联系）。同时也比较喜欢去了解人文科普类的知识（尤其是喜欢看这方面的记录片）。最大的梦想是能快乐的活着。</p>
-<h2 id="不止生活"><a href="#不止生活" class="headerlink" title="不止生活"></a>不止生活</h2><p>本博客用来记录自己的学习以及感想</p>
-<p>这其实也是我的一个初衷，是建立这个博客的最初的出发点。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>神奇的display</title>
-    <url>/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/</url>
-    <content><![CDATA[<p>display可是个神奇的东西，通过修改display可以帮助组件实现“逆天改命”，变成其他组件的“模样”，当然，修炼之路不乏贫困，让我们一起来看看都有些什么神奇的display可供更改。</p>
-<span id="more"></span>
-
-<h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
-<p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
-<hr>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C1.png" alt="img"></p>
-<blockquote>
-<p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
-<p>— Alan Turing, <em>Computer scientist</em></p>
-</blockquote>
-<hr>
-<h1 id="display-block、inline"><a href="#display-block、inline" class="headerlink" title="display:block、inline"></a>display:block、inline</h1><p>根据css的规定，一些组件有着其默认的display值，常用的div的默认display值为block，为“块级元素”(block-level ),而作为块级元素，其高度、宽度、内距以及外距都可以进行调整。</p>
-<p>块级元素特点：</p>
-<ol>
-<li>每个块级元素都从新的一行开始（一块霸占一行）</li>
-<li>在其本身的宽度不进行设置时，其宽度默认为其父级组件的宽度（body也算父级组件）。</li>
-<li>可以设置padding和margin</li>
-</ol>
-<p>常用的 块级元素有：</p>
-<p>div、p、h1…h6、ol、ul、dl、table、address、blockquote （块引用）、form</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div style=&#x27;display:inline’&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>而如链接元素a，其默认display值为inline，为“行内元素”，它是依附于其他块级元素存在的，故行内元素是无法设置高度、宽度等属性，在设置margin时只有left、right的时候，与此同时可以设置padding（若想设置，应该将其display强制转化为block）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;span style=&#x27;display:block’&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
-
-<p>常用的行内元素有：</p>
-<p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
-<h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
-<p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C2.png" alt="img"></p>
-<p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
-<h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
-<p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
-<p>我们来对对比一下display：inline-block和float的效果</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C3.png" alt="img"></p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C4.png" alt="img"></p>
-<p>设置overfloat:hidden防止父元素高度坍塌</p>
-<p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C9.png" alt="img"></p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C8.png" alt="img"></p>
-<p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
-<h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
-<p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C5.png" alt="img"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
-<h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
-<p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C6.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis)</p>
-<h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
-<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
-<li>flex-direction</li>
-<li>justify-content</li>
-<li>align-items</li>
-<li>flex-wrap</li>
-<li>align-content</li>
-<li>flex-flow</li>
-</ul>
-<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1.flex-direction"></a>1.flex-direction</h4><p>项目（flex item)默认情况下是沿着主轴从main start 开始往main end 方向进行排序。而属性flex-direction决定了主轴的方向。其中flex-direction有四个取值（row(默认值)、row-reverse、column(自上而下）、column-reverse)</p>
-<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2.justify-content"></a>2.justify-content</h4><p>这个属性主要用来排列主轴上各个项目(item)的位置，决定了项目在主轴上的对齐方式</p>
-<p>属性值：</p>
-<ul>
-<li>flex-start(默认值):与main start对齐</li>
-<li>flex-end：与main end对齐</li>
-<li>center：居中</li>
-<li>space-between：flex items 之间的距离相等，与main start、main end两端对齐</li>
-<li>space-evenly: flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离</li>
-<li>space-around :flex items 之间的距离相等,flex items与main start 、main end 之间的距离等于flex items之间的距离的一半</li>
-</ul>
-<p>值得注意的是这些都<strong>是容器的属性</strong></p>
-<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3.align-items"></a>3.align-items</h4><p>这个属性是用于决定项目（items)在纵轴上的对齐方式</p>
-<p>属性值：</p>
-<ul>
-<li>normal：在弹性布局中，效果和stretch一样</li>
-<li>stretch：前提是items不设置高度，当flex items 在cross axis 方向的size为auto时，会自动拉伸至填充flex container(或者换句话说：如果项目未设置高度或设为auto，将占满整个容器的高度。)</li>
-<li>flex-satrt:与cross start 对齐</li>
-<li>flex-end:与cross end 对齐</li>
-<li>center:居中对齐</li>
-<li>baseline:与基准线对齐</li>
-</ul>
-<h4 id="4-flex-wrap"><a href="#4-flex-wrap" class="headerlink" title="4.flex-wrap"></a>4.flex-wrap</h4><p>决定了flex container 是单行还是多行,默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
-<p>属性值：</p>
-<ul>
-<li>nowrap(默认)：单行</li>
-<li>warp：多行 &#x2F;&#x2F;这个比较少用</li>
-<li>wrap-reverse:多行（对比wrap，cross start 与cross end相反）</li>
-</ul>
-<h4 id="5-align-content"><a href="#5-align-content" class="headerlink" title="5.align-content"></a>5.align-content</h4><p>决定了多行flex items 在cross axis的对齐方式 用法与justify-content相似 一个是横轴。一个控制竖轴</p>
-<p>属性值：</p>
-<ul>
-<li>stretch(默认值)：与align-items的stretch类似，当items有高度的时候，无效果</li>
-<li>flex-start:与cross start 对齐</li>
-<li>flex-end :与cross end 对齐</li>
-<li>center：居中对齐</li>
-<li>space-between:flex items 之间的距离相等，与cross start、cross end两端对齐</li>
-<li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
-<li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
-</ul>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C7.jpg" alt="img"></p>
-<h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
-<h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
-<h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
-<p>如果所有flex items 的flex-grow 综合sum不超过1，这直接乘以剩余size就是扩展大小、<br>如果超过1 扩展size&#x3D;剩余size*flex-grow&#x2F;sum</p>
-<p><strong>当设置flex:1时，每个子组件将会均匀的分布（水平）在flex容器中</strong></p>
-<h4 id="4-flex-shrink"><a href="#4-flex-shrink" class="headerlink" title="4.flex-shrink"></a>4.flex-shrink</h4><p>flex-shrink (shrink 缩小，收缩)与flex-grow相似，一个扩展，一个伸缩<br>可以设置为任意非父数字（小数，整数 0），默认为1<br>当flex items在main axis 方向上超过了flex container 的size flex-shrink属性才会生效、<br>如果所有flex items 的flex-shrink 总和sum超过1，每个flex item 收缩的size为：<br>flex item 超出flex container 的size*收缩比例&#x2F;每个flex items 的收缩比例之和<br>如果sum不超过1，每个flex item 收缩的size为：<br>size &#x3D; 超出的size * flex-shrink值<br>flex items收缩后的最终size不能小于min-width\min-height</p>
-<h4 id="5-flex-basis"><a href="#5-flex-basis" class="headerlink" title="5.flex-basis"></a>5.flex-basis</h4><p>用来设置flex items 在 main axis方向上的base size<br>默认为auto，可以设置具体的宽度数值 决定flex items最终base size 的因素，优先级从高到低</p>
-<ul>
-<li>max-width\max-height\min-width\min-height</li>
-<li>flex-basis width\height</li>
-<li>内容本身的size</li>
-</ul>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>箭头函数</title>
-    <url>/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const aaa = function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">cost bbb = ()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//aaa与bbb等效</span><br></pre></td></tr></table></figure>
-
-<p>通过简单的&#x3D;&gt;就可以生成一个函数，确实会比之前的方式简单许多，箭头函数的格式如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（参数列表）=&gt; &#123;</span><br><span class="line">//代码块</span><br><span class="line">&#125;</span><br><span class="line">//如果参数只有一个，则小括号可以省略</span><br><span class="line">//如果代码块中的代码只有一行，则可以省略大括号，并将该代码置于箭头后，计算机将会运行改行代码，并自动将其运行结果作为返回值</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是在箭头函数中应用this，此时this指向的是 一层层往外层作用域寻找，直到找到最近的this定义</p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈表单</title>
     <url>/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/</url>
     <content><![CDATA[<p>表单，常常用于提交用户向服务器发送的消息，应用非常广泛，而整个表单又可以分为表单控件、提示信息、表单域这三大内容。</p>
@@ -1014,106 +1142,6 @@
       </categories>
       <tags>
         <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue初步</title>
-    <url>/2022/04/04/Vue%E5%88%9D%E6%AD%A5/</url>
-    <content><![CDATA[<h2 id="什么是工程化"><a href="#什么是工程化" class="headerlink" title="什么是工程化"></a>什么是工程化</h2><p>你以为的前端开发：老三样，需要美化页面：bootstrap!,需要实现网页布局：Layui（然后最后写出个DEMO）</p>
-<p>实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）</p>
-<p>那到底什么是前端工程化呢？前端工程化指的是，把前端开发所需的工具、技术、流程、经验等进行规范化、标准化。（说了半天还是不清楚）</p>
-<h2 id="什么是VUE"><a href="#什么是VUE" class="headerlink" title="什么是VUE"></a>什么是VUE</h2><p>Vue是一款前端渐进式框架，可以提高前端开发效率。Vue通过MVVM模式,能够实现视图与模型的双向绑定。简单来说，就是数据变化的时候, 页面会自动刷新, 页面变化的时候，数据也会自动变化.</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f579a76fad6d43e88fcaee49fc5d8e97~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<h3 id="webpack的登场"><a href="#webpack的登场" class="headerlink" title="webpack的登场"></a>webpack的登场</h3><p>webpack是前端项目工程化的具体解决方案，它主要提供了友好的前端模块化开发支持以及代码压缩混淆处理（将多行代码压缩到一行，清除全部注释，压缩用以节约空间）、处理浏览器端的JavaScript的兼容性、性能优化等强大的功能。提高开发效率和可维护性（总而言之，就是webpack，行！）</p>
-<p>目前，比较主流的前端开发框架如react、Vue都是基于webpack进行工程化开发的</p>
-<h3 id="webpack的安装与配置"><a href="#webpack的安装与配置" class="headerlink" title="webpack的安装与配置"></a>webpack的安装与配置</h3><p>在终端运行如下命令，安装webpack相关的两个包：</p>
-<p>npm install webpack webpack-cli -D</p>
-<p>安装完webpack，vue的基本环节就算安装结束了。</p>
-<h2 id="Vue实例"><a href="#Vue实例" class="headerlink" title="Vue实例"></a>Vue实例</h2><p>在初学Vue，写demo的时候，我们常常会看见以下代码 <code>const app = new Vue(&#123;          el:#app,          data:&#123;&#125;          &#125;)</code> 这就是一个最简单的Vue实例，其中<strong>el:挂载点</strong>，他是用来设置Vue实例挂载的元素（在这里挂载的就是id为app的一个div），Vue会管理el挂载的元素以及其内部的元素。可以使用其他的选择器，但是建议使用<strong>ID选择器</strong>。<strong>data:数据库</strong>，Vue中用到的数据都定义在data中，在渲染复杂类型的数据时，遵循js的语法。</p>
-<h2 id="Vue指令与事件"><a href="#Vue指令与事件" class="headerlink" title="Vue指令与事件"></a>Vue指令与事件</h2><p>vue中提供了以下指令：</p>
-<h3 id="V-on"><a href="#V-on" class="headerlink" title="V-on"></a>V-on</h3><p>V-on 用于给元素绑定事件，不多bb，直接看demo:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;你再点一下试试&quot; @click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;别点了别点了！&quot; v-on:click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;再点要破防惹！&quot; @dblclick = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;#&quot; v-html = &quot;message&quot; @click = &quot;nt&quot; style=&quot;text-decoration:none;&quot;&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:&quot;我是真的无语&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function()&#123;</span><br><span class="line">                alert(&quot;哭了&quot;);</span><br><span class="line">            &#125;,</span><br><span class="line">            nt:function()&#123;</span><br><span class="line">                this.message +=&quot; 别戳了QAQ&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;`</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>值得一提的是，指令可以简写为@，平时在写代码的时候，鼓励大家使用这个语法糖。绑定的方法定义在<strong>methods</strong>属性中，方法内部可以通过<strong>this</strong>关键字访问在data中的数据。 除此之外，还可以将绑定的方法写成函数调用的形式，并传入自定义参数。 另外还有事件修饰符，例子如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt; </span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;点我&quot; @click =&quot;doIt(6666,&#x27;ohNo&#x27;)&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; @keyup.enter=&quot;sayHi&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function(p1,p2)&#123;</span><br><span class="line">                console.log(p1);</span><br><span class="line">                console.log(p2);</span><br><span class="line">            &#125;,</span><br><span class="line">            sayHi:function()&#123;</span><br><span class="line">                alert(&quot;您真是个大可爱&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>更多的事件修饰符见vue官方文<a href="https://link.juejin.cn/?target=https://cn.vuejs.org/v2/api%23v-on">cn.vuejs.org&#x2F;v2&#x2F;api#v-on</a> 。</p>
-<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p>v-for，类似于python中的for，可以实时生成。它一般用作：根据数据生成列表结构（常常和数组结合使用），语法是<code>（item,index）in data </code>item是data中的属性，如果data是数组的话,item就是数组中的每个数值，index是item的索引,v-for的使用方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li v-for=&quot;item in Arr&quot;&gt;&#123;&#123; item &#125;&#125;&lt;/li&gt;</span><br><span class="line">            &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;add&quot; @click = &quot;add&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;remove&quot; @click = &quot;remove&quot; &gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;    </span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app =new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                Arr:[&#x27;北京&#x27;,&#x27;天津&#x27;,&#x27;成都&#x27;,&#x27;上海&#x27;],</span><br><span class="line">                boys:[</span><br><span class="line">                    &#123;name:&quot;bovi&quot;,age:18&#125;,</span><br><span class="line">                    &#123;name:&quot;jeff&quot;,age:19&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                add:function()&#123;</span><br><span class="line">                    this.boys.push(&#123;name:&quot;kevin&quot;,age:12&#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                remove:function()&#123;</span><br><span class="line">                    this.boys.shift();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>数组长度的更新会同步到页面上，是<strong>响应式</strong>的，在上例中，如果点击第一个button，将会在页面中添加一个li，内容为kevin，同理，如果点击第二个button，页面中将会减少一个li。item和index可以结合其他指令一起使用。例如，在上例中我们获得的每个boy都是一个对象，可以通过boy.age获取拿到的boy中的age属性的值。</p>
-<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>v-if：根据值的真假切换元素的显示与隐藏（直接在dom树中移除、添加）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;p v-if = &quot;true&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是咋办&lt;/span&gt;</span><br><span class="line">        &lt;p v-if = &quot;isShow&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是span&lt;/span&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;改变可见度&quot; @dblclick =&quot;changeIsShow&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                isShow:false</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                changeIsShow:function()&#123;</span><br><span class="line">                    this.isShow = !this.isShow;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>和v-if相对应的就是v-show</p>
-<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>v-show:根据值的真假，切换元素的显示与隐藏（仅仅改变对象的display）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏，数据发生改变后，对应元素的显示状态将会同步更新。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;button value=&quot;点击切换&quot; @click = &quot;changeIsShow&quot;&gt;&lt;/button&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;true&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;isShow&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;age&gt;18&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            isShow:false,</span><br><span class="line">            age:17</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            changeIsShow:function()&#123;</span><br><span class="line">                this.isShow=!this.isShow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>如果经常切换，建议使用v-show（避免多次修改dom树），反之使用v-if（速度更快）。</p>
-<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>v-model:与数据绑定，实时进行修改（双方同时）。即： 绑定的数据&lt;–&gt;表单元素值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">        &lt;input type=&quot;text&quot; v-model=&quot;message&quot; @keyup.enter=&quot;getMessage&quot;&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123; message &#125;&#125;&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &quot;我是谁？&quot;,</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                getMessage:function()&#123;</span><br><span class="line">                    alert(this.message);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>v-model指令的作用是便于设置、获取表单元素的值</p>
-<p><a href="https://juejin.cn/post/7082426039946706975">https://juejin.cn/post/7082426039946706975</a></p>
-]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>v-model的常用事件修饰符</title>
-    <url>/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/</url>
-    <content><![CDATA[<h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。<strong>使用方法：v-model.lazy&#x3D;”（绑定的数据）”</strong></p>
-<h4 id="number修饰符"><a href="#number修饰符" class="headerlink" title="number修饰符"></a>number修饰符</h4><p>默认情况下，在输入框中无论是输入字符还是数字，v-model绑定数据时均会按照字符串进行处理。当我们希望处理的时数字类型时（可以在input 的type属性中设置为number），使用number修饰符可以将其自动转化为数字类型，便于处理。<strong>使用方法：v-model.number&#x3D;”(绑定的数据)”</strong></p>
-<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title="trim修饰符"></a>trim修饰符</h4><p>当输入的数据中左右两端存在很多的空格时，可以通过trim修饰符将左右两端的空格进行删除。<strong>使用方法：v-model.trim&#x3D;”(绑定的数据)”</strong></p>
-<p>链接：<a href="https://juejin.cn/post/7082428951708041247">https://juejin.cn/post/7082428951708041247</a></p>
-]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>父子组件传值</title>
-    <url>/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</url>
-    <content><![CDATA[<p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6f28be593d14051a679c01760bf859a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>Vue提供的传输方法</p>
-<h2 id="（父传子）props传输数据"><a href="#（父传子）props传输数据" class="headerlink" title="（父传子）props传输数据"></a>（父传子）props传输数据</h2><p>这里，我们不妨将实例app当做父组件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//生成一个实例</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我爱你&#x27;,</span><br><span class="line">                array:[1,2,3,4]</span><br><span class="line">            &#125;,</span><br><span class="line">            components:&#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">//注册组件cpn</span><br><span class="line">//需要注意的是我们在使用props传入数据时，需要在子组件外围设置一个根（一个包裹如div）</span><br><span class="line"> &lt;template id=&quot;cnp&quot; &gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;carray&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;cmessage&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line"> const cpn=&#123;</span><br><span class="line">            template:&#x27;#cnp&#x27;,</span><br><span class="line">//注册的组件的data必须是一个函数（用于返回对象）</span><br><span class="line">            data()&#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">//声明props</span><br><span class="line">传入父组件数据</span><br><span class="line">            props:&#123;</span><br><span class="line">                carray:Array,</span><br><span class="line">                cmessage:&#123;</span><br><span class="line">                    type:String,</span><br><span class="line">                    default:&quot;我日你先人&quot;,</span><br><span class="line">                    // 是否必须传值</span><br><span class="line">                    // required:true</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">//使用v-bind语法糖</span><br><span class="line"></span><br><span class="line">//将array中的值绑定到carray中</span><br><span class="line">//将message中的值绑定到cmessage中</span><br><span class="line">        &lt;cpn :cArray=&quot;array&quot; :cMessage=&quot;message&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>至此，最简单的传值操作就已经完成了</p>
-<p>值得注意的是，v-bind语句不支持驼峰命名法，若在props中的元素使用驼峰命名法，则需要在绑定值时使用 -分割线</p>
-<h2 id="（子传父）自定义事件传递数据"><a href="#（子传父）自定义事件传递数据" class="headerlink" title="（子传父）自定义事件传递数据"></a>（子传父）自定义事件传递数据</h2><p>父传子时是通过props属性来完成的，而当我们遇到子传父时，则需要注册自定义事件</p>
-<p>一般情况下，子组件发生了某个事件，我们希望父组件根据该事件做出相应的一个调整与反映。</p>
-<p>同样的我，我们先创建一个子组件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">                &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line"></span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>子传父的应用场景比较多的是子组件中发生了某些事件，我们希望父组件知道并且作出反映。在此，我们模拟一个简单的传输过程。现将整个子组件丰富一下，然后在此我们将自定义事件在子组件中进行一个注册</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    categories:[</span><br><span class="line">                        &#123;id:&#x27;111&#x27;,name:&#x27;apple&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;112&#x27;,name:&#x27;iphone&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;113&#x27;,name:&#x27;ipad&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;114&#x27;,name:&#x27;huawei&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;115&#x27;,name:&#x27;xiaomi&#x27;&#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                itemClick(item)&#123;</span><br><span class="line">                    // console.log(item);</span><br><span class="line">                    // 发射(事件,参数)</span><br><span class="line">                    this.$emit(&#x27;item-click&#x27;,item) </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line"></span><br><span class="line">//注册点击事件</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>子组件发射事件后，父组件需要对该事件进行监听，监听方式：在父组件的模板上使用v-on绑定事件。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//以前我们使用v-on绑定的事件都是默认注册好的事件，自定义事件注册后，便可以在其作用域（父组件）内进行监听、绑定</span><br><span class="line">//监听的自定义事件的命名需要从驼峰命名法进行转化（使用脚手架可忽略）</span><br><span class="line">//若在监听事件时没有传入参数（如cpnClick(item)传入参数），将会默认传入子组件发射的参数，在这里为item</span><br><span class="line">        &lt;cpn @item-click=&quot;cpnClick&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;div&gt;我爱&#123;&#123; things &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>在父组件中注册监听后，还需要在父组件内部注册事件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &#x27;我爱你&#x27;,</span><br><span class="line">                array: [1, 2, 3, 4],</span><br><span class="line">                things:&quot;NONE&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                cpnClick(item)&#123;</span><br><span class="line">                    console.log(item.id);</span><br><span class="line">                    this.things = item.name;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>至此，我们完成了对父传子操作的全过程。运行截图如下：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e832e4a99eab43c2a96cbdd4463aa1c3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10b4140fe8c0488d8cee57b2161d38ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/682923a1b22f408b8fc7725b72ea3f12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>作者：用户4721573403919<br>链接：<a href="https://juejin.cn/post/7082435003316961311">https://juejin.cn/post/7082435003316961311</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
       </tags>
   </entry>
 </search>

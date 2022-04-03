@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-03T17:49:20.590Z</updated>
+  <updated>2022-04-03T17:53:01.296Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>父子组件通信双向绑定</title>
+    <link href="http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"/>
+    <id>http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</id>
+    <published>2022-04-03T17:52:34.000Z</published>
+    <updated>2022-04-03T17:53:01.296Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据&lt;/p&gt;
+&lt;p&gt;同样的，先注册子组件和父组件&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="Vue" scheme="http://example.com/categories/Vue/"/>
+    
+    
+    <category term="前端" scheme="http://example.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>父子组件传值</title>
