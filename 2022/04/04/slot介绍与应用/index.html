@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>组件访问 |  点滴生活 点滴人生</title>
+      <title>slot介绍与应用 |  点滴生活 点滴人生</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -65,7 +65,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-组件访问"
+  id="post-slot介绍与应用"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -76,7 +76,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  组件访问
+  slot介绍与应用
 </h1>
  
 
@@ -84,8 +84,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/" class="article-date">
-  <time datetime="2022-04-03T17:55:24.000Z" itemprop="datePublished">2022-04-04</time>
+      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-date">
+  <time datetime="2022-04-03T17:58:45.000Z" itemprop="datePublished">2022-04-04</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/Vue/">Vue</a>
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">803</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -105,31 +105,48 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>当我们想要实现在父组件上进行操作后访问子组件的功能或者数据时，可以使用 refs或refs 或refs或children 来实现。同样的，先注册一个实例以及一个子组件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                  name:&#x27;我是傻逼&#x27;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                showinfo()&#123;</span><br><span class="line">                    console.log(&#x27;showinfo&#x27;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;) </span><br><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;我是个屑子组件&lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;cpn &gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;button @click = &#x27;btnClick&#x27;&gt;访问子组件&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+  <h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p>
+<span id="more"></span>
 
-<p>我们在子组件中声明一个函数以及一个数据用于模拟父组件的访问,在父组件中注册一个自定义事件，用于做访问子组件的触发器。接着，在父组件中注册该事件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> methods:&#123;</span><br><span class="line">                btnClick()&#123;</span><br><span class="line">                    //  1.$children 获得一个对象数组（里面装的是所有的子组件）</span><br><span class="line">                      console.log(this.$children);</span><br><span class="line">                     this.$children[0].showinfo();</span><br><span class="line">                     for(let CPN of this.$children)&#123;</span><br><span class="line">                         console.log(CPN.name);</span><br><span class="line">                         CPN.showinfo();</span><br><span class="line">                     &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>具体操作如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>children获取的是该父组件的所有子组件，在大部分时间中我们都想要精确的获取其中的某一个子组件，这个时候，我们就需要通过children获取的是该父组件的所有子组件，在大部分时间中我们都想要精确的获取其中的某一个子组件，这个时候，我们就需要通过children获取的是该父组件的所有子组件，在大部分时间中我们都想要精确的获取其中的某一个子组件，这个时候，我们就需要通过refs来进行精确定位了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;cpn ref=&#x27;aaa&#x27;&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;button @click = &#x27;btnClick&#x27;&gt;访问子组件&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">       methods:&#123;</span><br><span class="line">                btnClick()&#123;</span><br><span class="line">                    // 2. $refs 获得的是一个对象</span><br><span class="line">                    console.log(this.$refs.aaa.name);</span><br><span class="line">                    this.$refs.aaa.showinfo();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01455dbb048746c99c5b1bc9b82badd4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>当然，slot标签中也可以预设值（即默认值），当你需要改变的时候只需要在外部设置好想要的样式即可自动覆盖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>在希望准确获取的子组件上增加一个ref属性（类似于Key），便可以实现对该组件的访问。值得一提的是，如果出现两个及以上ref属性值相同的子组件，最后通过$refs访问的子组件是第一个。</p>
-<p>类似的，想要实现子访父，则通过parent实现。但是不推荐使用子访父：在开发时，若要用子访父，会使子组件的开发受父组件开发的限制、不够独立、复用性不强。特别的，有parent实现。 但是不推荐使用子访父：在开发时，若要用子访父，会使子组件的开发受父组件开发的限制、不够独立、复用性不强。特别的，有parent实现。但是不推荐使用子访父：在开发时，若要用子访父，会使子组件的开发受父组件开发的限制、不够独立、复用性不强。特别的，有root—访问根组件</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082437425108090917">https://juejin.cn/post/7082437425108090917</a></p>
+<p>效果与上图相同</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be524654d26045c1a1755f2cf98cf3a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>当然，如果想要插入插槽的部分由若干个小标签组成，则这些标签将会全部嵌入插槽中</p>
+<h4 id="具名插槽的使用"><a href="#具名插槽的使用" class="headerlink" title="具名插槽的使用"></a>具名插槽的使用</h4><p>当然，一个组件中可以有多个插槽，而为了方便区别各个插槽以及插入插槽的样式，我们使用具名插槽进行解决。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;slot name=&quot;left&quot;&gt; &lt;button&gt;我是第一个的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;center&quot;&gt; &lt;button&gt;我是中间的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;right&quot;&gt; &lt;button&gt;我是最后的按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">//在想要插入的部门添加属性slot，并附上要插入的插槽的名字</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1e496bed42d43f6b72f23dc7063e613~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"> VUE中有一条准则：父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在自己作用域内编译</p>
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>作用域插槽主要用于实现 父组件替换插槽的内容，但是内容由子组件来提供</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;) </span><br><span class="line">复制代码</span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>上述例子，如果我想要改变插槽中的样式但是沿用子组件的内容，我们根据作用域可知，不能直接在父组件中写 v-for&#x3D;”item in Languages”，因为此时的作用域是vue实例app，所以v-for将会在app的data属性中查找 Languages 数组，故此刻我们需要使用作用域插槽,使用v-slot语句实现。v-slot <em>：后边是插槽名称</em>，&#x3D;后边是组件内部绑定作用域值的映射。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot name=&#x27;lis&#x27; :PLanguages=&#x27;Languages&#x27; :Pid=&#x27;id&#x27;&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn v-slot:lis=&#x27;lang&#x27;&gt;</span><br><span class="line">//这里lang是从子组件绑定过来的属性的集合</span><br><span class="line">          &lt;div&gt;&#123;&#123;lang.pid&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;span v-for=&quot;num in lang.pid&quot;&gt;&#123;&#123;num&#125;&#125; &lt;/span&gt;</span><br><span class="line">            &lt;!-- object.join(&#x27;#&#x27;):将数组object转化为字符串，并将每个字符间通过#号（可以更换）相连接 --&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages.join(&#x27;*&#x27;)&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;],</span><br><span class="line">                    id:[12,123,441,234]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在模板插槽处绑定的属性（这里为PLanguages、Pid），在父组件中应用时字母全部都会变成小写</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082437661348069406">https://juejin.cn/post/7082437661348069406</a></p>
  
       <!-- reward -->
       
@@ -194,7 +211,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -207,19 +224,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            slot介绍与应用
-          
-        </div>
-      </a>
     
-    
-      <a href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="article-nav-link">
+      <a href="/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">父子组件通信双向绑定</div>
+        <div class="article-nav-title">组件访问</div>
       </a>
     
   </nav>

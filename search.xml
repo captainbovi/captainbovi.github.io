@@ -17,6 +17,44 @@
 ]]></content>
   </entry>
   <entry>
+    <title>slot介绍与应用</title>
+    <url>/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p>
+<span id="more"></span>
+
+<p>具体操作如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>效果图</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01455dbb048746c99c5b1bc9b82badd4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>当然，slot标签中也可以预设值（即默认值），当你需要改变的时候只需要在外部设置好想要的样式即可自动覆盖</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>效果与上图相同</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be524654d26045c1a1755f2cf98cf3a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>当然，如果想要插入插槽的部分由若干个小标签组成，则这些标签将会全部嵌入插槽中</p>
+<h4 id="具名插槽的使用"><a href="#具名插槽的使用" class="headerlink" title="具名插槽的使用"></a>具名插槽的使用</h4><p>当然，一个组件中可以有多个插槽，而为了方便区别各个插槽以及插入插槽的样式，我们使用具名插槽进行解决。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;slot name=&quot;left&quot;&gt; &lt;button&gt;我是第一个的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;center&quot;&gt; &lt;button&gt;我是中间的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;right&quot;&gt; &lt;button&gt;我是最后的按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">//在想要插入的部门添加属性slot，并附上要插入的插槽的名字</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1e496bed42d43f6b72f23dc7063e613~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"> VUE中有一条准则：父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在自己作用域内编译</p>
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>作用域插槽主要用于实现 父组件替换插槽的内容，但是内容由子组件来提供</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;) </span><br><span class="line">复制代码</span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>上述例子，如果我想要改变插槽中的样式但是沿用子组件的内容，我们根据作用域可知，不能直接在父组件中写 v-for&#x3D;”item in Languages”，因为此时的作用域是vue实例app，所以v-for将会在app的data属性中查找 Languages 数组，故此刻我们需要使用作用域插槽,使用v-slot语句实现。v-slot <em>：后边是插槽名称</em>，&#x3D;后边是组件内部绑定作用域值的映射。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot name=&#x27;lis&#x27; :PLanguages=&#x27;Languages&#x27; :Pid=&#x27;id&#x27;&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn v-slot:lis=&#x27;lang&#x27;&gt;</span><br><span class="line">//这里lang是从子组件绑定过来的属性的集合</span><br><span class="line">          &lt;div&gt;&#123;&#123;lang.pid&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;span v-for=&quot;num in lang.pid&quot;&gt;&#123;&#123;num&#125;&#125; &lt;/span&gt;</span><br><span class="line">            &lt;!-- object.join(&#x27;#&#x27;):将数组object转化为字符串，并将每个字符间通过#号（可以更换）相连接 --&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages.join(&#x27;*&#x27;)&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;],</span><br><span class="line">                    id:[12,123,441,234]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在模板插槽处绑定的属性（这里为PLanguages、Pid），在父组件中应用时字母全部都会变成小写</p>
+<p>链接：<a href="https://juejin.cn/post/7082437661348069406">https://juejin.cn/post/7082437661348069406</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>组件访问</title>
     <url>/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/</url>
     <content><![CDATA[<p>当我们想要实现在父组件上进行操作后访问子组件的功能或者数据时，可以使用 refs或refs 或refs或children 来实现。同样的，先注册一个实例以及一个子组件</p>
@@ -43,6 +81,8 @@
     <title>父子组件通信双向绑定</title>
     <url>/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
     <content><![CDATA[<p>将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据</p>
+<span id="more"></span>
+
 <p>同样的，先注册子组件和父组件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line"></span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line"></span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">   &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//将父组件中的数据绑定到子组件上   </span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
@@ -71,6 +111,8 @@
     <title>父子组件传值</title>
     <url>/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</url>
     <content><![CDATA[<p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p>
+<span id="more"></span>
+
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6f28be593d14051a679c01760bf859a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
 <p>Vue提供的传输方法</p>
 <h2 id="（父传子）props传输数据"><a href="#（父传子）props传输数据" class="headerlink" title="（父传子）props传输数据"></a>（父传子）props传输数据</h2><p>这里，我们不妨将实例app当做父组件</p>
@@ -106,9 +148,35 @@
       </tags>
   </entry>
   <entry>
+    <title>vue创建组件</title>
+    <url>/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<p>Vue组件创建两大步：1.创建组件 2.注册组件</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1.创建组件构造器</span><br><span class="line">        const cpnC = Vue.extend(&#123;</span><br><span class="line">            template:`</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h2&gt;我是标题&lt;/h2&gt;</span><br><span class="line">                &lt;p&gt;我是&lt;/p&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            `</span><br><span class="line">        &#125;)</span><br><span class="line"> // 2.注册组件</span><br><span class="line">         Vue.component(&quot;firstcnp&quot;,cpnCC);</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>注册组件简洁写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">注册全局组件语法糖写法</span><br><span class="line">         Vue.component(&quot;firstcnp&quot;,&#123;</span><br><span class="line">             template:`</span><br><span class="line">             &lt;div&gt;</span><br><span class="line">                 &lt;h2&gt;我是标题&lt;/h2&gt;</span><br><span class="line">                 &lt;p&gt;我是&lt;/p&gt;</span><br><span class="line">             &lt;/div&gt;</span><br><span class="line">             `</span><br><span class="line">         &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然除了在script中写组件的内容以外，还可以在body中写组件的内容（更好写）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;template id=&quot;name2&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;我不是&lt;/h2&gt;</span><br><span class="line">            &lt;p&gt;但xx是&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"> Vue.component(&quot;cnp2&quot;,&#123;</span><br><span class="line">            template:&quot;#name2&quot;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p>链接：<a href="https://juejin.cn/post/7082431612939403301">https://juejin.cn/post/7082431612939403301</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>v-model的常用事件修饰符</title>
     <url>/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/</url>
-    <content><![CDATA[<h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。<strong>使用方法：v-model.lazy&#x3D;”（绑定的数据）”</strong></p>
+    <content><![CDATA[<h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。</p>
+<span id="more"></span>**使用方法：v-model.lazy=”（绑定的数据）”**
+
 <h4 id="number修饰符"><a href="#number修饰符" class="headerlink" title="number修饰符"></a>number修饰符</h4><p>默认情况下，在输入框中无论是输入字符还是数字，v-model绑定数据时均会按照字符串进行处理。当我们希望处理的时数字类型时（可以在input 的type属性中设置为number），使用number修饰符可以将其自动转化为数字类型，便于处理。<strong>使用方法：v-model.number&#x3D;”(绑定的数据)”</strong></p>
 <h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title="trim修饰符"></a>trim修饰符</h4><p>当输入的数据中左右两端存在很多的空格时，可以通过trim修饰符将左右两端的空格进行删除。<strong>使用方法：v-model.trim&#x3D;”(绑定的数据)”</strong></p>
 <p>链接：<a href="https://juejin.cn/post/7082428951708041247">https://juejin.cn/post/7082428951708041247</a></p>
@@ -125,6 +193,8 @@
     <url>/2022/04/04/Vue%E5%88%9D%E6%AD%A5/</url>
     <content><![CDATA[<h2 id="什么是工程化"><a href="#什么是工程化" class="headerlink" title="什么是工程化"></a>什么是工程化</h2><p>你以为的前端开发：老三样，需要美化页面：bootstrap!,需要实现网页布局：Layui（然后最后写出个DEMO）</p>
 <p>实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）</p>
+<span id="more"></span>
+
 <p>那到底什么是前端工程化呢？前端工程化指的是，把前端开发所需的工具、技术、流程、经验等进行规范化、标准化。（说了半天还是不清楚）</p>
 <h2 id="什么是VUE"><a href="#什么是VUE" class="headerlink" title="什么是VUE"></a>什么是VUE</h2><p>Vue是一款前端渐进式框架，可以提高前端开发效率。Vue通过MVVM模式,能够实现视图与模型的双向绑定。简单来说，就是数据变化的时候, 页面会自动刷新, 页面变化的时候，数据也会自动变化.</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f579a76fad6d43e88fcaee49fc5d8e97~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-03T17:55:51.869Z</updated>
+  <updated>2022-04-03T17:59:53.337Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>slot介绍与应用</title>
+    <link href="http://example.com/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
+    <id>http://example.com/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/</id>
+    <published>2022-04-03T17:58:45.000Z</published>
+    <updated>2022-04-03T17:59:53.337Z</updated>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;什么是slot、插槽的基本使用&quot;&gt;&lt;a href=&quot;#什么是slot、插槽的基本使用&quot; class=&quot;headerlink&quot; title=&quot;什么是slot、插槽的基本使用&quot;&gt;&lt;/a&gt;什么是slot、插槽的基本使用&lt;/h4&gt;&lt;p&gt;slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Vue" scheme="http://example.com/categories/Vue/"/>
+    
+    
+    <category term="前端" scheme="http://example.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>组件访问</title>
@@ -47,18 +66,10 @@
     <link href="http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"/>
     <id>http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</id>
     <published>2022-04-03T17:52:34.000Z</published>
-    <updated>2022-04-03T17:53:01.296Z</updated>
+    <updated>2022-04-03T18:00:36.004Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据&lt;/p&gt;
-&lt;p&gt;同样的，先注册子组件和父组件&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
+    <summary type="html">&lt;p&gt;将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据&lt;/p&gt;</summary>
     
     
     
@@ -74,17 +85,29 @@
     <link href="http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/"/>
     <id>http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</id>
     <published>2022-04-03T17:48:38.000Z</published>
-    <updated>2022-04-03T17:49:20.590Z</updated>
+    <updated>2022-04-03T18:00:30.307Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
+    <summary type="html">&lt;p&gt;子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Vue" scheme="http://example.com/categories/Vue/"/>
+    
+    
+    <category term="前端" scheme="http://example.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue创建组件</title>
+    <link href="http://example.com/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/"/>
+    <id>http://example.com/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/</id>
+    <published>2022-04-03T17:40:41.000Z</published>
+    <updated>2022-04-03T18:02:06.672Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Vue组件创建两大步：1.创建组件 2.注册组件&lt;/p&gt;</summary>
     
     
     
@@ -100,16 +123,10 @@
     <link href="http://example.com/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/"/>
     <id>http://example.com/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/</id>
     <published>2022-04-03T17:39:08.000Z</published>
-    <updated>2022-04-03T17:41:45.280Z</updated>
+    <updated>2022-04-03T18:00:05.999Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h4 id=&quot;lazy修饰符&quot;&gt;&lt;a href=&quot;#lazy修饰符&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h4 id=&quot;lazy修饰符&quot;&gt;&lt;a href=&quot;#lazy修饰符&quot; class=&quot;headerlink&quot; title=&quot;lazy修饰符&quot;&gt;&lt;/a&gt;lazy修饰符&lt;/h4&gt;&lt;p&gt;默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。&lt;/p&gt;</summary>
     
     
     
@@ -125,16 +142,11 @@
     <link href="http://example.com/2022/04/04/Vue%E5%88%9D%E6%AD%A5/"/>
     <id>http://example.com/2022/04/04/Vue%E5%88%9D%E6%AD%A5/</id>
     <published>2022-04-03T17:37:00.000Z</published>
-    <updated>2022-04-03T17:41:30.187Z</updated>
+    <updated>2022-04-03T18:00:14.352Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;什么是工程化&quot;&gt;&lt;a href=&quot;#什么是工程化&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;什么是工程化&quot;&gt;&lt;a href=&quot;#什么是工程化&quot; class=&quot;headerlink&quot; title=&quot;什么是工程化&quot;&gt;&lt;/a&gt;什么是工程化&lt;/h2&gt;&lt;p&gt;你以为的前端开发：老三样，需要美化页面：bootstrap!,需要实现网页布局：Layui（然后最后写出个DEMO）&lt;/p&gt;
+&lt;p&gt;实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）&lt;/p&gt;</summary>
     
     
     

@@ -178,6 +178,62 @@
 
     
     <article
+  id="post-slot介绍与应用"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/"
+    >slot介绍与应用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-date">
+  <time datetime="2022-04-03T17:58:45.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p> 
+      <a class="article-more-link" href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-组件访问"
   class="article article-type-post"
   itemscope
@@ -273,24 +329,11 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据</p>
-<p>同样的，先注册子组件和父组件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line"></span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line"></span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">   &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//将父组件中的数据绑定到子组件上   </span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是使用:value中不能直接绑定props中的属性，以免出现数据紊乱，故需要在data中重新注册数据，然后对data中的数据进行修改</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>然后子组件中自定义事件，发射给父组件，这里我们把v-model拆开也是为了方便自定义事件( v-model 等于 :value&#x3D;”+ @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ ),故我们将 @input&#x3D;’ &#x3D;event.target.value’),故我们将@input&#x3D;’&#x3D;event.target.value’ 定义为一个新事件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">                num1Input(event)&#123;</span><br><span class="line">                    this.dnumber1 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line"></span><br><span class="line">                &#125;,</span><br><span class="line">                num2Input(event)&#123;</span><br><span class="line">                    this.dnumber2 = event.target.value;</span><br><span class="line">                    // 发送事件</span><br><span class="line">                    this.$emit(&#x27;num2change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num1&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;!-- v-model 等于  :value=&#x27;&#x27;+ @input=&#x27; =$event.target.value&#x27;--&gt;</span><br><span class="line">            &lt;!-- &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;dnumber1=$event.target.value&#x27;&gt; --&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber1&#x27; @input =&#x27;num1Input&#x27;&gt;</span><br><span class="line">            &lt;h2&gt;props:&#123;&#123;dnumber2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;h2&gt;data:&#123;&#123;num2&#125;&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; :value=&#x27;dnumber2&#x27; @input =&#x27;num2Input&#x27;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt; </span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>发射事件后，需要在父组件中监听，并在父组件中声明做出反应，将dnumber的值付给number,同时number的值就是num的值，故最后实现number和num的值相同并实现实时绑定。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn </span><br><span class="line">        :num1=&#x27;number1&#x27;</span><br><span class="line">        :num2=&#x27;number2&#x27;</span><br><span class="line"></span><br><span class="line">//监听事件</span><br><span class="line">        @num1change =&#x27;num1change&#x27;</span><br><span class="line">        @num2change =&#x27;num2change&#x27;</span><br><span class="line">        &gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                number1:1,</span><br><span class="line">                number2:0</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                num1change(value)&#123;</span><br><span class="line"></span><br><span class="line">//传入的value的类型默认为字符串，通过parsInt()可以将value的类型转化为int类型</span><br><span class="line">                    this.number1 = parseInt(value),</span><br><span class="line">                    //this.number2 = parseInt(value)/10</span><br><span class="line">                &#125;,</span><br><span class="line">                num2change(value)&#123;</span><br><span class="line">                    this.number2 = parseInt(value),</span><br><span class="line">                    //this.number1 = parseInt(value)*10</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>当然了，我们还可以使用watch来简化整个过程，我们回到将v-model拆开的部门。如果我们还是想要使用v-model的话，可以使用watch属性来对dnumber进行监听</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            // 避免直接修改props中的值，直接修改可能会导致数据紊乱出错</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    dnumber1:this.num1,</span><br><span class="line">                    dnumber2:this.num2</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            props:&#123;</span><br><span class="line">                num1:Number,</span><br><span class="line">                num2:Number</span><br><span class="line">            &#125;,</span><br><span class="line">            watch:&#123;</span><br><span class="line">                // 检测到dnumber发生变化后就触发事件</span><br><span class="line">                dnumber1(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber1);</span><br><span class="line">                &#125;,</span><br><span class="line">                dnumber2(newValue)&#123;</span><br><span class="line">                    this.$emit(&#x27;num1change&#x27;,this.dnumber2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>其余操作相同。<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082436147279822879">https://juejin.cn/post/7082436147279822879</a></p>
- 
+  <p>将父传子，子传父稍微结合一下，实现父子组件通信双向绑定。最终实现在子组件的输入框中输入数据，实时改变父组件中的数据</p> 
+      <a class="article-more-link" href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -342,34 +385,67 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6f28be593d14051a679c01760bf859a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>Vue提供的传输方法</p>
-<h2 id="（父传子）props传输数据"><a href="#（父传子）props传输数据" class="headerlink" title="（父传子）props传输数据"></a>（父传子）props传输数据</h2><p>这里，我们不妨将实例app当做父组件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//生成一个实例</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我爱你&#x27;,</span><br><span class="line">                array:[1,2,3,4]</span><br><span class="line">            &#125;,</span><br><span class="line">            components:&#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">//注册组件cpn</span><br><span class="line">//需要注意的是我们在使用props传入数据时，需要在子组件外围设置一个根（一个包裹如div）</span><br><span class="line"> &lt;template id=&quot;cnp&quot; &gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;carray&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;cmessage&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line"> const cpn=&#123;</span><br><span class="line">            template:&#x27;#cnp&#x27;,</span><br><span class="line">//注册的组件的data必须是一个函数（用于返回对象）</span><br><span class="line">            data()&#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">//声明props</span><br><span class="line">传入父组件数据</span><br><span class="line">            props:&#123;</span><br><span class="line">                carray:Array,</span><br><span class="line">                cmessage:&#123;</span><br><span class="line">                    type:String,</span><br><span class="line">                    default:&quot;我日你先人&quot;,</span><br><span class="line">                    // 是否必须传值</span><br><span class="line">                    // required:true</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">//使用v-bind语法糖</span><br><span class="line"></span><br><span class="line">//将array中的值绑定到carray中</span><br><span class="line">//将message中的值绑定到cmessage中</span><br><span class="line">        &lt;cpn :cArray=&quot;array&quot; :cMessage=&quot;message&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+  <p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p> 
+      <a class="article-more-link" href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
 
-<p>至此，最简单的传值操作就已经完成了</p>
-<p>值得注意的是，v-bind语句不支持驼峰命名法，若在props中的元素使用驼峰命名法，则需要在绑定值时使用 -分割线</p>
-<h2 id="（子传父）自定义事件传递数据"><a href="#（子传父）自定义事件传递数据" class="headerlink" title="（子传父）自定义事件传递数据"></a>（子传父）自定义事件传递数据</h2><p>父传子时是通过props属性来完成的，而当我们遇到子传父时，则需要注册自定义事件</p>
-<p>一般情况下，子组件发生了某个事件，我们希望父组件根据该事件做出相应的一个调整与反映。</p>
-<p>同样的我，我们先创建一个子组件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">                &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line"></span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
 
-<p>子传父的应用场景比较多的是子组件中发生了某些事件，我们希望父组件知道并且作出反映。在此，我们模拟一个简单的传输过程。现将整个子组件丰富一下，然后在此我们将自定义事件在子组件中进行一个注册</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    categories:[</span><br><span class="line">                        &#123;id:&#x27;111&#x27;,name:&#x27;apple&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;112&#x27;,name:&#x27;iphone&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;113&#x27;,name:&#x27;ipad&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;114&#x27;,name:&#x27;huawei&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;115&#x27;,name:&#x27;xiaomi&#x27;&#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                itemClick(item)&#123;</span><br><span class="line">                    // console.log(item);</span><br><span class="line">                    // 发射(事件,参数)</span><br><span class="line">                    this.$emit(&#x27;item-click&#x27;,item) </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line"></span><br><span class="line">//注册点击事件</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+    </footer>
+  </div>
 
-<p>子组件发射事件后，父组件需要对该事件进行监听，监听方式：在父组件的模板上使用v-on绑定事件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//以前我们使用v-on绑定的事件都是默认注册好的事件，自定义事件注册后，便可以在其作用域（父组件）内进行监听、绑定</span><br><span class="line">//监听的自定义事件的命名需要从驼峰命名法进行转化（使用脚手架可忽略）</span><br><span class="line">//若在监听事件时没有传入参数（如cpnClick(item)传入参数），将会默认传入子组件发射的参数，在这里为item</span><br><span class="line">        &lt;cpn @item-click=&quot;cpnClick&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;div&gt;我爱&#123;&#123; things &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+   
+    
+</article>
 
-<p>在父组件中注册监听后，还需要在父组件内部注册事件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &#x27;我爱你&#x27;,</span><br><span class="line">                array: [1, 2, 3, 4],</span><br><span class="line">                things:&quot;NONE&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                cpnClick(item)&#123;</span><br><span class="line">                    console.log(item.id);</span><br><span class="line">                    this.things = item.name;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>至此，我们完成了对父传子操作的全过程。运行截图如下：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e832e4a99eab43c2a96cbdd4463aa1c3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10b4140fe8c0488d8cee57b2161d38ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/682923a1b22f408b8fc7725b72ea3f12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>作者：用户4721573403919<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082435003316961311">https://juejin.cn/post/7082435003316961311</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+    
+    <article
+  id="post-vue创建组件"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/"
+    >vue创建组件</a> 
+</h2>
  
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" class="article-date">
+  <time datetime="2022-04-03T17:40:41.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Vue组件创建两大步：1.创建组件 2.注册组件</p> 
+      <a class="article-more-link" href="/2022/04/04/vue%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -421,11 +497,11 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。<strong>使用方法：v-model.lazy&#x3D;”（绑定的数据）”</strong></p>
-<h4 id="number修饰符"><a href="#number修饰符" class="headerlink" title="number修饰符"></a>number修饰符</h4><p>默认情况下，在输入框中无论是输入字符还是数字，v-model绑定数据时均会按照字符串进行处理。当我们希望处理的时数字类型时（可以在input 的type属性中设置为number），使用number修饰符可以将其自动转化为数字类型，便于处理。<strong>使用方法：v-model.number&#x3D;”(绑定的数据)”</strong></p>
-<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title="trim修饰符"></a>trim修饰符</h4><p>当输入的数据中左右两端存在很多的空格时，可以通过trim修饰符将左右两端的空格进行删除。<strong>使用方法：v-model.trim&#x3D;”(绑定的数据)”</strong></p>
-<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082428951708041247">https://juejin.cn/post/7082428951708041247</a></p>
- 
+  <h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。</p> 
+      <a class="article-more-link" href="/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -478,42 +554,11 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="什么是工程化"><a href="#什么是工程化" class="headerlink" title="什么是工程化"></a>什么是工程化</h2><p>你以为的前端开发：老三样，需要美化页面：bootstrap!,需要实现网页布局：Layui（然后最后写出个DEMO）</p>
-<p>实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）</p>
-<p>那到底什么是前端工程化呢？前端工程化指的是，把前端开发所需的工具、技术、流程、经验等进行规范化、标准化。（说了半天还是不清楚）</p>
-<h2 id="什么是VUE"><a href="#什么是VUE" class="headerlink" title="什么是VUE"></a>什么是VUE</h2><p>Vue是一款前端渐进式框架，可以提高前端开发效率。Vue通过MVVM模式,能够实现视图与模型的双向绑定。简单来说，就是数据变化的时候, 页面会自动刷新, 页面变化的时候，数据也会自动变化.</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f579a76fad6d43e88fcaee49fc5d8e97~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<h3 id="webpack的登场"><a href="#webpack的登场" class="headerlink" title="webpack的登场"></a>webpack的登场</h3><p>webpack是前端项目工程化的具体解决方案，它主要提供了友好的前端模块化开发支持以及代码压缩混淆处理（将多行代码压缩到一行，清除全部注释，压缩用以节约空间）、处理浏览器端的JavaScript的兼容性、性能优化等强大的功能。提高开发效率和可维护性（总而言之，就是webpack，行！）</p>
-<p>目前，比较主流的前端开发框架如react、Vue都是基于webpack进行工程化开发的</p>
-<h3 id="webpack的安装与配置"><a href="#webpack的安装与配置" class="headerlink" title="webpack的安装与配置"></a>webpack的安装与配置</h3><p>在终端运行如下命令，安装webpack相关的两个包：</p>
-<p>npm install webpack webpack-cli -D</p>
-<p>安装完webpack，vue的基本环节就算安装结束了。</p>
-<h2 id="Vue实例"><a href="#Vue实例" class="headerlink" title="Vue实例"></a>Vue实例</h2><p>在初学Vue，写demo的时候，我们常常会看见以下代码 <code>const app = new Vue(&#123;          el:#app,          data:&#123;&#125;          &#125;)</code> 这就是一个最简单的Vue实例，其中<strong>el:挂载点</strong>，他是用来设置Vue实例挂载的元素（在这里挂载的就是id为app的一个div），Vue会管理el挂载的元素以及其内部的元素。可以使用其他的选择器，但是建议使用<strong>ID选择器</strong>。<strong>data:数据库</strong>，Vue中用到的数据都定义在data中，在渲染复杂类型的数据时，遵循js的语法。</p>
-<h2 id="Vue指令与事件"><a href="#Vue指令与事件" class="headerlink" title="Vue指令与事件"></a>Vue指令与事件</h2><p>vue中提供了以下指令：</p>
-<h3 id="V-on"><a href="#V-on" class="headerlink" title="V-on"></a>V-on</h3><p>V-on 用于给元素绑定事件，不多bb，直接看demo:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;你再点一下试试&quot; @click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;别点了别点了！&quot; v-on:click = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;再点要破防惹！&quot; @dblclick = &quot;doIt&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;#&quot; v-html = &quot;message&quot; @click = &quot;nt&quot; style=&quot;text-decoration:none;&quot;&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:&quot;我是真的无语&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function()&#123;</span><br><span class="line">                alert(&quot;哭了&quot;);</span><br><span class="line">            &#125;,</span><br><span class="line">            nt:function()&#123;</span><br><span class="line">                this.message +=&quot; 别戳了QAQ&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;`</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>值得一提的是，指令可以简写为@，平时在写代码的时候，鼓励大家使用这个语法糖。绑定的方法定义在<strong>methods</strong>属性中，方法内部可以通过<strong>this</strong>关键字访问在data中的数据。 除此之外，还可以将绑定的方法写成函数调用的形式，并传入自定义参数。 另外还有事件修饰符，例子如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt; </span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;点我&quot; @click =&quot;doIt(6666,&#x27;ohNo&#x27;)&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; @keyup.enter=&quot;sayHi&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            doIt:function(p1,p2)&#123;</span><br><span class="line">                console.log(p1);</span><br><span class="line">                console.log(p2);</span><br><span class="line">            &#125;,</span><br><span class="line">            sayHi:function()&#123;</span><br><span class="line">                alert(&quot;您真是个大可爱&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>更多的事件修饰符见vue官方文<a href="https://link.juejin.cn/?target=https://cn.vuejs.org/v2/api%23v-on">cn.vuejs.org&#x2F;v2&#x2F;api#v-on</a> 。</p>
-<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p>v-for，类似于python中的for，可以实时生成。它一般用作：根据数据生成列表结构（常常和数组结合使用），语法是<code>（item,index）in data </code>item是data中的属性，如果data是数组的话,item就是数组中的每个数值，index是item的索引,v-for的使用方法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li v-for=&quot;item in Arr&quot;&gt;&#123;&#123; item &#125;&#125;&lt;/li&gt;</span><br><span class="line">            &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;add&quot; @click = &quot;add&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;remove&quot; @click = &quot;remove&quot; &gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li v-for = &quot;boy in boys&quot;&gt;&#123;&#123;boy.name&#125;&#125;&lt;/li&gt;    </span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app =new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                Arr:[&#x27;北京&#x27;,&#x27;天津&#x27;,&#x27;成都&#x27;,&#x27;上海&#x27;],</span><br><span class="line">                boys:[</span><br><span class="line">                    &#123;name:&quot;bovi&quot;,age:18&#125;,</span><br><span class="line">                    &#123;name:&quot;jeff&quot;,age:19&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                add:function()&#123;</span><br><span class="line">                    this.boys.push(&#123;name:&quot;kevin&quot;,age:12&#125;);</span><br><span class="line">                &#125;,</span><br><span class="line">                remove:function()&#123;</span><br><span class="line">                    this.boys.shift();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>数组长度的更新会同步到页面上，是<strong>响应式</strong>的，在上例中，如果点击第一个button，将会在页面中添加一个li，内容为kevin，同理，如果点击第二个button，页面中将会减少一个li。item和index可以结合其他指令一起使用。例如，在上例中我们获得的每个boy都是一个对象，可以通过boy.age获取拿到的boy中的age属性的值。</p>
-<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>v-if：根据值的真假切换元素的显示与隐藏（直接在dom树中移除、添加）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;p v-if = &quot;true&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是咋办&lt;/span&gt;</span><br><span class="line">        &lt;p v-if = &quot;isShow&quot;&gt;我就是个P&lt;/p&gt;</span><br><span class="line">        &lt;span v-if = &quot;isShow&quot;&gt;我是span&lt;/span&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; value=&quot;改变可见度&quot; @dblclick =&quot;changeIsShow&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                isShow:false</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                changeIsShow:function()&#123;</span><br><span class="line">                    this.isShow = !this.isShow;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>和v-if相对应的就是v-show</p>
-<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>v-show:根据值的真假，切换元素的显示与隐藏（仅仅改变对象的display）指令后的内容，最终都将解析为boolean，值为true的元素显示，值为false的元素隐藏，数据发生改变后，对应元素的显示状态将会同步更新。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;button value=&quot;点击切换&quot; @click = &quot;changeIsShow&quot;&gt;&lt;/button&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;true&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;isShow&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;素材/005.jpeg&quot; alt=&quot;&quot; v-show=&quot;age&gt;18&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app =new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            isShow:false,</span><br><span class="line">            age:17</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            changeIsShow:function()&#123;</span><br><span class="line">                this.isShow=!this.isShow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>如果经常切换，建议使用v-show（避免多次修改dom树），反之使用v-if（速度更快）。</p>
-<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>v-model:与数据绑定，实时进行修改（双方同时）。即： 绑定的数据&lt;–&gt;表单元素值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">        &lt;input type=&quot;text&quot; v-model=&quot;message&quot; @keyup.enter=&quot;getMessage&quot;&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123; message &#125;&#125;&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &quot;我是谁？&quot;,</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                getMessage:function()&#123;</span><br><span class="line">                    alert(this.message);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>v-model指令的作用是便于设置、获取表单元素的值</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7082426039946706975">https://juejin.cn/post/7082426039946706975</a></p>
- 
+<p>实际的前端开发：模块化+组件化+规范化+自动化（介都是嘛玩意儿啊）</p> 
+      <a class="article-more-link" href="/2022/04/04/Vue%E5%88%9D%E6%AD%A5/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -636,118 +681,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-居中"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/%E5%B1%85%E4%B8%AD/"
-    >居中</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/%E5%B1%85%E4%B8%AD/" class="article-date">
-  <time datetime="2022-04-01T13:07:47.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/css/">css</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中</p> 
-      <a class="article-more-link" href="/2022/04/01/%E5%B1%85%E4%B8%AD/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-JS的原型和原型链"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"
-    >JS的原型和原型链</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
-  <time datetime="2022-04-01T12:59:07.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：</p> 
-      <a class="article-more-link" href="/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
 
     </footer>
   </div>
