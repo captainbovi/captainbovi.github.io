@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Vuex |  点滴生活 点滴人生</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="点滴生活 点滴人生" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Vuex"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Vuex
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/Vuex/" class="article-date">
+  <time datetime="2022-04-03T18:31:10.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="什么是Vuex，它是干什么的"><a href="#什么是Vuex，它是干什么的" class="headerlink" title="什么是Vuex，它是干什么的"></a>什么是Vuex，它是干什么的</h3><p>官方解释：他是一个专为Vue.js应用程序开发的<strong>状态管理模式</strong>，它采用<strong>集中式存储管理</strong>应用所有组件的状态，Vuex是响应式的。</p>
+<span id="more"></span>
+
+<h4 id="状态管理是什么"><a href="#状态管理是什么" class="headerlink" title="状态管理是什么"></a>状态管理是什么</h4><p>简单的来说，就是把需要多个组件共享的变量全部存储在一个对象之中，然后将该对象放入顶层的Vue实例之中，供其它组件使用，当然我们也可以手动声明一个共享对象然后将它嵌入每一个组件中，实现方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const shareThing=&#123;   &#125;</span><br><span class="line">Vue.prototype.shareThing = shareThing //通过Vue原型对每一个Vue实例中的组件进行赋值，在每个组件内部只需要通过this.sharThing.  即可访问shareThing中的具体值，但该方式不支持响应式</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>一般来说，用户的登录信息、头像、商品信息等状态信息需要供多个组件共享使用，而这些状态就可以放入Vuex进行响应式管理。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9bee50919a4455eb4ce1b6c2890ed74~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h2 id="小案例"><a href="#小案例" class="headerlink" title="小案例"></a>小案例</h2><p>我们实现一个计数器，同时实现两个组件共享一个counter属性</p>
+<ul>
+<li>思路一：通过父子组件传值实现：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//子组件</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;counter&#125;&#125;&lt;/h3&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">export default (&#123;</span><br><span class="line">    name:&#x27;vuex&#x27;,</span><br><span class="line">    props:&#123;</span><br><span class="line">        counter:Number</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//父组件</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;counter&#125;&#125;&lt;/h3&gt;</span><br><span class="line">    &lt;button @click=&quot;counter++&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;counter--&quot;&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;vuex :counter=&#x27;counter&#x27;/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import vuex from &#x27;./components/vuex.vue&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;App&#x27;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      counter:0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">  vuex</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>思路二：通过vuex集中管理：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">//vuex配置文件</span><br><span class="line">// 导入</span><br><span class="line">import Vue from &quot;vue&quot;;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line"></span><br><span class="line">// 安装插件</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">// 创建对象</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    // 保存状态</span><br><span class="line">    state:&#123;</span><br><span class="line">        counter:100</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations:&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    actions:&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    getters:&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    modules:&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">// 导出store</span><br><span class="line">export default store</span><br><span class="line"></span><br><span class="line">//在main.js中引用</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import App from &#x27;./App.vue&#x27;</span><br><span class="line">import store from &#x27;./store&#x27;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  render: h =&gt; h(App),</span><br><span class="line">  store,</span><br><span class="line">&#125;).$mount(&#x27;#app&#x27;)</span><br><span class="line">//类似于router，在这里实现了对每个组件注册$store属性，$store = store</span><br><span class="line"></span><br><span class="line">//在组件中应用</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;$store.state.counter&#125;&#125;&lt;/h3&gt;</span><br><span class="line">    &lt;button @click=&quot;$store.state.counter++&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;$store.state.counter--&quot;&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;vuex/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59e7d6ee405445a4a4cd724502dc6a2c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>action部分处理异步操作，mutations中处理同步操作，Devtools可以追踪哪个组件对state进行了修改</p>
+<p>vue官方不推荐直接修改state，而是通过action和mutation对state的具体值进行修改。</p>
+<p>vue官方提供了一个插件devtools，用于追踪Vuex中状态的变化，需要在浏览器中自行添加扩展插件。</p>
+<p>回到之前的情景，我们不直接调用$store.state.counter来对状态中的counter的值进行更改，而是通过在配置文件中注册mutations方法，来对state中的counter进行修改，然后在每个组件中调用mutations中声明的方法。mutations中的方法都是<strong>同步方法</strong>，如果是异步操作的话，devtools将无法追踪到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//配置文件   </span><br><span class="line"> mutations:&#123;</span><br><span class="line">        incerement(state)&#123;</span><br><span class="line">            state.counter++</span><br><span class="line">        &#125;,</span><br><span class="line">        decerement(state)&#123;</span><br><span class="line">            state.counter--</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">//组件调用方法</span><br><span class="line"> methods:&#123;</span><br><span class="line">    add()&#123;</span><br><span class="line">      this.$store.commit(&#x27;incerement&#x27;)</span><br><span class="line">    &#125;,</span><br><span class="line">    sub()&#123;</span><br><span class="line">      this.$store.commit(&#x27;decerement&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/378fec2d7c3346339d57f6359e19f47d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>提交mutation是store（state）更新的唯一方式，通过commit(”)来使用mutation中的回调函数</p>
+<p>当我们在mutation中处理数据时需要用到外部传入的数据时（例如上例中我们增加一个按钮，让其实现每按一次counter就是增加5），此时需要我们在使用commit调用回调函数时传入额外参数（payload），实现上述要求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//组件中 </span><br><span class="line">&lt;button @click=&quot;addNum(5)&quot;&gt;+5&lt;/button&gt;</span><br><span class="line"> methods:&#123;</span><br><span class="line">    addNum(number)&#123;</span><br><span class="line">      this.$store.commit(&#x27;incerementNum&#x27;,number)</span><br><span class="line">    &#125;</span><br><span class="line">//store文件中</span><br><span class="line">    mutations:&#123;</span><br><span class="line">        incerementNum(state,number)&#123;</span><br><span class="line">            state.counter += number</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然除了直接使用commit进行提交，官方还提供了另外一种提交封装，一个包含type属性的对象，我们以上述例子为例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//组件中    </span><br><span class="line">addNum(number)&#123;</span><br><span class="line">      // 1.简单的提交封装</span><br><span class="line">      // this.$store.commit(&#x27;incerementNum&#x27;,number)</span><br><span class="line">      // 2.另一种提交封装</span><br><span class="line">      this.$store.commit(&#123;</span><br><span class="line">        type:&#x27;incerementNum&#x27;,</span><br><span class="line">        payload</span><br><span class="line">        // payload是一个对象，内部属性为type:&#x27;incerementNum&#x27;和number:</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">//store文件中</span><br><span class="line">    mutations:&#123;</span><br><span class="line">        incerementNum(state,payload)&#123;</span><br><span class="line">            state.counter += payload.number</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>Mutation中的处理方式是将整个commit的对象作为payload进行使用。</p>
+<p>当然，我们还可以对Mutation中的函数进行一定处理，以便于导入调用</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/de00a7b44bda485388412bb8bf1ea348~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8aa350ddc9b743ce9608104ce4c49e7d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h3 id="Mutation的响应式原理"><a href="#Mutation的响应式原理" class="headerlink" title="Mutation的响应式原理"></a>Mutation的响应式原理</h3><p>从先前的state学习中得知，state是响应式的（当state中的数据发生改变时，Vue组件将会自动更新）也就是说，我们申明state中的对象以及其变量时，这些属性都将加入响应式系统中进行实时监听，当属性发生变化时，将会通知界面中所有用到该属性的地方，让界面进行刷新，故我们需要在store中初始化好需要的属性。如果需要改变现有的对象中的属性，可以直接在mutation中声明函数，完成该功能，然后再在组件中使用commit调用即可。当我们需要给state中的对象添加新属性时，方式有：</p>
+<ul>
+<li><strong>使用Vue.set(obj,’newProp’,value)</strong></li>
+</ul>
+<p>值得注意的是，state中的属性如果要加入响应式系统的话，必须提前初始化，或使用上方方法增加属性。若单纯使用js已有的在对象中添加属性的方法(state.xxxx[‘xxx’]&#x3D;’xx’)，则添加的属性xx不会加入响应式系统，不会被实时监听，但如果检查属性的话会发现能够实现属性的增加，但由于界面不会随之刷新，故使用该方式添加属性没有实质作用。 相应的，正确的添加方法为：Vue.set(xxxx,’xxx’,’xx’)</p>
+<p>同样的，如果我们想要删除某个属性，直接使用js中已有的方法delete（delete state.xxxx.xxx）,也无法实现在响应式系统中的删除。相应的，<strong>Vue.delete(state.xxxx,’xxx’</strong>)可以实现</p>
+<h3 id="单一状态树"><a href="#单一状态树" class="headerlink" title="单一状态树"></a>单一状态树</h3><p>单一状态树（single source of truth）指的是将所有的状态(state)全部保存在一个系统中，即将所有的需要进行管理的state全部保存在一个store对象里，而不是分别存于store1、store2等。如此操作有助于今后的管理与维护。</p>
+<p>采用单一状态树，可以让我们以最直接的方式找到某个状态的片段</p>
+<h3 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h3><p>getters，类似于computed属性，用于计算state中的值，一般用于呈现state中的值经过处理后的值，操作方式与computed基本类似。</p>
+<p>值得一提的是，当需要使用已经在getters中定义过的值时，只需要在后续传参时传入getters，然后通过调用getters.来实现对其中值的访问(第二个传入的参数无论名称都默认为是传入getters)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">       counterPower(state)&#123;</span><br><span class="line">       return state.count* state.count</span><br><span class="line">       &#125;,</span><br><span class="line">       fitPeople(state)&#123;</span><br><span class="line">       return state.People.filter(s =&gt; s.age&gt;=20)</span><br><span class="line">       &#125;,</span><br><span class="line">       fitPeopleLength(state, getters)&#123;</span><br><span class="line">       return getters.fitPeople.length</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>回到上例，当我们想从外部传入数据而不是在内部写死筛选年龄不小于20的人时，我们需要对getters内部传入的数值进行更改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fitPeople(state)&#123;</span><br><span class="line">//返回一个函数后，便可以传入参数，调用该函数</span><br><span class="line">         return function(age)&#123;</span><br><span class="line">             return state.People.filter(s =&gt; s.age&gt;=age)</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>使用箭头函数对上方函数进行进一步简化得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fitPeople(state)&#123;</span><br><span class="line">//返回一个函数后，便可以传入参数，调用该函数</span><br><span class="line">         return age =&gt; &#123;</span><br><span class="line">             return state.People.filter(s =&gt; s.age&gt;=age)</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h3><p>mutations中的方法全是同步操作，如果出现异步操作的话，devtools将无法实现跟踪，很难去debug,此时需要使用action(异步操作）。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e31d404a2dbc43da963464f0cc55cec2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>值得注意的是，在action中并不是直接对state中进行更改，而是通过commit使用mutation中的函数对state进行修改（这样操作才能让devtools实现正常追踪）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea32cd3a82549bfb7f726902d18f5d0~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>Vuex工作流程</p>
+<p>action的使用方式与mutation差不多，使用this.$store.dispatch调用在action中已声明好的函数。值得注意的是，在action中不能直接对state中的属性或对象进行更改，而是调用mutation中的方法进行更改，具体案例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> //配置文件 </span><br><span class="line"> mutations:&#123;</span><br><span class="line">        updateState(state)&#123;</span><br><span class="line">            state.People[1].name = &#x27;sunShineBoy&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions:&#123;</span><br><span class="line">        // context上下文</span><br><span class="line">        aUpdateState(context, payload)&#123;</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                context.commit(&#x27;updateState&#x27;);</span><br><span class="line">                console.log(payload);</span><br><span class="line">            &#125;, 1000);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">//组件</span><br><span class="line">  methods:&#123;</span><br><span class="line"></span><br><span class="line">    aUpdateState()&#123;</span><br><span class="line">      this.$store.dispatch(&#x27;aUpdateState&#x27;,&#x27;我是sunshine boy&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果我们需要在异步处理完成后提醒用户已经完成异步处理的话，我们可以在dispatch传入数据时进行更改(传入一个大的对象)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//组件</span><br><span class="line">aUpdateState()&#123;</span><br><span class="line">      this.$store.dispatch(&#x27;aUpdateState&#x27;,&#123;</span><br><span class="line">        msg:&#x27;我是sunshine boy&#x27;,</span><br><span class="line">        success:()=&gt;&#123;</span><br><span class="line">          console.log(&#x27;我终于成为阳光男孩辣&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">//配置文件</span><br><span class="line">aUpdateState(context, payload)&#123;</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                context.commit(&#x27;updateState&#x27;);</span><br><span class="line">                console.log(payload.msg);</span><br><span class="line">                payload.success();</span><br><span class="line">            &#125;, 1000);</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然上述操作还可以通过Promise进行操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//配置文件        </span><br><span class="line">aUpdateState(context, payload)&#123;</span><br><span class="line">            return new Promise((resovle,reject)=&gt;&#123;</span><br><span class="line">               setTimeout(() =&gt; &#123;</span><br><span class="line">                context.commit(&#x27;updateState&#x27;);</span><br><span class="line">                resovle(&#x27;传入的数据&#x27;)</span><br><span class="line">            &#125;, 1000); </span><br><span class="line">            &#125;)    </span><br><span class="line">        &#125;</span><br><span class="line">//组件</span><br><span class="line"> aUpdateState()&#123;</span><br><span class="line">      this.$store.dispatch(&#x27;aUpdateState&#x27;,&#x27;我是sunshine boy&#x27;)</span><br><span class="line">      .then(res=&gt;&#123;</span><br><span class="line">        console.log(&#x27;我是阳光大男孩辣！&#x27;);</span><br><span class="line">        console.log(res);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>action这个方法本身就可以返回一个Promise,在返回这个promise之后就可以在其他地方（例如dispatch中）拿到这个promise，然后在后端就可以就这加上.then等</p>
+<h3 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab2f8a8a86c0458286e403abd00cf8dd~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>模块化</p>
+<p>modules的核心就是模块化，将复杂的应用进行抽离，抽离出若干个小模块，并分别进行管理，如上图，若要访问定义的moduleA的状态，则需要通过this.store.state.a来进行访问（这里的a是在modules中注册的名字），如果要使用声明的modules中的mutation，s还是直接在组件中使用commit，需要注意的是，∗∗各个模块间声明的mutations中的方法名不要重合∗∗。外部调用commit后，会首先在store中的mutations中进行方法的寻找，未果，再在各个模块进行寻找。getters和mutations相同，也是直接在外部调用store.state.a来进行访问（这里的a是在modules中注册的名字），如果要使用声明的modules中的mutation，s还是直接在组件中使用commit，需要注意的是，<strong>各个模块间声明的mutations中的方法名不要重合</strong>。外部调用commit后，会首先在store中的mutations中进行方法的寻找，未果，再在各个模块进行寻找。getters和mutations相同，也是直接在外部调用store.state.a来进行访问（这里的a是在modules中注册的名字），如果要使用声明的modules中的mutation，s还是直接在组件中使用commit，需要注意的是，∗∗各个模块间声明的mutations中的方法名不要重合∗∗。外部调用commit后，会首先在store中的mutations中进行方法的寻找，未果，再在各个模块进行寻找。getters和mutations相同，也是直接在外部调用store.getters即可。</p>
+<p>如果想要在module中使用根(即store)的一些状态的话，只需要在传输参数的时候传入rootState.需要注意的是，模块在声明actions中的异步操作函数时使用commit，只能调用该模块中mutations中已声明的函数方法。在actions中的方法，我们会传入参数context(上下文)，我们打印一下这个参数。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3cb6203cbdb84a619b62e3853d6397cc~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>不难看出context中不仅包含该模块的getters和state还包含根中的getters和state，故需要访问根中的getters和state只需要通过context.rootGetters或者context.rootState即可进行访问,当然在这里也可以对对象context进行解构，传入context中所包含的并且我们所需要的参数。</p>
+<ul>
+<li>ps.只有在模块里面才会有根的概念</li>
+</ul>
+<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082442359216013326">https://juejin.cn/post/7082442359216013326</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/Vuex/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/04/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            axios的基本使用
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/04/vue-router/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">vue-router</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2022
+        <i class="ri-heart-fill heart_icon"></i> bovi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="点滴生活 点滴人生"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=478507889&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

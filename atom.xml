@@ -103,6 +103,25 @@
   </entry>
   
   <entry>
+    <title>Vuex</title>
+    <link href="http://example.com/2022/04/04/Vuex/"/>
+    <id>http://example.com/2022/04/04/Vuex/</id>
+    <published>2022-04-03T18:31:10.000Z</published>
+    <updated>2022-04-03T18:59:02.041Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;什么是Vuex，它是干什么的&quot;&gt;&lt;a href=&quot;#什么是Vuex，它是干什么的&quot; class=&quot;headerlink&quot; title=&quot;什么是Vuex，它是干什么的&quot;&gt;&lt;/a&gt;什么是Vuex，它是干什么的&lt;/h3&gt;&lt;p&gt;官方解释：他是一个专为Vue.js应用程序开发的&lt;strong&gt;状态管理模式&lt;/strong&gt;，它采用&lt;strong&gt;集中式存储管理&lt;/strong&gt;应用所有组件的状态，Vuex是响应式的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Vue" scheme="http://example.com/categories/Vue/"/>
+    
+    
+    <category term="前端" scheme="http://example.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>vue-router</title>
     <link href="http://example.com/2022/04/04/vue-router/"/>
     <id>http://example.com/2022/04/04/vue-router/</id>
@@ -379,25 +398,6 @@
     
     
     <summary type="html">&lt;p&gt;首先是for循环的一种简化写法，主要针对数组遍历&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
-    
-    
-    <category term="js" scheme="http://example.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>箭头函数</title>
-    <link href="http://example.com/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
-    <id>http://example.com/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</id>
-    <published>2022-04-01T12:57:54.000Z</published>
-    <updated>2022-04-01T13:04:57.097Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。&lt;/p&gt;</summary>
     
     
     
