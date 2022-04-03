@@ -178,6 +178,62 @@
 
     
     <article
+  id="post-v-model的常用事件修饰符"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/"
+    >v-model的常用事件修饰符</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/v-model%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="article-date">
+  <time datetime="2022-04-03T17:39:08.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="lazy修饰符"><a href="#lazy修饰符" class="headerlink" title="lazy修饰符"></a>lazy修饰符</h4><p>默认情况下，v-model是与输入框中的value同步的，一旦有数据发生改变，data中与其双向绑定的数据也随之改变。使用lazy修饰符可以让数据在失去焦点或者回车时再进行更新。<strong>使用方法：v-model.lazy&#x3D;”（绑定的数据）”</strong></p>
+<h4 id="number修饰符"><a href="#number修饰符" class="headerlink" title="number修饰符"></a>number修饰符</h4><p>默认情况下，在输入框中无论是输入字符还是数字，v-model绑定数据时均会按照字符串进行处理。当我们希望处理的时数字类型时（可以在input 的type属性中设置为number），使用number修饰符可以将其自动转化为数字类型，便于处理。<strong>使用方法：v-model.number&#x3D;”(绑定的数据)”</strong></p>
+<h4 id="trim修饰符"><a href="#trim修饰符" class="headerlink" title="trim修饰符"></a>trim修饰符</h4><p>当输入的数据中左右两端存在很多的空格时，可以通过trim修饰符将左右两端的空格进行删除。<strong>使用方法：v-model.trim&#x3D;”(绑定的数据)”</strong></p>
+<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082428951708041247">https://juejin.cn/post/7082428951708041247</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-Vue初步"
   class="article article-type-post"
   itemscope
@@ -255,7 +311,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
 
     </footer>
   </div>
@@ -635,62 +691,6 @@
        
   <p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p> 
       <a class="article-more-link" href="/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-JS类型判断"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/"
-    >JS类型判断</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" class="article-date">
-  <time datetime="2022-04-01T12:40:23.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>类型判断在 web 开发中有非常广泛的应用，简单的有判断数字还是字符串，进阶一点的有判断数组还是对象，再进阶一点的有判断日期、正则、错误类型，再再进阶一点还有比如判断 plainObject、空对象、Window 对象等等。</p> 
-      <a class="article-more-link" href="/2022/04/01/JS%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/"
         >阅读更多...</a
       >
        
