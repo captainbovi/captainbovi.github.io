@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>javascript类型转换 |  点滴生活 点滴人生</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="点滴生活 点滴人生" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-javascript类型转换"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  javascript类型转换
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/01/javascript%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" class="article-date">
+  <time datetime="2022-04-01T07:10:10.000Z" itemprop="datePublished">2022-04-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Number() 转换为数字， String() 转换为字符串， Boolean() 转化为布尔值。</p>
+<span id="more"></span>
+
+<h2 id="JavaScript-数据类型"><a href="#JavaScript-数据类型" class="headerlink" title="JavaScript 数据类型"></a>JavaScript 数据类型</h2><p>在 JavaScript 中有 5 种不同的数据类型：</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>object</li>
+<li>function</li>
+</ul>
+<p>3 种对象类型：</p>
+<ul>
+<li>Object</li>
+<li>Date</li>
+<li>Array</li>
+</ul>
+<p>2 个不包含任何值的数据类型：</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h2 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h2><p>你可以使用 <strong>typeof</strong> 操作符来查看 JavaScript 变量的数据类型。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof` `&quot;John&quot;`         `// 返回 string``typeof` `3.14          ``// 返回 number``typeof` `NaN          ``// 返回 number``typeof` `false`         `// 返回 boolean``typeof` `[1,2,3,4]       ``// 返回 object``typeof` `&#123;name:``&#x27;John&#x27;``, age:34&#125; ``// 返回 object``typeof` `new` `Date()       ``// 返回 object``typeof` `function` `() &#123;&#125;     ``// 返回 function``typeof` `myCar         ``// 返回 undefined (如果 myCar 没有声明)``typeof` `null`          `// 返回 object</span><br></pre></td></tr></table></figure>
+
+<p>请注意：</p>
+<ul>
+<li>NaN 的数据类型是 number</li>
+<li>数组(Array)的数据类型是 object</li>
+<li>日期(Date)的数据类型为 object</li>
+<li>null 的数据类型是 object</li>
+<li>未定义变量的数据类型为 undefined</li>
+</ul>
+<p>如果对象是 JavaScript Array 或 JavaScript Date ，我们就无法通过 <strong>typeof</strong> 来判断他们的类型，因为都是 返回 object。</p>
+<h2 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h2><p><strong>constructor</strong> 属性返回所有 JavaScript 变量的构造函数。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;John&quot;``.constructor         ``// 返回函数 String() &#123; [native code] &#125;``(3.14).constructor         ``// 返回函数 Number() &#123; [native code] &#125;``false``.constructor         ``// 返回函数 Boolean() &#123; [native code] &#125;``[1,2,3,4].constructor       ``// 返回函数 Array()  &#123; [native code] &#125;``&#123;name:``&#x27;John&#x27;``, age:34&#125;.constructor ``// 返回函数 Object() &#123; [native code] &#125;``new` `Date().constructor       ``// 返回函数 Date()  &#123; [native code] &#125;``function` `() &#123;&#125;.constructor     ``// 返回函数 Function()&#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 constructor 属性来查看对象是否为数组 (包含字符串 “Array”)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function` `isArray(myArray) &#123;``  ``return` `myArray.constructor.toString().indexOf(``&quot;Array&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>你可以使用 constructor 属性来查看对象是否为日期 (包含字符串 “Date”)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function` `isDate(myDate) &#123;``  ``return` `myDate.constructor.toString().indexOf(``&quot;Date&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JavaScript-类型转换"><a href="#JavaScript-类型转换" class="headerlink" title="JavaScript 类型转换"></a>JavaScript 类型转换</h2><p>JavaScript 变量可以转换为新变量或其他数据类型：</p>
+<ul>
+<li>通过使用 JavaScript 函数</li>
+<li>通过 JavaScript 自身自动转换</li>
+</ul>
+<h2 id="将数字转换为字符串"><a href="#将数字转换为字符串" class="headerlink" title="将数字转换为字符串"></a>将数字转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将数字转换为字符串。</p>
+<p>该方法可用于任何类型的数字，字母，变量，表达式：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(x)     ``// 将变量 x 转换为字符串并返回``String(123)    ``// 将数字 123 转换为字符串并返回``String(100 + 23) ``// 将数字表达式转换为字符串并返回</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Number 方法 <strong>toString()</strong> 也是有同样的效果。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.toString()``(123).toString()``(100 + 23).toString()</span><br></pre></td></tr></table></figure>
+
+<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以找到更多数字转换为字符串的方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">toExponential()</td>
+<td align="center">把对象的值转换为指数计数法。</td>
+</tr>
+<tr>
+<td align="center">toFixed()</td>
+<td align="center">把数字转换为字符串，结果的小数点后有指定位数的数字。</td>
+</tr>
+<tr>
+<td align="center">toPrecision()</td>
+<td align="center">把数字格式化为指定的长度。</td>
+</tr>
+</tbody></table>
+<h2 id="将布尔值转换为字符串"><a href="#将布尔值转换为字符串" class="headerlink" title="将布尔值转换为字符串"></a>将布尔值转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将布尔值转换为字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(``false``)    ``// 返回 &quot;false&quot;``String(``true``)     ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Boolean 方法 <strong>toString()</strong> 也有相同的效果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">false``.toString()   ``// 返回 &quot;false&quot;``true``.toString()   ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将日期转换为字符串"><a href="#将日期转换为字符串" class="headerlink" title="将日期转换为字符串"></a>将日期转换为字符串</h2><p>Date() 返回字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date() ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>全局方法 String() 可以将日期对象转换为字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(``new` `Date()) ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>Date 方法 <strong>toString()</strong> 也有相同的效果。</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = ``new` `Date()``obj.toString()  ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+
+<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/cef9e4a498c14ec5a9cf897eac36f3bf">Date 方法</a> 章节中，你可以查看更多关于日期转换为字符串的函数：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">getDate()</td>
+<td align="center">从 Date 对象返回一个月中的某一天 (1 ~ 31)。</td>
+</tr>
+<tr>
+<td align="center">getDay()</td>
+<td align="center">从 Date 对象返回一周中的某一天 (0 ~ 6)。</td>
+</tr>
+<tr>
+<td align="center">getFullYear()</td>
+<td align="center">从 Date 对象以四位数字返回年份。</td>
+</tr>
+<tr>
+<td align="center">getHours()</td>
+<td align="center">返回 Date 对象的小时 (0 ~ 23)。</td>
+</tr>
+<tr>
+<td align="center">getMilliseconds()</td>
+<td align="center">返回 Date 对象的毫秒(0 ~ 999)。</td>
+</tr>
+<tr>
+<td align="center">getMinutes()</td>
+<td align="center">返回 Date 对象的分钟 (0 ~ 59)。</td>
+</tr>
+<tr>
+<td align="center">getMonth()</td>
+<td align="center">从 Date 对象返回月份 (0 ~ 11)。</td>
+</tr>
+<tr>
+<td align="center">getSeconds()</td>
+<td align="center">返回 Date 对象的秒数 (0 ~ 59)。</td>
+</tr>
+<tr>
+<td align="center">getTime()</td>
+<td align="center">返回 1970 年 1 月 1 日至今的毫秒数。</td>
+</tr>
+</tbody></table>
+<h2 id="将字符串转换为数字"><a href="#将字符串转换为数字" class="headerlink" title="将字符串转换为数字"></a>将字符串转换为数字</h2><p>全局方法 <strong>Number()</strong> 可以将字符串转换为数字。</p>
+<p>字符串包含数字(如 “3.14”) 转换为数字 (如 3.14).</p>
+<p>空字符串转换为 0。</p>
+<p>其他的字符串会转换为 NaN (不是个数字)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(``&quot;3.14&quot;``)  ``// 返回 3.14``Number(``&quot; &quot;``)    ``// 返回 0``Number(``&quot;&quot;``)    ``// 返回 0``Number(``&quot;99 88&quot;``)  ``// 返回 NaN</span><br></pre></td></tr></table></figure>
+
+<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以查看到更多关于字符串转为数字的方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">parseFloat()</td>
+<td align="center">解析一个字符串，并返回一个浮点数。</td>
+</tr>
+<tr>
+<td align="center">parseInt()</td>
+<td align="center">解析一个字符串，并返回一个整数。</td>
+</tr>
+</tbody></table>
+<h2 id="一元运算符"><a href="#一元运算符" class="headerlink" title="一元运算符 +"></a>一元运算符 +</h2><p><strong>Operator +</strong> 可用于将变量转换为数字：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var` `y = ``&quot;5&quot;``;   ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果变量不能转换，它仍然会是一个数字，但值为 NaN (不是一个数字)：</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var` `y = ``&quot;John&quot;``;  ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字 (NaN)</span><br></pre></td></tr></table></figure>
+
+<h2 id="将布尔值转换为数字"><a href="#将布尔值转换为数字" class="headerlink" title="将布尔值转换为数字"></a>将布尔值转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将布尔值转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(``false``)   ``// 返回 0``Number(``true``)   ``// 返回 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="将日期转换为数字"><a href="#将日期转换为数字" class="headerlink" title="将日期转换为数字"></a>将日期转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将日期转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = ``new` `Date();``Number(d)     ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+
+<p>日期方法 <strong>getTime()</strong> 也有相同的效果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = ``new` `Date();``d.getTime()    ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动转换类型"><a href="#自动转换类型" class="headerlink" title="自动转换类型"></a>自动转换类型</h2><p>当 JavaScript 尝试操作一个 “错误” 的数据类型时，会自动转换为 “正确” 的数据类型。</p>
+<p>以下输出结果不是你所期望的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 + ``null`  `// 返回 5     null 转换为 0``&quot;5&quot;` `+ ``null` `// 返回&quot;5null&quot;  null 转换为 &quot;null&quot;``&quot;5&quot;` `+ 1   ``// 返回 &quot;51&quot;   1 转换为 &quot;1&quot;``&quot;5&quot;` `- 1   ``// 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动转换为字符串"><a href="#自动转换为字符串" class="headerlink" title="自动转换为字符串"></a>自动转换为字符串</h2><p>当你尝试输出一个对象或一个变量时 JavaScript 会自动调用变量的 toString() 方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(``&quot;demo&quot;``).innerHTML = myVar;` `myVar = &#123;name:``&quot;Fjohn&quot;``&#125; ``// toString 转换为 &quot;[object Object]&quot;``myVar = [1,2,3,4]    ``// toString 转换为 &quot;1,2,3,4&quot;``myVar = ``new` `Date()   ``// toString 转换为 &quot;Fri Jul 18 2014 09:08:55 GMT+0200&quot;</span><br></pre></td></tr></table></figure>
+
+<p>数字和布尔值也经常相互转换：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myVar = 123       ``// toString 转换为 &quot;123&quot;``myVar = ``true`      `// toString 转换为 &quot;true&quot;``myVar = ``false`      `// toString 转换为 &quot;false&quot;</span><br></pre></td></tr></table></figure>
+
+<p>下表展示了使用不同的数值转换为数字(Number), 字符串(String), 布尔值(Boolean)：</p>
+<table>
+<thead>
+<tr>
+<th align="center">原始值</th>
+<th align="center">转换为数字</th>
+<th align="center">转换为字符串</th>
+<th align="center">转换为布尔值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">false</td>
+<td align="center">0</td>
+<td align="center">“false”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">true</td>
+<td align="center">1</td>
+<td align="center">“true”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">“0”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">“1”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“0”</td>
+<td align="center">0</td>
+<td align="center">“0”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“000”</td>
+<td align="center">0</td>
+<td align="center">“000”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“1”</td>
+<td align="center">1</td>
+<td align="center">“1”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">NaN</td>
+<td align="center">NaN</td>
+<td align="center">“NaN”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">Infinity</td>
+<td align="center">Infinity</td>
+<td align="center">“Infinity”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">-Infinity</td>
+<td align="center">-Infinity</td>
+<td align="center">“-Infinity”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“”</td>
+<td align="center">0</td>
+<td align="center">“”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">“20”</td>
+<td align="center">20</td>
+<td align="center">“20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“Nowcoder”</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[ ]</td>
+<td align="center">0</td>
+<td align="center">“”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[20]</td>
+<td align="center">20</td>
+<td align="center">“20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[10,20]</td>
+<td align="center">NaN</td>
+<td align="center">“10,20”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[“Nowcoder”]</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">[“Nowcoder”,”Google”]</td>
+<td align="center">NaN</td>
+<td align="center">“Nowcoder,Google”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">function(){}</td>
+<td align="center">NaN</td>
+<td align="center">“function(){}”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">{ }</td>
+<td align="center">NaN</td>
+<td align="center">“[object Object]”</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">0</td>
+<td align="center">“null”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">undefined</td>
+<td align="center">NaN</td>
+<td align="center">“undefined”</td>
+<td align="center">false</td>
+</tr>
+</tbody></table>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/01/javascript%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/01/This%E7%90%86%E8%A7%A3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            This理解
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/01/%E8%B0%88%E8%B0%88%E8%A1%A8%E5%8D%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">谈谈表单</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021-2022
+        <i class="ri-heart-fill heart_icon"></i> bovi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="点滴生活 点滴人生"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+ 
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=478507889&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
