@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>slot介绍与应用 |  点滴生活 点滴人生</title>
+      <title>es6模块化导入导出 |  点滴生活 点滴人生</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -65,7 +65,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-slot介绍与应用"
+  id="post-es6模块化导入导出"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -76,7 +76,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  slot介绍与应用
+  es6模块化导入导出
 </h1>
  
 
@@ -84,8 +84,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-date">
-  <time datetime="2022-04-03T17:58:45.000Z" itemprop="datePublished">2022-04-04</time>
+      <a href="/2022/04/04/es6%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" class="article-date">
+  <time datetime="2022-04-03T18:08:03.000Z" itemprop="datePublished">2022-04-04</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/Vue/">Vue</a>
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">870</span>
         </span>
     </span>
 
@@ -105,48 +105,46 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p>
+  <p>模块化，能够有效的提高多人开发时的效率，同时避免出现全局变量命名重复等比较严重的问题。常见的模块化导入导出的规范有：CommonJS、AMD、CMD、ES6的modules规范，其中只有ES6的模块规范不需要底层支持就可以直接在浏览器中运行。这里使用ES6的规范进行模块化导入导出</p>
 <span id="more"></span>
 
-<p>具体操作如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>先生成一个html文件，再生成三个(数量不限，这里用3个进行示范)js文件（man.js、we.js、woman.js），先对该JS文件进行引用，这里需要对引用的JS文件设置type属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!-- type=&quot;module&quot; 即将整个引用的js文件视作一个封闭的模块 --&gt;</span><br><span class="line">&lt;!-- 使用import导入的时候需要在html文件中将引入的JS文件将类型设置为module--&gt;</span><br><span class="line">&lt;!-- 一个模块的内部的数据封闭的，一个模块就是一个作用域  --&gt;</span><br><span class="line">    &lt;script src=&quot;man.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;woman.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;we.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>效果图</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01455dbb048746c99c5b1bc9b82badd4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>当然，slot标签中也可以预设值（即默认值），当你需要改变的时候只需要在外部设置好想要的样式即可自动覆盖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>我们不妨在man.js中设置一些变量和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let name = &#x27;bovi&#x27;;</span><br><span class="line">let age = 19;</span><br><span class="line">let flag = true;</span><br><span class="line"></span><br><span class="line">function sum(num1,num2)&#123;</span><br><span class="line">    return num1+num2</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>效果与上图相同</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be524654d26045c1a1755f2cf98cf3a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>当然，如果想要插入插槽的部分由若干个小标签组成，则这些标签将会全部嵌入插槽中</p>
-<h4 id="具名插槽的使用"><a href="#具名插槽的使用" class="headerlink" title="具名插槽的使用"></a>具名插槽的使用</h4><p>当然，一个组件中可以有多个插槽，而为了方便区别各个插槽以及插入插槽的样式，我们使用具名插槽进行解决。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;slot name=&quot;left&quot;&gt; &lt;button&gt;我是第一个的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;center&quot;&gt; &lt;button&gt;我是中间的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;right&quot;&gt; &lt;button&gt;我是最后的按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">//在想要插入的部门添加属性slot，并附上要插入的插槽的名字</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>再对woman.js 中设置一些变量和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let name =&#x27;Fbovi&#x27;;</span><br><span class="line">let age = 20;</span><br><span class="line">let flag = false;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>效果图：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1e496bed42d43f6b72f23dc7063e613~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"> VUE中有一条准则：父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在自己作用域内编译</p>
-<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>作用域插槽主要用于实现 父组件替换插槽的内容，但是内容由子组件来提供</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;) </span><br><span class="line">复制代码</span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>再在we.js中设置一个函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(flag)&#123;</span><br><span class="line">    console.log(12);</span><br><span class="line">    console.log(sum(20,200));</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>上述例子，如果我想要改变插槽中的样式但是沿用子组件的内容，我们根据作用域可知，不能直接在父组件中写 v-for&#x3D;”item in Languages”，因为此时的作用域是vue实例app，所以v-for将会在app的data属性中查找 Languages 数组，故此刻我们需要使用作用域插槽,使用v-slot语句实现。v-slot <em>：后边是插槽名称</em>，&#x3D;后边是组件内部绑定作用域值的映射。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot name=&#x27;lis&#x27; :PLanguages=&#x27;Languages&#x27; :Pid=&#x27;id&#x27;&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn v-slot:lis=&#x27;lang&#x27;&gt;</span><br><span class="line">//这里lang是从子组件绑定过来的属性的集合</span><br><span class="line">          &lt;div&gt;&#123;&#123;lang.pid&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;span v-for=&quot;num in lang.pid&quot;&gt;&#123;&#123;num&#125;&#125; &lt;/span&gt;</span><br><span class="line">            &lt;!-- object.join(&#x27;#&#x27;):将数组object转化为字符串，并将每个字符间通过#号（可以更换）相连接 --&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages.join(&#x27;*&#x27;)&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;],</span><br><span class="line">                    id:[12,123,441,234]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>不难看出woman.js和man.js中存在命名相同的变量，但由于在引入的时候设置了type&#x3D;’module’，将两个文件模块化，从而不会出现报错</p>
+<p>此时我们想要在we.js使用man.js中的变量flag以及函数sum。首先需要对flag、sum进行导出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 导出方式一：以对象的方式导出</span><br><span class="line">export&#123;</span><br><span class="line">    flag,sum</span><br><span class="line">&#125;</span><br><span class="line">// 导出方式二：</span><br><span class="line">export var flag = true;</span><br><span class="line">// 导出方式三：导出类 /函数</span><br><span class="line">export function sum(num1,num2)&#123;</span><br><span class="line">    return num1+num2;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>需要注意的是，在模板插槽处绑定的属性（这里为PLanguages、Pid），在父组件中应用时字母全部都会变成小写</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082437661348069406">https://juejin.cn/post/7082437661348069406</a></p>
+<p>在man.js文件中实现导出后，我们需要在we.js中进行导入,需要注意的是，我们在导入&#x2F;使用导入的变量或函数时，必须使用他们的原名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//导入方式</span><br><span class="line">import &#123; flag，sum &#125; from &quot;./man&quot;;</span><br><span class="line">// 统一全部导入 将一个模块中导出的全部属性、函数放入一个对象mess(名称可更改)</span><br><span class="line">// import * as mess from &#x27;./man.js&#x27;</span><br><span class="line">// console.log(mess.flag)；</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果想要让导出者对导入的变量、函数进行命名的话，我们在导出的时候需要使用export default</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// export default（一个模块中只能有一个），可以导出属性或者函数 </span><br><span class="line">const address = &#x27;成都&#x27;;</span><br><span class="line">export default address;</span><br><span class="line">export default function(message)&#123;</span><br><span class="line">    console.log(message);</span><br><span class="line">&#125;</span><br><span class="line">// 导入  import aaaa from &#x27;./man.js&#x27;  其中aaaa可以为任意字符名字,此时aaaa = &#x27;成都&#x27;</span><br><span class="line">// 导入  import aaaa from &#x27;./man.js&#x27;  aaaa(&quot;你好呀&quot;),将会实现在控制台输出 你好呀 ；其中aaaa可以为任意字符名字</span><br></pre></td></tr></table></figure>
+
+
+<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082438093613039653">https://juejin.cn/post/7082438093613039653</a></p>
  
       <!-- reward -->
       
@@ -211,7 +209,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/es6%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -224,19 +222,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/04/04/es6%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" class="article-nav-link">
+      <a href="/2022/04/04/Vue-cli/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            es6模块化导入导出
+            Vue-cli
           
         </div>
       </a>
     
     
-      <a href="/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/" class="article-nav-link">
+      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">组件访问</div>
+        <div class="article-nav-title">slot介绍与应用</div>
       </a>
     
   </nav>

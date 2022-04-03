@@ -17,6 +17,305 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Vue响应式原理</title>
+    <url>/2022/04/04/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p>vue是如何实现响应式的？ 随之而来便有两个问题：</p>
+<ul>
+<li><p>vue是如何实现监听实例中的属性的变化的</p>
+</li>
+<li><p>当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新</p>
+<span id="more"></span></li>
+</ul>
+<h4 id="vue是如何实现监听实例中的属性的变化的"><a href="#vue是如何实现监听实例中的属性的变化的" class="headerlink" title="vue是如何实现监听实例中的属性的变化的"></a>vue是如何实现监听实例中的属性的变化的</h4><p>vue通过设置Object.defineProperty() 来监听对象属性的改变。</p>
+<p>我们不妨回到一个最简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &#123;&#123;message&#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el:&#x27;app&#x27;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我是data&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>此时页面是这样监听message的：</p>
+<ol>
+<li>先在内部拿到一个对象obj（内容即data中的内容）</li>
+<li>然后通过 Object.defineProperty对原本data中的属性进行重新定义具体操作如下</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    Object.keys(obj).forEach(key =&gt;&#123;</span><br><span class="line">        // 将obj中的每一个属性（key）中的值赋值到value中</span><br><span class="line">        let value = obj[key]</span><br><span class="line">        // 使用defineProperty将每个value在obj中进行定义，一旦数值发生改变，便会调用set函数</span><br><span class="line">        Object.defineProperty(obj,key,&#123;</span><br><span class="line">            set(newValue)&#123;</span><br><span class="line">                value = newValue</span><br><span class="line">            &#125;,</span><br><span class="line">            get()&#123;</span><br><span class="line">                return value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h4 id="当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新"><a href="#当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新" class="headerlink" title="当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新"></a>当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新</h4><p>vue通过发布订阅者模式，实现通知。所谓发布订阅者模式，就是谁在使用特定属性（通过解析html文件得知），该属性更新时就会通知该组件（使用get函数获取最新的数值），该模式的大致实现思路如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 发布者</span><br><span class="line">    class dep&#123;</span><br><span class="line">        constructor()&#123;</span><br><span class="line">            this.subs=[]</span><br><span class="line">        &#125;</span><br><span class="line">        // 添加订阅者</span><br><span class="line">        addSub(watcher)&#123;</span><br><span class="line">            this.subs.push(watcher)</span><br><span class="line">        &#125;</span><br><span class="line">        // 通知订阅者进行更新</span><br><span class="line">        notify()&#123;</span><br><span class="line">            this.subs.forEach(item =&gt;&#123;</span><br><span class="line">                item.update()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 订阅者</span><br><span class="line">    class watcher&#123;</span><br><span class="line">        constructor(name)&#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    //更新函数</span><br><span class="line">        update()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    const dep = new dep();</span><br><span class="line">    const w1 = new watcher(&#x27;张三&#x27;)</span><br><span class="line">    dep.addSub(w1)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>了解完响应式原理实现的两大重要技术后，我们重温一下响应式的原理图</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7397769e0c8840078cf47c5505ae2803~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>原理图</p>
+<p>我们在生成一个实例之后，里面的数据就换传入observer中（通过defineProperty实现），里面的每一个key都将会对应生成一个dep对象。在解析的时候，每解析到一个key时，都会生成一个watcher并将其添加到对应dep对象中的subs数组中（发布订阅者模式），而当某个key的值发生改变的时候，便会调用该key对应的dep对象中的notify函数，并通知该dep的所有订阅者调用update函数，最后更新视图，实现响应式。</p>
+<p>链接：<a href="https://juejin.cn/post/7082445269245100040">https://juejin.cn/post/7082445269245100040</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue生命周期</title>
+    <url>/2022/04/04/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<p>Vue实例从创建直至销毁的过程，叫做Vue的生命周期。即开始创建、初始化数据、编译模板、挂载dom、渲染、更新、卸载等一些列过程，我们将其称之为vue的生命周期。</p>
+<span id="more"></span>
+
+<p>下图为官方提供的生命周期图。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01f52e879eb6444d940ae874c1fb9044~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>生命周期图</p>
+<p>了解了生命周期后，我们不难发现，上图中出现了一些生命周期函数，诸如beforeCreate等，稍作整理，最终得出生命周期函数有八种，分别为创建前&#x2F;后，载入前&#x2F;后，更新前&#x2F;后，销毁前&#x2F;后。</p>
+<p>1、beforeCreate（创建前）</p>
+<p>表示实例完全被创建出来之前，vue 实例的挂载元素$el和数据对象 data 都为 undefined，还未初始化。</p>
+<p>2、created（创建后）</p>
+<p>数据对象 data 已存在，可以调用 methods 中的方法，操作 data 中的数据，但 dom 未生成，$el 未存在 。</p>
+<p>3、beforeMount（挂载前）</p>
+<p>vue 实例的 $el 和 data 都已初始化，挂载之前为虚拟的 dom节点，模板已经在内存中编辑完成了，但是尚未把模板渲染到页面中。data.message 未替换。</p>
+<p>4、mounted（挂载后）</p>
+<p>vue 实例挂载完成，data.message 成功渲染。内存中的模板，已经真实的挂载到了页面中，用户已经可以看到渲染好的页面了。实例创建期间的最后一个生命周期函数，当执行完 mounted 就表示，实例已经被完全创建好了，DOM 渲染在 mounted 中就已经完成了。</p>
+<p>5、beforeUpdate（更新前）</p>
+<p>当 data 变化时，会触发beforeUpdate方法 。data 数据尚未和最新的数据保持同步。</p>
+<p>6、updated（更新后）</p>
+<p>当 data 变化时，会触发 updated 方法。页面和 data 数据已经保持同步了。</p>
+<p>7、beforeDestory（销毁前）</p>
+<p>组件销毁之前调用 ，在这一步，实例仍然完全可用。</p>
+<p>8、destoryed（销毁后）</p>
+<p>组件销毁之后调用，对 data 的改变不会再触发周期函数，vue 实例已解除事件监听和 dom绑定，但 dom 结构依然存在。</p>
+<p>链接：<a href="https://juejin.cn/post/7082443530588815374">https://juejin.cn/post/7082443530588815374</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>axios的基本使用</title>
+    <url>/2022/04/04/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="什么是axios"><a href="#什么是axios" class="headerlink" title="什么是axios"></a>什么是axios</h3><p>axios 是一个基于<a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=Promise&spm=1001.2101.3001.7020">Promise</a>的  用于浏览器和 nodejs 的 HTTP 客户端。简单的理解就是ajax的封装。他有一下这些特点：</p>
+<ul>
+<li>从浏览器中创建 XMLHttpRequest</li>
+<li>从 <a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>.js 发出 http 请求</li>
+<li>支持 Promise <a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020">API</a></li>
+<li>拦截请求和响应</li>
+<li>转换请求和响应数据</li>
+<li>取消请求</li>
+<li>自动转换JSON数据</li>
+<li>客户端支持防止 CSRF&#x2F;XSRF</li>
+</ul>
+<p>axios是vue开发中进行网络模块开发时的第一选择。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ed554f11cab245c38cb386672558f177~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h3 id="axios的基本使用"><a href="#axios的基本使用" class="headerlink" title="axios的基本使用"></a>axios的基本使用</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010b5712b9df4e6c8ad30776ec65283c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>请求方式</p>
+<p>我们以axios.(config)请求为例来进行说明。首先先下载axios框架（npm install），然后在文件中（例如main.js）中引入axios，之后就可以在该文件中进行请求的发起。axios是支持promise的，故可以在axios.(config)后直接使用.then函数（成功收到数据后的操作）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import axios from &#x27;axios&#x27;</span><br><span class="line"></span><br><span class="line">axios(&#123;</span><br><span class="line">  url:&#x27;&#x27;,</span><br><span class="line">//默认情况下是get请求，若需要设置，则设置method属性</span><br><span class="line"> method:&#x27;post&#x27;</span><br><span class="line">&#125;).then(res=&gt;&#123;</span><br><span class="line">  console.log(res);</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果嫌设置method麻烦的话，也可以直接使用axios.get()、axios.post()</p>
+<h3 id="axios处理并发操作"><a href="#axios处理并发操作" class="headerlink" title="axios处理并发操作"></a>axios处理并发操作</h3><p>axios处理并发操作的方式是axios.all()请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">axios.all([axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/multidata&#x27;</span><br><span class="line">&#125;),axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/data&#x27;,</span><br><span class="line">  params:&#123;</span><br><span class="line">    type:&#x27;sell&#x27;,</span><br><span class="line">    page:5</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)]).then(results =&gt;&#123;</span><br><span class="line">  console.log(results);</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76280450ab8b431d8231253e42ecf96b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>results内容</p>
+<p>最后获得的results是一个数组，我们也可以将这个数组进行进行拆分：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">axios.all([axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/multidata&#x27;</span><br><span class="line">&#125;),axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/data&#x27;,</span><br><span class="line">  params:&#123;</span><br><span class="line">    type:&#x27;sell&#x27;,</span><br><span class="line">    page:5</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)]).then(axios.spread((res1,res2)=&gt;&#123;</span><br><span class="line">  console.log(res1);</span><br><span class="line">  console.log(res2);</span><br><span class="line">&#125;))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/700b8be0c08848359c6852835cd46b5d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"><br>链接：<a href="https://juejin.cn/post/7082444446687559717">https://juejin.cn/post/7082444446687559717</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-router</title>
+    <url>/2022/04/04/vue-router/</url>
+    <content><![CDATA[<p>前置知识：</p>
+<h4 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h4><p>所谓路由（routing）就是通过互联网的网络把信息从原地址传输到目的地址的活动（说了，但没完全说）。</p>
+<span id="more"></span>
+
+<h4 id="后端渲染与后端路由"><a href="#后端渲染与后端路由" class="headerlink" title="后端渲染与后端路由"></a>后端渲染与后端路由</h4><p>后端渲染，指的是使用jsp（通过java代码实现从数据库中读取数据，并动态的放在页面中）、php等技术使得需要最终呈现的页面在服务器端实现，然后上传至客户端（区别于ajax）</p>
+<p>后端路由，指的是后端处理url和页面之间的映射关系，最后将指定的页面在客户端呈现的过程，后端路由的缺点显而易见，最主要的是不便于前端人员对代码进行维护以及将html代码与数据、逻辑相混杂，不便于编写和维护。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/220a55b3729347da81b7d4a5e4bfaf70~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h4 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h4><p>前端路由是实现单页面富应用的关键，所谓单页面富应用指的是在静态内容数据库只有一个html文件（区别于后端路由的每个页面一个html文件），而具体展示的内容是通过传入的js文件决定的。每一个显示逻辑（比如展示首页、联系页面）都有一个相对的url(如xxx&#x2F;home xxx&#x2F;men),前端路由就是通过改变url来改变展示内容，同时前端路由通过一些方式实现改变url而不刷新页面，从而实现单页面富应用。</p>
+<h3 id="改变url但不刷新页面的方式"><a href="#改变url但不刷新页面的方式" class="headerlink" title="改变url但不刷新页面的方式"></a>改变url但不刷新页面的方式</h3><p>改变url但不刷新的方式有两个，分别为改变url的hash以及使用html5的history</p>
+<ul>
+<li>url的hash：改变url的hash值可以做到不刷新而改变页面内容，具体操作方式： location.hash &#x3D; ‘ (url) ‘</li>
+<li>html5的history：具体操作方式：history.pushState &#x3D; ‘ ({}，’ ‘ , ‘(url)’) ‘ （将新的url压栈，可以返回） 返回上一个：history.back() 返回下一个： history.forward() history.replaceState &#x3D;({},”,’(url)’) (将新的url替换旧的url，不可返回) history.go(数值) （返回到 该数值 个url）</li>
+<li><strong>vue-router中的纯代码实现</strong>：使用方法 组件.router.push(‘url’);组件.router.push(‘url’); 组件.router.push(‘url’);组件.router.replace(‘url’)</li>
+</ul>
+<h3 id="vue-router安装与使用"><a href="#vue-router安装与使用" class="headerlink" title="vue-router安装与使用"></a>vue-router安装与使用</h3><p>通过脚手架生成项目时圈选即可，或者在终端输入命令：npm install vue-router –save 进行安装</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5cc4ecaa5efd4741b2ef071d6ae14516~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>Vue在安装插件的时候都需要使用Vue.use(插件)来进行安装</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01158eb901794e2a985f0d57bd9565eb~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>对router文件夹中的index.js文件进行配置</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/906cfcc185ca4f12a5a3358730501414~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>在main.js文件中引入router</p>
+<p>至此，路由的底层框架已经搭建完毕了。接下来对vue-router进行配置使用</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f8b8d96f61a3442d90f18933a18423b2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>router文件配置如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import VueRouter from &#x27;vue-router&#x27;</span><br><span class="line">import Home from &#x27;../views/Home.vue&#x27;</span><br><span class="line"></span><br><span class="line">//导入组件</span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line">//安装vue-router</span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path:&#x27;/&#x27;,</span><br><span class="line">    // redirect重定向（设定默认首页）</span><br><span class="line">    redirect:&#x27;/home&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/home&#x27;,</span><br><span class="line">    name: &#x27;Home&#x27;,</span><br><span class="line">    component: Home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/about&#x27;,</span><br><span class="line">    name: &#x27;About&#x27;,</span><br><span class="line">    // route level code-splitting</span><br><span class="line">    // this generates a separate chunk (about.[hash].js) for this route</span><br><span class="line">    // which is lazy-loaded when the route is visited.</span><br><span class="line">    component: () =&gt; import(/* webpackChunkName: &quot;about&quot; */ &#x27;../views/About.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">//分配url与组件</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//生成router</span><br><span class="line">export default router</span><br><span class="line">//导出</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>最后在app.vue中引入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;nav&quot;&gt;</span><br><span class="line">      &lt;router-link to=&quot;/home&quot;&gt;Home&lt;/router-link&gt; |</span><br><span class="line">      &lt;router-link to=&quot;/about&quot;&gt;About&lt;/router-link&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">//&lt;router-link/&gt;最终渲染出来为超链接（a标签）</span><br><span class="line">//&lt;router-view/&gt;用于站位，即组件位置</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>url默认为哈希模式，如果想要将url改为history模式（将会去除#），只需要在生成router时添加一个属性</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes,</span><br><span class="line">  mode:&#x27;history&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="router-link的其他属性"><a href="#router-link的其他属性" class="headerlink" title="router-link的其他属性"></a>router-link的其他属性</h3><ul>
+<li>tag:router-link默认渲染为a标签，通过附加tag属性可以改变router-link渲染的标签，例如tag&#x3D;”button”</li>
+<li>relpace:history模式下改变url默认使用pushState，通过添加replace改变url的变化方式，即使用replaceState对url进行更改，直接添加replace即可。</li>
+<li>active-class:点击router-link后，会自动增加两个类，通过添加active-class属性改变增加类地名称，例如 active-class&#x3D;’active’;当然，如果要改变所有的router-link可以在路由配置文件（index.js）中生成router处添加属性linkActiveClass:’ ‘</li>
+</ul>
+<h3 id="动态路由的使用"><a href="#动态路由的使用" class="headerlink" title="动态路由的使用"></a>动态路由的使用</h3><p>我们以生成用户界面为例，现在路由配置文件中进行设置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const routes = [</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    path:&#x27;/user/:userId&#x27;,</span><br><span class="line">// 使用语法糖绑定userId</span><br><span class="line">    component:User</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>然后再在App.vue中绑定router-link</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;nav&quot;&gt;</span><br><span class="line">      &lt;router-link :to=&#x27;&quot;/user/&quot;+userId&#x27;&gt;user&lt;/router-link&gt;</span><br><span class="line">//使用v-bind将data中的userId绑定进入url之中</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default (&#123;</span><br><span class="line">  name:&#x27;App&#x27;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">      userId:&#x27;bovi&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>至此就实现了点击user跳转至user&#x2F;bovi，同时路由跳转至显示user组件，如果需要实现在user页面中实时显示跳转的userid，则需要在user.vue文件中使用$route</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;我是用户界面&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;UserId&#125;&#125;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;$route.params.userId&#125;&#125;&lt;/p&gt;</span><br><span class="line">// $route指向处于活跃的路由 params:参数（parameters）userId:这里的名称取决于路由配置文件中使用语法糖绑定的属性的名称</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default(&#123;</span><br><span class="line">    name:&#x27;user&#x27;,</span><br><span class="line">    computed:&#123;</span><br><span class="line">        UserId() &#123;</span><br><span class="line">            return this.$route.params.userId;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c76b1ccfdc94a75bcb6f4edc10d6f7a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>最终效果图</p>
+<h3 id="路由的懒加载"><a href="#路由的懒加载" class="headerlink" title="路由的懒加载"></a>路由的懒加载</h3><p>我们在使用构建项目时，会发现最后生成的dist文件中会将css文件和js文件进行分包，其中js文件夹中会有三个文件app.<strong><em>*.js(当前应用程序开发的所有代码)\manifest.*</em>*.js（给打包的代码做底层支撑）&#x2F;vendor.*</strong>.js（第三方代码，例如vue&#x2F;vue-router&#x2F;axios）,但是打包后的文件还是很大（尤其是app.js），如果将所有的路由的对应的js代码放入app.js中，会导致加载缓慢的问题，为了解决这个问题，我们将各个路由对应的js代码单独分离出来，使用懒加载的模式（用到才加载）对整个页面加载进行优化。</p>
+<p>路由懒加载实现了将各个路由对应的组件打包成为一个个晓得js代码块，只有在这个路由被访问到是，才加载相应的组件，而不是一次性全部加载。</p>
+<p>懒加载的实现方式：（在配置路由的文件中）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/about&#x27;,</span><br><span class="line">    name: &#x27;About&#x27;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // which is lazy-loaded when the route is visited.</span><br><span class="line">    component: () =&gt; import(&#x27;../views/About.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9aada30209ac429d8bc8ec7a19bdbbe2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b67219e502724c7f898f9ca84833d04b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><p>嵌套路由非常常见，例如 &#x2F;home&#x2F;page1就是一个路由嵌套，一个路由映射一个组件，访问嵌套路由将会将涉及到的组件分别进行访问。实现嵌套路由的步骤很简单：1.创建相对应的子组件，并在路由配置文件中配置对应的子路由；2.在组件内部使用<router-view>标签</router-view></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//配置路由配置文件</span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/home&#x27;,</span><br><span class="line">    name: &#x27;Home&#x27;,</span><br><span class="line">    component: () =&gt; import(&#x27;../views/Home.vue&#x27;),</span><br><span class="line">//子路由配置，在children数组中进行注册</span><br><span class="line">    children:[</span><br><span class="line">      &#123;</span><br><span class="line">        path:&#x27;news&#x27;,</span><br><span class="line">        component :()=&gt;import(&#x27;../views/HomeNews&#x27;)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">复制代码</span><br><span class="line">//子路由对应组件在父路由对应组件中的引入</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;router-link to=&quot;/home/news&quot; tag=&quot;button&quot;&gt;点我康好康的！！&lt;/router-link&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>当我们点击路由后进行页面跳转，此时我们希望传输一些数据（例如userId）到新界面并予以使用、呈现时，就需要用到参数传递。</p>
+<p>传递参数主要由两种方式：params和query</p>
+<ul>
+<li>params:配置路由格式：&#x2F;router&#x2F;:id 传递方式：在path后面跟上相对应的值(修改app.vue中to的url） 传递后形成的路径：&#x2F;router&#x2F;bovi</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//路由配置文件</span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path:&#x27;/user/:userId&#x27;,</span><br><span class="line">    component:User</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br><span class="line">//app.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;nav&quot;&gt;</span><br><span class="line">      &lt;router-link :to=&#x27;&quot;/user/&quot;+userId&#x27;&gt;user&lt;/router-link&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">export default (&#123;</span><br><span class="line">  name:&#x27;App&#x27;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">      userId:&#x27;bovi&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//vue.app中传入的部分</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;我是用户界面&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;UserId&#125;&#125;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;$route.params.userId&#125;&#125;&lt;/p&gt;</span><br><span class="line">//两者等价</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default(&#123;</span><br><span class="line">    name:&#x27;user&#x27;,</span><br><span class="line">    computed:&#123;</span><br><span class="line">        UserId() &#123;</span><br><span class="line">            return this.$route.params.userId;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e7c7b86ce8fc4d9fb9e021f1d63452c5~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>最后呈现结果</p>
+<ul>
+<li>query:配置路由格式：&#x2F;router（普通配置格式） 传递方式：在对象中使用<strong>query中的key作为传递方式</strong> 传递后生成的路径：&#x2F;router?id&#x3D;bovi 使用query的原理：通过修改url中的query部分实现路由后缀跳转 <strong>url:协议(scheme):&#x2F;&#x2F;主机(host)：端口(port)&#x2F;路径(path)？查询（query）</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//app.vue文件</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;nav&quot;&gt;</span><br><span class="line">      &lt;!-- url:协议(scheme)://主机(host)：端口(port)/路径(path)？查询（query） --&gt;</span><br><span class="line">      &lt;router-link :to=&quot;&#123;path:&#x27;/profile&#x27;,query:&#123;name:&#x27;bovi&#x27;,height:&#x27;1.92&#x27;&#125;&#125;&quot;&gt;profile&lt;/router-link&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">//路由配置文件</span><br><span class="line">const routes = [</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    path:&#x27;/profile&#x27;,</span><br><span class="line">    component:() =&gt; import(&#x27;../views/profile.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">//profile.vue呈现</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;这个是&#123;&#123;$route.query.name&#125;&#125;的档案&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;他的身高是&#123;&#123;$route.query.height&#125;&#125;米&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然，跳转路由可以使用万能的方法：注册事件，绑定事件，事件内部为this.router.push()&#x2F;this.router.push()&#x2F;this.router.push()&#x2F;this.router.replace()，括号内的东西和:to括号中的东西相同</p>
+<h3 id="router与route"><a href="#router与route" class="headerlink" title="router与route"></a>router与route</h3><p>方前使用了很多次router以及route，但是这两个东西到底是怎么生成的呢？他们两个又有什么区别呢？</p>
+<p>我们在main.js中对router进行打印，不难发现router其实就是路由配置文件中导出的有一个VueRouter实例,查阅源码不难得出这个VueRouter是一个类，其中内置了诸如push()、replace()等函数，同时$router与最后在main.js中传入的router是同一个东西。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes,</span><br><span class="line">  mode:&#x27;history&#x27;,</span><br><span class="line">  linkActiveClass:&#x27;active&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ca15c661ae8247769c5ac8b65015be55~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>router具体信息</p>
+<p>而route就是当前处于激活状态（active）的路由对应的信息</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f67085850144bb0a4347ea8e6b0f29d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>route具体信息</p>
+<p>当然，在使用的时候，除了在main.js中不需要加$，其余地方都需要加，因为所有的组件都继承自Vue类的原型</p>
+<h3 id="全局导航守卫-router的watch函数）"><a href="#全局导航守卫-router的watch函数）" class="headerlink" title="全局导航守卫(router的watch函数）"></a>全局导航守卫(router的watch函数）</h3><p>当我们在路由跳转的时候想要监听并作出相应动作（如实时将网页标题改为当前路由名称）时，就需要用到全局导航守卫，具体使用：在路由配置文件进行事件注册</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//路由配置文件</span><br><span class="line">const routes = [</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    path:&#x27;/profile&#x27;,</span><br><span class="line">    component:() =&gt; import(&#x27;../views/profile.vue&#x27;),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      title:&#x27;profile&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">//注册元数据（在元数据中在增加路由的其他属性）</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">router.beforeEach((to,from,next)=&gt;&#123;</span><br><span class="line">  //从from到to</span><br><span class="line">  document.title = to.meta.title;</span><br><span class="line">  next();</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>其中，beforeEach函数(前置守卫函数、跳转之前调用)中的参数是一个函数，该函数有三个参数分别是 to、from、next，其中to和from都是一个路由（route），且切换路径是从from到to，而next又是另一个函数，且必须要调用（让整个程序继续进行，），在上述例子中，如遇到路由嵌套，标题将会变为undifined，因为此时的路由to中没有对应的title属性，此时需要使用另一个数组属性matched，他包括了嵌套的所有路由的信息，并从外到内排序，故将document.title&#x3D; to.meta.title改为document.title &#x3D; to.matched[0].meta.title，即可</p>
+<p>当然在这个场景中也可以调用afterEach函数（后置守卫函数、跳转至后调用），同样的该函数有三个参数，分别是 to、from、next。后置守卫函数不需要主动调用next函数。</p>
+<p>以上两个守卫函数成为全局守卫，当然，守卫中还有路由专享守卫（在路由配置中直接定义–const routers &#x3D;[]中）、组件内守卫(beforRouteEnter（）、beforeRouteUpate()、beaforeRouteLeave()),具体内容可查询<a href="https://link.juejin.cn/?target=https://router.vuejs.org/zh/guide/advanced/navigation-guards.html%23%E5%85%A8%E5%B1%80%E5%89%8D%E7%BD%AE%E5%AE%88%E5%8D%AB">导航守卫 | Vue Router (vuejs.org)</a>。</p>
+<h3 id="与keep-alive的邂逅"><a href="#与keep-alive的邂逅" class="headerlink" title="与keep-alive的邂逅"></a>与keep-alive的邂逅</h3><h4 id="什么是keep-alive"><a href="#什么是keep-alive" class="headerlink" title="什么是keep-alive"></a>什么是keep-alive</h4><p>keep-alive是Vue内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b26040410644353b68f2e8d289ea9e0~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>vue的生命周期</p>
+<p>当我们切换路由的时候，被切换的路由对应的组件将会被摧毁（destroy），而切换到的路由的组件就会生成（create），而有些组件我们不希望它被重复的摧毁生成，此时需要用到keep-alive标签，只需要将保持不变的内容放入标签内即可。值得一提的是Vue生命周期中的activated(激活）和deactivated(未激活）函数只有在keep-alive中标签中才是有效的（等同于不在keep-alive标签中使用created和destroyed函数）</p>
+<h3 id="keep-alive中的重要属性"><a href="#keep-alive中的重要属性" class="headerlink" title="keep-alive中的重要属性"></a>keep-alive中的重要属性</h3><ul>
+<li>include:字符或者正则表达式，字符间用逗号隔开，只有匹配的组件才会被缓存（匹配name属性）</li>
+<li>exclude:字符或者正则表达式，字符间用逗号隔开，任何匹配的组件都不会被缓存（匹配name属性）</li>
+</ul>
+<p>链接：<a href="https://juejin.cn/post/7082441639100153893">https://juejin.cn/post/7082441639100153893</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue-cli</title>
+    <url>/2022/04/04/Vue-cli/</url>
+    <content><![CDATA[<p>Cli（Command-Line interface），即命令行界面，俗称脚手架，大型的前端开发框架如react、vue都有自己的官方CLI，CLI可以帮助开发者搭建开发环境并且配置webpack。</p>
+<span id="more"></span>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/53cac3881083494f94972eaf4a577f9f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>传统意义上的脚手架</p>
+<p>cli需要对webpack进行配置，而webpack是基于node.js的一个工具，故CLI需要依赖node.js</p>
+<h4 id="CLI的安装"><a href="#CLI的安装" class="headerlink" title="CLI的安装"></a>CLI的安装</h4><p>以vue举例，目前脚手架默认为Vue CLI3,安装命令如下（在已经安装node.js和webpack的前提下）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g@vue/cli</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>安装完脚手架便可以着手搭建项目框架了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vue create &lt;项目名称&gt; //vue-cli 3创建项目</span><br><span class="line">vue init &lt;项目名称&gt;   //vue-cli 2创建项目</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>eslint的使用：在最开始的构建中可以选择是否使用eslint；在config文件夹中的index.js中找到useEslint,将其值设置为false便可关闭</p>
+<h3 id="runtime-compiler-与-runtimeonly"><a href="#runtime-compiler-与-runtimeonly" class="headerlink" title="runtime+compiler 与 runtimeonly"></a>runtime+compiler 与 runtimeonly</h3><p>vue的实际运行过程如下图：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00c7f3a467c944bdbb0fd7ad88a54227~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"> 使用runtime+compiler将会完整的走完template-&gt;ast-&gt;render-&gt;virtual dom-&gt;ui 而使用runtimeonly只进行render-&gt;virtual dom-&gt;ui操作，他们的唯一区别就是main.js函数</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f6b5b0007d44f139bcb3b21a9106cb3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"></p>
+<p>runtimeonly相对于runtime+compiler更加轻量、效率也更高。其中render:h&#x3D;&gt;h(App)，等价于render:function(h){return h(App)}</p>
+<p>h相当于是createElement,使用该函数相当于生成了一个组件，通过该方法，使最终挂载的</p>
+<p>替换为createElement生成内容</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f86f4522d8da4205b9189693522d233e~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>之所以可以直接使用render函数，是因为之前传入的组件App已经经过编译，内部不存在template。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4923124ef53444f8901c7f071fe8c83d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>console.log(App)后的结果</p>
+<p>而之前的.vue文件是由先前安装好的vue-template-compiler解析成render函数(vue-loader用于加载.vue文件、vue-template-compiler用于解析.vue文件).</p>
+<h3 id="Vue-CLI2-VS-Vue-CLI3"><a href="#Vue-CLI2-VS-Vue-CLI3" class="headerlink" title="Vue CLI2 VS Vue CLI3"></a>Vue CLI2 VS Vue CLI3</h3><p>3.x版本的脚手架相较于2.x版本，文件目录更加简洁，删除了配置文件的文件夹，取而代之的是通过可视化编辑，通过命令 vue ui唤出可视化编辑端</p>
+<p><img src="/2022/04/04/Vue-cli/" alt="img"></p>
+<p>可以通过Vue项目管理器对项目进行配置的改变、以及创建新的项目。我们导入已经创建好了的项目</p>
+<p><img src="/2022/04/04/Vue-cli/" alt="img"></p>
+<p>在仪表盘的左侧可以查看与管理插件、依赖、配置，也可以才这里添加所需要的依赖、插件、配置。如果想要修改其他配置，可以在最高层文件夹中添加vue.config.js文件，并在其中进行配置的填写。</p>
+<p>作者：captainbovi<br>链接：<a href="https://juejin.cn/post/7082439623300874248">https://juejin.cn/post/7082439623300874248</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>es6模块化导入导出</title>
+    <url>/2022/04/04/es6%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/</url>
+    <content><![CDATA[<p>模块化，能够有效的提高多人开发时的效率，同时避免出现全局变量命名重复等比较严重的问题。常见的模块化导入导出的规范有：CommonJS、AMD、CMD、ES6的modules规范，其中只有ES6的模块规范不需要底层支持就可以直接在浏览器中运行。这里使用ES6的规范进行模块化导入导出</p>
+<span id="more"></span>
+
+<p>先生成一个html文件，再生成三个(数量不限，这里用3个进行示范)js文件（man.js、we.js、woman.js），先对该JS文件进行引用，这里需要对引用的JS文件设置type属性</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!-- type=&quot;module&quot; 即将整个引用的js文件视作一个封闭的模块 --&gt;</span><br><span class="line">&lt;!-- 使用import导入的时候需要在html文件中将引入的JS文件将类型设置为module--&gt;</span><br><span class="line">&lt;!-- 一个模块的内部的数据封闭的，一个模块就是一个作用域  --&gt;</span><br><span class="line">    &lt;script src=&quot;man.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;woman.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;we.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>我们不妨在man.js中设置一些变量和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let name = &#x27;bovi&#x27;;</span><br><span class="line">let age = 19;</span><br><span class="line">let flag = true;</span><br><span class="line"></span><br><span class="line">function sum(num1,num2)&#123;</span><br><span class="line">    return num1+num2</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>再对woman.js 中设置一些变量和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let name =&#x27;Fbovi&#x27;;</span><br><span class="line">let age = 20;</span><br><span class="line">let flag = false;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>再在we.js中设置一个函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if(flag)&#123;</span><br><span class="line">    console.log(12);</span><br><span class="line">    console.log(sum(20,200));</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>不难看出woman.js和man.js中存在命名相同的变量，但由于在引入的时候设置了type&#x3D;’module’，将两个文件模块化，从而不会出现报错</p>
+<p>此时我们想要在we.js使用man.js中的变量flag以及函数sum。首先需要对flag、sum进行导出</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 导出方式一：以对象的方式导出</span><br><span class="line">export&#123;</span><br><span class="line">    flag,sum</span><br><span class="line">&#125;</span><br><span class="line">// 导出方式二：</span><br><span class="line">export var flag = true;</span><br><span class="line">// 导出方式三：导出类 /函数</span><br><span class="line">export function sum(num1,num2)&#123;</span><br><span class="line">    return num1+num2;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>在man.js文件中实现导出后，我们需要在we.js中进行导入,需要注意的是，我们在导入&#x2F;使用导入的变量或函数时，必须使用他们的原名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//导入方式</span><br><span class="line">import &#123; flag，sum &#125; from &quot;./man&quot;;</span><br><span class="line">// 统一全部导入 将一个模块中导出的全部属性、函数放入一个对象mess(名称可更改)</span><br><span class="line">// import * as mess from &#x27;./man.js&#x27;</span><br><span class="line">// console.log(mess.flag)；</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果想要让导出者对导入的变量、函数进行命名的话，我们在导出的时候需要使用export default</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// export default（一个模块中只能有一个），可以导出属性或者函数 </span><br><span class="line">const address = &#x27;成都&#x27;;</span><br><span class="line">export default address;</span><br><span class="line">export default function(message)&#123;</span><br><span class="line">    console.log(message);</span><br><span class="line">&#125;</span><br><span class="line">// 导入  import aaaa from &#x27;./man.js&#x27;  其中aaaa可以为任意字符名字,此时aaaa = &#x27;成都&#x27;</span><br><span class="line">// 导入  import aaaa from &#x27;./man.js&#x27;  aaaa(&quot;你好呀&quot;),将会实现在控制台输出 你好呀 ；其中aaaa可以为任意字符名字</span><br></pre></td></tr></table></figure>
+
+
+<p>链接：<a href="https://juejin.cn/post/7082438093613039653">https://juejin.cn/post/7082438093613039653</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>slot介绍与应用</title>
     <url>/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p>

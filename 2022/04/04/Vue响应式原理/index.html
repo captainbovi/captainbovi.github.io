@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>slot介绍与应用 |  点滴生活 点滴人生</title>
+      <title>Vue响应式原理 |  点滴生活 点滴人生</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -65,7 +65,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-slot介绍与应用"
+  id="post-Vue响应式原理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -76,7 +76,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  slot介绍与应用
+  Vue响应式原理
 </h1>
  
 
@@ -84,8 +84,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" class="article-date">
-  <time datetime="2022-04-03T17:58:45.000Z" itemprop="datePublished">2022-04-04</time>
+      <a href="/2022/04/04/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2022-04-03T18:31:54.000Z" itemprop="datePublished">2022-04-04</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/Vue/">Vue</a>
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">672</span>
         </span>
     </span>
 
@@ -105,7 +105,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -120,33 +120,32 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="什么是slot、插槽的基本使用"><a href="#什么是slot、插槽的基本使用" class="headerlink" title="什么是slot、插槽的基本使用"></a>什么是slot、插槽的基本使用</h4><p>slot，即插槽，是为了提高组件复用性而孕育的标签，在组件模板中添加，可以预留位置，用于后续的补充替换，实现一个组件，多个表现样式，极大提升组件的复用性。</p>
-<span id="more"></span>
+  <p>vue是如何实现响应式的？ 随之而来便有两个问题：</p>
+<ul>
+<li><p>vue是如何实现监听实例中的属性的变化的</p>
+</li>
+<li><p>当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新</p>
+<span id="more"></span></li>
+</ul>
+<h4 id="vue是如何实现监听实例中的属性的变化的"><a href="#vue是如何实现监听实例中的属性的变化的" class="headerlink" title="vue是如何实现监听实例中的属性的变化的"></a>vue是如何实现监听实例中的属性的变化的</h4><p>vue通过设置Object.defineProperty() 来监听对象属性的改变。</p>
+<p>我们不妨回到一个最简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &#123;&#123;message&#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el:&#x27;app&#x27;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我是data&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>具体操作如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>此时页面是这样监听message的：</p>
+<ol>
+<li>先在内部拿到一个对象obj（内容即data中的内容）</li>
+<li>然后通过 Object.defineProperty对原本data中的属性进行重新定义具体操作如下</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    Object.keys(obj).forEach(key =&gt;&#123;</span><br><span class="line">        // 将obj中的每一个属性（key）中的值赋值到value中</span><br><span class="line">        let value = obj[key]</span><br><span class="line">        // 使用defineProperty将每个value在obj中进行定义，一旦数值发生改变，便会调用set函数</span><br><span class="line">        Object.defineProperty(obj,key,&#123;</span><br><span class="line">            set(newValue)&#123;</span><br><span class="line">                value = newValue</span><br><span class="line">            &#125;,</span><br><span class="line">            get()&#123;</span><br><span class="line">                return value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>效果图</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01455dbb048746c99c5b1bc9b82badd4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>当然，slot标签中也可以预设值（即默认值），当你需要改变的时候只需要在外部设置好想要的样式即可自动覆盖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;我是一个组件&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;你全家都是组件&lt;/p&gt;</span><br><span class="line">        &lt;slot&gt; &lt;button&gt;我是按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面的也叫组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;p&gt;上面好像是组件&lt;/p&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn&gt;  &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<h4 id="当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新"><a href="#当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新" class="headerlink" title="当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新"></a>当数据发生变化时，vue是如何做到通知相应的组件，并使界面实现刷新</h4><p>vue通过发布订阅者模式，实现通知。所谓发布订阅者模式，就是谁在使用特定属性（通过解析html文件得知），该属性更新时就会通知该组件（使用get函数获取最新的数值），该模式的大致实现思路如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 发布者</span><br><span class="line">    class dep&#123;</span><br><span class="line">        constructor()&#123;</span><br><span class="line">            this.subs=[]</span><br><span class="line">        &#125;</span><br><span class="line">        // 添加订阅者</span><br><span class="line">        addSub(watcher)&#123;</span><br><span class="line">            this.subs.push(watcher)</span><br><span class="line">        &#125;</span><br><span class="line">        // 通知订阅者进行更新</span><br><span class="line">        notify()&#123;</span><br><span class="line">            this.subs.forEach(item =&gt;&#123;</span><br><span class="line">                item.update()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 订阅者</span><br><span class="line">    class watcher&#123;</span><br><span class="line">        constructor(name)&#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    //更新函数</span><br><span class="line">        update()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    const dep = new dep();</span><br><span class="line">    const w1 = new watcher(&#x27;张三&#x27;)</span><br><span class="line">    dep.addSub(w1)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
 
-<p>效果与上图相同</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be524654d26045c1a1755f2cf98cf3a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>当然，如果想要插入插槽的部分由若干个小标签组成，则这些标签将会全部嵌入插槽中</p>
-<h4 id="具名插槽的使用"><a href="#具名插槽的使用" class="headerlink" title="具名插槽的使用"></a>具名插槽的使用</h4><p>当然，一个组件中可以有多个插槽，而为了方便区别各个插槽以及插入插槽的样式，我们使用具名插槽进行解决。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;slot name=&quot;left&quot;&gt; &lt;button&gt;我是第一个的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;center&quot;&gt; &lt;button&gt;我是中间的按钮&lt;/button&gt;&lt;/slot&gt;</span><br><span class="line">        &lt;slot name=&quot;right&quot;&gt; &lt;button&gt;我是最后的按钮&lt;/button&gt; &lt;/slot&gt; </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">//在想要插入的部门添加属性slot，并附上要插入的插槽的名字</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>效果图：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1e496bed42d43f6b72f23dc7063e613~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"> VUE中有一条准则：父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在自己作用域内编译</p>
-<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>作用域插槽主要用于实现 父组件替换插槽的内容，但是内容由子组件来提供</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;) </span><br><span class="line">复制代码</span><br><span class="line">&lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>上述例子，如果我想要改变插槽中的样式但是沿用子组件的内容，我们根据作用域可知，不能直接在父组件中写 v-for&#x3D;”item in Languages”，因为此时的作用域是vue实例app，所以v-for将会在app的data属性中查找 Languages 数组，故此刻我们需要使用作用域插槽,使用v-slot语句实现。v-slot <em>：后边是插槽名称</em>，&#x3D;后边是组件内部绑定作用域值的映射。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;slot name=&#x27;lis&#x27; :PLanguages=&#x27;Languages&#x27; :Pid=&#x27;id&#x27;&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li v-for=&quot;item in Languages&quot;&gt;&#123;&#123;item&#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/slot&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;cpn&gt; &lt;button slot=&quot;center&quot;&gt;哈哈&lt;/button&gt; &lt;/cpn&gt;</span><br><span class="line">        &lt;cpn v-slot:lis=&#x27;lang&#x27;&gt;</span><br><span class="line">//这里lang是从子组件绑定过来的属性的集合</span><br><span class="line">          &lt;div&gt;&#123;&#123;lang.pid&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages&#125;&#125;&lt;/div&gt;</span><br><span class="line">            &lt;span v-for=&quot;num in lang.pid&quot;&gt;&#123;&#123;num&#125;&#125; &lt;/span&gt;</span><br><span class="line">            &lt;!-- object.join(&#x27;#&#x27;):将数组object转化为字符串，并将每个字符间通过#号（可以更换）相连接 --&gt;</span><br><span class="line">            &lt;div&gt;&#123;&#123;lang.planguages.join(&#x27;*&#x27;)&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/cpn&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data()&#123;</span><br><span class="line">                return&#123;</span><br><span class="line">                    Languages:[&#x27;Java&#x27;,&#x27;C++&#x27;,&#x27;c#&#x27;,&#x27;Go&#x27;],</span><br><span class="line">                    id:[12,123,441,234]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，在模板插槽处绑定的属性（这里为PLanguages、Pid），在父组件中应用时字母全部都会变成小写</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082437661348069406">https://juejin.cn/post/7082437661348069406</a></p>
+<p>了解完响应式原理实现的两大重要技术后，我们重温一下响应式的原理图</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7397769e0c8840078cf47c5505ae2803~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>原理图</p>
+<p>我们在生成一个实例之后，里面的数据就换传入observer中（通过defineProperty实现），里面的每一个key都将会对应生成一个dep对象。在解析的时候，每解析到一个key时，都会生成一个watcher并将其添加到对应dep对象中的subs数组中（发布订阅者模式），而当某个key的值发生改变的时候，便会调用该key对应的dep对象中的notify函数，并通知该dep的所有订阅者调用update函数，最后更新视图，实现响应式。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082445269245100040">https://juejin.cn/post/7082445269245100040</a></p>
  
       <!-- reward -->
       
@@ -211,7 +210,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/slot%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%BA%94%E7%94%A8/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/04/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -224,19 +223,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/04/04/es6%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            es6模块化导入导出
-          
-        </div>
-      </a>
     
-    
-      <a href="/2022/04/04/%E7%BB%84%E4%BB%B6%E8%AE%BF%E9%97%AE/" class="article-nav-link">
+      <a href="/2022/04/04/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">组件访问</div>
+        <div class="article-nav-title">Vue生命周期</div>
       </a>
     
   </nav>
