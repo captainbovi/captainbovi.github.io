@@ -88,16 +88,10 @@
     <link href="http://example.com/2022/04/04/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
     <id>http://example.com/2022/04/04/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</id>
     <published>2022-04-03T18:31:26.000Z</published>
-    <updated>2022-04-03T18:34:21.293Z</updated>
+    <updated>2022-04-03T18:53:32.716Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;什么是axios&quot;&gt;&lt;a href=&quot;#什么是axios&quot; class=&quot;headerlink&quot; title=&quot;什么是axios&quot;&gt;&lt;/a&gt;什么是axios&lt;/h3&gt;&lt;p&gt;axios 是一个基于&lt;a</summary>
-        
-      
+    <summary type="html">&lt;h3 id=&quot;什么是axios&quot;&gt;&lt;a href=&quot;#什么是axios&quot; class=&quot;headerlink&quot; title=&quot;什么是axios&quot;&gt;&lt;/a&gt;什么是axios&lt;/h3&gt;&lt;p&gt;axios 是一个基于&lt;a href=&quot;https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=Promise&amp;spm=1001.2101.3001.7020&quot;&gt;Promise&lt;/a&gt;的  用于浏览器和 nodejs 的 HTTP 客户端。简单的理解就是ajax的封装。他有一下这些特点：&lt;/p&gt;</summary>
     
     
     

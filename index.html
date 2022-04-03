@@ -406,35 +406,11 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="什么是axios"><a href="#什么是axios" class="headerlink" title="什么是axios"></a>什么是axios</h3><p>axios 是一个基于<a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=Promise&spm=1001.2101.3001.7020">Promise</a>的  用于浏览器和 nodejs 的 HTTP 客户端。简单的理解就是ajax的封装。他有一下这些特点：</p>
-<ul>
-<li>从浏览器中创建 XMLHttpRequest</li>
-<li>从 <a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=node&spm=1001.2101.3001.7020">node</a>.js 发出 http 请求</li>
-<li>支持 Promise <a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020">API</a></li>
-<li>拦截请求和响应</li>
-<li>转换请求和响应数据</li>
-<li>取消请求</li>
-<li>自动转换JSON数据</li>
-<li>客户端支持防止 CSRF&#x2F;XSRF</li>
-</ul>
-<p>axios是vue开发中进行网络模块开发时的第一选择。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ed554f11cab245c38cb386672558f177~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<h3 id="axios的基本使用"><a href="#axios的基本使用" class="headerlink" title="axios的基本使用"></a>axios的基本使用</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010b5712b9df4e6c8ad30776ec65283c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>请求方式</p>
-<p>我们以axios.(config)请求为例来进行说明。首先先下载axios框架（npm install），然后在文件中（例如main.js）中引入axios，之后就可以在该文件中进行请求的发起。axios是支持promise的，故可以在axios.(config)后直接使用.then函数（成功收到数据后的操作）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#x27;axios&#x27;</span><br><span class="line"></span><br><span class="line">axios(&#123;</span><br><span class="line">  url:&#x27;&#x27;,</span><br><span class="line">//默认情况下是get请求，若需要设置，则设置method属性</span><br><span class="line"> method:&#x27;post&#x27;</span><br><span class="line">&#125;).then(res=&gt;&#123;</span><br><span class="line">  console.log(res);</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>当然，如果嫌设置method麻烦的话，也可以直接使用axios.get()、axios.post()</p>
-<h3 id="axios处理并发操作"><a href="#axios处理并发操作" class="headerlink" title="axios处理并发操作"></a>axios处理并发操作</h3><p>axios处理并发操作的方式是axios.all()请求：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">axios.all([axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/multidata&#x27;</span><br><span class="line">&#125;),axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/data&#x27;,</span><br><span class="line">  params:&#123;</span><br><span class="line">    type:&#x27;sell&#x27;,</span><br><span class="line">    page:5</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)]).then(results =&gt;&#123;</span><br><span class="line">  console.log(results);</span><br><span class="line">&#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76280450ab8b431d8231253e42ecf96b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
-<p>results内容</p>
-<p>最后获得的results是一个数组，我们也可以将这个数组进行进行拆分：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">axios.all([axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/multidata&#x27;</span><br><span class="line">&#125;),axios(&#123;</span><br><span class="line">  url:&#x27;http://123.207.32.32:8000/home/data&#x27;,</span><br><span class="line">  params:&#123;</span><br><span class="line">    type:&#x27;sell&#x27;,</span><br><span class="line">    page:5</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)]).then(axios.spread((res1,res2)=&gt;&#123;</span><br><span class="line">  console.log(res1);</span><br><span class="line">  console.log(res2);</span><br><span class="line">&#125;))</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/700b8be0c08848359c6852835cd46b5d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"><br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082444446687559717">https://juejin.cn/post/7082444446687559717</a></p>
- 
+  <h3 id="什么是axios"><a href="#什么是axios" class="headerlink" title="什么是axios"></a>什么是axios</h3><p>axios 是一个基于<a href="https://link.juejin.cn/?target=https://so.csdn.net/so/search?q=Promise&spm=1001.2101.3001.7020">Promise</a>的  用于浏览器和 nodejs 的 HTTP 客户端。简单的理解就是ajax的封装。他有一下这些特点：</p> 
+      <a class="article-more-link" href="/2022/04/04/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
