@@ -178,6 +178,85 @@
 
     
     <article
+  id="post-父子组件传值"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/"
+    >父子组件传值</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="article-date">
+  <time datetime="2022-04-03T17:48:38.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d6f28be593d14051a679c01760bf859a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>Vue提供的传输方法</p>
+<h2 id="（父传子）props传输数据"><a href="#（父传子）props传输数据" class="headerlink" title="（父传子）props传输数据"></a>（父传子）props传输数据</h2><p>这里，我们不妨将实例app当做父组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//生成一个实例</span><br><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el:&quot;#app&quot;,</span><br><span class="line">            data:&#123;</span><br><span class="line">                message:&#x27;我爱你&#x27;,</span><br><span class="line">                array:[1,2,3,4]</span><br><span class="line">            &#125;,</span><br><span class="line">            components:&#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">//注册组件cpn</span><br><span class="line">//需要注意的是我们在使用props传入数据时，需要在子组件外围设置一个根（一个包裹如div）</span><br><span class="line"> &lt;template id=&quot;cnp&quot; &gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;carray&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123;cmessage&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line"> const cpn=&#123;</span><br><span class="line">            template:&#x27;#cnp&#x27;,</span><br><span class="line">//注册的组件的data必须是一个函数（用于返回对象）</span><br><span class="line">            data()&#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">//声明props</span><br><span class="line">传入父组件数据</span><br><span class="line">            props:&#123;</span><br><span class="line">                carray:Array,</span><br><span class="line">                cmessage:&#123;</span><br><span class="line">                    type:String,</span><br><span class="line">                    default:&quot;我日你先人&quot;,</span><br><span class="line">                    // 是否必须传值</span><br><span class="line">                    // required:true</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">//使用v-bind语法糖</span><br><span class="line"></span><br><span class="line">//将array中的值绑定到carray中</span><br><span class="line">//将message中的值绑定到cmessage中</span><br><span class="line">        &lt;cpn :cArray=&quot;array&quot; :cMessage=&quot;message&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>至此，最简单的传值操作就已经完成了</p>
+<p>值得注意的是，v-bind语句不支持驼峰命名法，若在props中的元素使用驼峰命名法，则需要在绑定值时使用 -分割线</p>
+<h2 id="（子传父）自定义事件传递数据"><a href="#（子传父）自定义事件传递数据" class="headerlink" title="（子传父）自定义事件传递数据"></a>（子传父）自定义事件传递数据</h2><p>父传子时是通过props属性来完成的，而当我们遇到子传父时，则需要注册自定义事件</p>
+<p>一般情况下，子组件发生了某个事件，我们希望父组件根据该事件做出相应的一个调整与反映。</p>
+<p>同样的我，我们先创建一个子组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">        const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">                &#125;</span><br><span class="line">        const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line"></span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"> &lt;/script&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>子传父的应用场景比较多的是子组件中发生了某些事件，我们希望父组件知道并且作出反映。在此，我们模拟一个简单的传输过程。现将整个子组件丰富一下，然后在此我们将自定义事件在子组件中进行一个注册</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> const cpn = &#123;</span><br><span class="line">            template: &#x27;#cnp&#x27;,</span><br><span class="line">            data() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    categories:[</span><br><span class="line">                        &#123;id:&#x27;111&#x27;,name:&#x27;apple&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;112&#x27;,name:&#x27;iphone&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;113&#x27;,name:&#x27;ipad&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;114&#x27;,name:&#x27;huawei&#x27;&#125;,</span><br><span class="line">                        &#123;id:&#x27;115&#x27;,name:&#x27;xiaomi&#x27;&#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                itemClick(item)&#123;</span><br><span class="line">                    // console.log(item);</span><br><span class="line">                    // 发射(事件,参数)</span><br><span class="line">                    this.$emit(&#x27;item-click&#x27;,item) </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> &lt;template id=&quot;cnp&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button </span><br><span class="line">            v-for=&quot;item in categories&quot;</span><br><span class="line">            @click = &#x27;itemClick(item)&#x27;</span><br><span class="line"></span><br><span class="line">//注册点击事件</span><br><span class="line">            &gt;&#123;&#123;item.name&#125;&#125;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>子组件发射事件后，父组件需要对该事件进行监听，监听方式：在父组件的模板上使用v-on绑定事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div id=&quot;app&quot;&gt;</span><br><span class="line"></span><br><span class="line">//以前我们使用v-on绑定的事件都是默认注册好的事件，自定义事件注册后，便可以在其作用域（父组件）内进行监听、绑定</span><br><span class="line">//监听的自定义事件的命名需要从驼峰命名法进行转化（使用脚手架可忽略）</span><br><span class="line">//若在监听事件时没有传入参数（如cpnClick(item)传入参数），将会默认传入子组件发射的参数，在这里为item</span><br><span class="line">        &lt;cpn @item-click=&quot;cpnClick&quot;&gt;&lt;/cpn&gt;</span><br><span class="line">        &lt;div&gt;我爱&#123;&#123; things &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>在父组件中注册监听后，还需要在父组件内部注册事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const app = new Vue(&#123;</span><br><span class="line">            el: &quot;#app&quot;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                message: &#x27;我爱你&#x27;,</span><br><span class="line">                array: [1, 2, 3, 4],</span><br><span class="line">                things:&quot;NONE&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods:&#123;</span><br><span class="line">                cpnClick(item)&#123;</span><br><span class="line">                    console.log(item.id);</span><br><span class="line">                    this.things = item.name;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            components: &#123;</span><br><span class="line">                cpn</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们完成了对父传子操作的全过程。运行截图如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e832e4a99eab43c2a96cbdd4463aa1c3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10b4140fe8c0488d8cee57b2161d38ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/682923a1b22f408b8fc7725b72ea3f12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>作者：用户4721573403919<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082435003316961311">https://juejin.cn/post/7082435003316961311</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-v-model的常用事件修饰符"
   class="article article-type-post"
   itemscope
@@ -635,62 +714,6 @@
        
   <p>箭头函数，是ES6语法中定义函数的一个非常方便的语法。通常我们在将一个函数作为参数传入另一个函数时使用箭头函数，我们先来看一个最简单的例子。</p> 
       <a class="article-more-link" href="/2022/04/01/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-JS中的回调函数"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
-    >JS中的回调函数</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="article-date">
-  <time datetime="2022-04-01T12:57:40.000Z" itemprop="datePublished">2022-04-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>什么是回调函数？回调的英文定义：A callback is a function that is passed as an argument to another function and is executed after its parent function has completed。（回调是一种函数，它将作为参数传递给另一个函数，并且在其父函数完成后执行。  ps.谷歌机翻）字面上的理解，回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。也就是说<strong>主函数的事先干完，回头再调用传进来的那个函数</strong>。</p> 
-      <a class="article-more-link" href="/2022/04/01/JS%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
         >阅读更多...</a
       >
        

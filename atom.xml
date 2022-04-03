@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-03T17:41:45.280Z</updated>
+  <updated>2022-04-03T17:49:20.590Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>父子组件传值</title>
+    <link href="http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/"/>
+    <id>http://example.com/2022/04/04/%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</id>
+    <published>2022-04-03T17:48:38.000Z</published>
+    <updated>2022-04-03T17:49:20.590Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;子件和父组件之间难免会涉及到数据传输的问题，尤其是在父（根）组件通过ajax请求获取数据后，在传入子组件中得以显示时。传输方式便显得尤为重要。&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="Vue" scheme="http://example.com/categories/Vue/"/>
+    
+    
+    <category term="前端" scheme="http://example.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>v-model的常用事件修饰符</title>
