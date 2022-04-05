@@ -121,6 +121,8 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>Vue中父子组件间进行通信可以使用 refs或refs 或refs或children 来进行父组件访问子组件的操作，通过$parent进行子组件访问父组件的操作(详情见文章<a target="_blank" rel="noopener" href="https://juejin.cn/post/7082437425108090917">组件访问（父访子 与 子访父） - 掘金 (juejin.cn)</a>), 那么如何实现非父子组件间的通信呢？基本思路如下：</p>
+<span id="more"></span>
+
 <h4 id="使用Vue-prototype"><a href="#使用Vue-prototype" class="headerlink" title="使用Vue.prototype"></a>使用Vue.prototype</h4><p><strong>使用prototype原型挂载属性，来作为全局变量</strong></p>
 <p>1.创建js文件，声明变量</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let gl_value = undefined;</span><br><span class="line">export default &#123;gl_value&#125;;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
