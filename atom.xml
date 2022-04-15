@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-15T15:40:12.771Z</updated>
+  <updated>2022-04-15T15:47:17.579Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2022/04/14/KMP%E7%AE%97%E6%B3%95/"/>
     <id>http://example.com/2022/04/14/KMP%E7%AE%97%E6%B3%95/</id>
     <published>2022-04-14T14:36:56.000Z</published>
-    <updated>2022-04-15T15:40:12.771Z</updated>
+    <updated>2022-04-15T15:47:17.579Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;什么是KMP算法&quot;&gt;&lt;a href=&quot;#什么是KMP算法&quot; class=&quot;headerlink&quot; title=&quot;什么是KMP算法&quot;&gt;&lt;/a&gt;什么是KMP算法&lt;/h2&gt;&lt;p&gt;KMP算法由Knuth、Morris和Pratt三位学者发明，这个算法取三主要名字的首字母，故叫做KMP算法。&lt;/p&gt;
