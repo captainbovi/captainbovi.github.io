@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>标签 |  点滴生活 点滴人生</title>
+      <title>KMP算法 |  点滴生活 点滴人生</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -64,13 +64,184 @@
       
     <main class="content on">
       <section class="outer">
+  <article
+  id="post-KMP算法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  KMP算法
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/14/KMP%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2022-04-14T14:36:56.000Z" itemprop="datePublished">2022-04-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
   
-    <h1 class="page-type-title">Tags</h1>
-    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">3 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="什么是KMP算法"><a href="#什么是KMP算法" class="headerlink" title="什么是KMP算法"></a>什么是KMP算法</h2><p>KMP算法由Knuth、Morris和Pratt三位学者发明，这个算法取三主要名字的首字母，故叫做KMP算法。</p>
+<p>这个算法用于<strong>字符串匹配</strong>，其核心思想就是利用已经匹配的部分，来简化整个重新匹配的机制，避免每次匹配失败都从头再来。</p>
+<span id="more"></span>
+
+<p>这么做，还是为了节约时间成本，花费额外的空间，来实现对时间复杂度的大幅减轻。</p>
+<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>我们先来看一个经典例子：</p>
+<p>给出一个文本串：aabaabaaf</p>
+<p>和一个模式串：    aabaaf    </p>
+<p>需要我们在文本串中找出第一个匹配模式串的位置。</p>
+<h3 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h3><p>当然，我们还是可以使用非常暴力的算法对此进行解决。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for( i = 0; i&lt;wenBenChuan.length;i++)&#123;</span><br><span class="line">    for(let n = 0 ;n&lt; moShiChuan.length;)&#123;</span><br><span class="line">    if(wenBenChuan[i+n] == moShiChuan[n]&amp;&amp;wenBenChuan[i+moShiChuan.length] ==moShiChuan[moShiChuan.length -1])&#123;</span><br><span class="line">    n++;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">    break;</span><br><span class="line">    &#125;</span><br><span class="line">    if(n == moShiChuan.length-1)</span><br><span class="line">    return i+1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不难看出，在双循环的顶级加持之下，暴力算法的时间复杂度到达了傲人的o(n*n)，我们对暴力法进行拷打后发现，只要出现字符串不匹配，暴力法都会选择前功尽弃，然后首位向后移动一格，重新做人，这样无疑会使时间复杂度高举不下。</p>
+<p>结合上述案例，也就是当我们从第一个开始寻找匹配至aabbaa时，下一个字符f是无法和文本串中的b配对的，此时暴力法将会非常无脑的从第二个字符即第二个a开始搜寻，这无疑让搜寻花费的时间陡然上涨。</p>
+<p>那么有没有一种方法，使得时间复杂度能够得到一个维度的下降呢？</p>
+<p>方法是有的，但既然我们想要直接降低时间复杂度，代价往往就是会牺牲空间复杂度。既然暴力法选择前功尽弃，那我们就需要对“前功”进行考虑、分析、并加工，让其辅助我们定位下一个寻找的起始点。而参考“前功”时，我们需要用到<strong>前缀表</strong>！！！</p>
+<h3 id="前缀表"><a href="#前缀表" class="headerlink" title="前缀表"></a>前缀表</h3><p>这里我们不由得提出两个问题：什么是前缀表？为什么是前缀表？</p>
+<p>前缀表是用于记录最长前后缀的表，最长前后缀，即一个字符串中的前缀和后缀相同的部分的长（取最大值），例如aabaa的最长前后缀为2，abcab的最长前后缀为2，abcba的最长前后缀为1，abccbb的最长前后缀为0。</p>
+<p>知道了前缀表里面的内容是什么，那为什么要使用前缀表呢？</p>
+<p>既然我们已经知道了一个字符串的最长前后缀，那就可以利用它进行简化跳跃，例如上例中，当我们匹配到f时，发现匹配失败，此时我们观察已经完成匹配的字符串的最长前后缀，不难得出aabaa的最长前后缀是2，也就是说已经匹配的字符串中，**前两个字符（aa）和后两个字符相同(aa)<strong>，也就是说用于被匹配的</strong>字符串（文本串）中匹配出错的字符（b)前面的两个字符 **(aa)和用于匹配的字符串（模式串）的前面两个字符相同（模式串前两个字符 &#x3D;&#x3D; 模式串后两个字符   模式串后两个字符 &#x3D;&#x3D; 文本串中匹配出错的字符前面的两个字符）</p>
+<p>由于文本串目前指向位置（b）的前面两个字符和模式串的前面两个字符相同，所以当我们开始新一轮匹配时，可以理所应当的跳到模式串的第三个字符和文本串进行匹配。</p>
+<p>简而言之，由于前后缀存在一部分区域相同(我们把这部分区域称之为公共前后缀)，所以下一次匹配时，只需要将模式串的公共前缀移动至上一次匹配的公共后缀的位置即可。</p>
+<p>这就是KMP算法的核心思想。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/14/KMP%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/04/04/%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">非父子组件间的通信</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
-
-
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -200,6 +371,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

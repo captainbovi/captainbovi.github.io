@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-05T04:11:06.345Z</updated>
+  <updated>2022-04-15T15:28:13.889Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP算法</title>
+    <link href="http://example.com/2022/04/14/KMP%E7%AE%97%E6%B3%95/"/>
+    <id>http://example.com/2022/04/14/KMP%E7%AE%97%E6%B3%95/</id>
+    <published>2022-04-14T14:36:56.000Z</published>
+    <updated>2022-04-15T15:28:13.889Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;什么是KMP算法&quot;&gt;&lt;a href=&quot;#什么是KMP算法&quot; class=&quot;headerlink&quot; title=&quot;什么是KMP算法&quot;&gt;&lt;/a&gt;什么是KMP算法&lt;/h2&gt;&lt;p&gt;KMP算法由Knuth、Morris和Pratt三位学者发明，这个算法取三主要名字的首字母，故叫做KMP算法。&lt;/p&gt;
+&lt;p&gt;这个算法用于&lt;strong&gt;字符串匹配&lt;/strong&gt;，其核心思想就是利用已经匹配的部分，来简化整个重新匹配的机制，避免每次匹配失败都从头再来。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据结构" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="算法" scheme="http://example.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>非父子组件间的通信</title>
@@ -373,25 +393,6 @@
     
     
     <summary type="html">&lt;p&gt;讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
-    
-    
-    <category term="js" scheme="http://example.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS高阶函数使用</title>
-    <link href="http://example.com/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2022/04/01/JS%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8/</id>
-    <published>2022-04-01T12:58:08.000Z</published>
-    <updated>2022-04-01T13:05:18.316Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;首先是for循环的一种简化写法，主要针对数组遍历&lt;/p&gt;</summary>
     
     
     
