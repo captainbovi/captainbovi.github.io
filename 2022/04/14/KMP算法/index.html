@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.2k</span>
+            <span class="post-count">1.7k</span>
         </span>
     </span>
 
@@ -105,7 +105,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -146,7 +146,27 @@
 <p>由于文本串目前指向位置（b）的前面两个字符和模式串的前面两个字符相同，所以当我们开始新一轮匹配时，可以理所应当的跳到模式串的第三个字符和文本串进行匹配。</p>
 <p>简而言之，完成匹配的模式串的前缀表中最大值对应的下标字符及其之前的字符中，存在部分相同的前缀和后缀（我们将之成为公共前后缀），每当我们进行下一次匹配时，将公共前缀移动至上一次公共后缀的位置，便可实现快速定位，继续进行匹配。</p>
 <p>这就是KMP算法的核心思想，若N为模式串长度，M为文本串长度，那么KMP算法的时间复杂度就是o(m+n)。</p>
-<h2 id="前缀表的实现"><a href="#前缀表的实现" class="headerlink" title="前缀表的实现"></a>前缀表的实现</h2> 
+<h2 id="前缀表的实现"><a href="#前缀表的实现" class="headerlink" title="前缀表的实现"></a>前缀表的实现</h2><p>我们先对前缀表（此后称为next数组)进行生成。声明一个函数getNext(int* next, const string* s) —此处使用C++语言，具体思想不变。</p>
+<p>先对该函数进行一个初始化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">next[1]=0;</span><br><span class="line">//next[j]：其值=第J字符前面j-1为字符组成的子串的最大前后缀值+1，此处next数组从下标1开始有意义</span><br><span class="line">int i=1,j=0;</span><br><span class="line">//i为next数组的索引，同时也是当前主串正在匹配的字符位置</span><br></pre></td></tr></table></figure>
+
+<p>函数实现的核心想法：<strong>如果next[j]不等于Pj，那么next[j+1]可能的次大值为next[next[j]+1]，以此类推即可高效求出next[j+1]，每一次只需要找到当前子串索引j对应的字符、前缀表索引j对应的值m，以及子串索引m对应的字符，并将这两个字符进行对比</strong></p>
+<p>(说的很好，下次别再说了)</p>
+<p>那这是为什么捏，我们不妨从一个例子进行推理。</p>
+<p>已知next[1],next[2]….next[j]，求next[j+1]</p>
+<p>我们假设<strong>next[j+1]&#x3D;k</strong>，那么前k-1个字符和后k-1个字符重合，即P1P2…Pk-1&#x3D;Pj-k+1…..Pj-1</p>
+<p>如果Pk &#x3D; Pj,那么P1P2…Pk&#x3D;Pj-k+1…..Pj，即前k个字符和后k个字符重合，则<strong>next[j+1]&#x3D;k+1</strong></p>
+<p>若二者不等，假设next[k]&#x3D;m(k一定小于j)，则有P1…Pm&#x3D;Pk-m+1…Pk</p>
+<p>故，得：<strong>P1…Pm&#x3D;Pk-m+1…Pk&#x3D;pJ-K+1…Pm-k+j-1&#x3D;Pj-m+1…..Pj-1</strong>(根据P1P2…Pk-1&#x3D;Pj-k+1…..Pj-1可得)，即前m-1个字符和后m-1个字符重合，此时，如果Pm &#x3D;Pj，那么next[j+1]&#x3D;m+1,反之则重复上述步骤，继续进行递推。</p>
+<p>还不懂？“偷”几张图看看</p>
+<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230104485.png" alt="image-20220421230104485"></p>
+<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230226429.png" alt="image-20220421230226429"></p>
+<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230343335.png" alt="image-20220421230343335"></p>
+<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230647405.png" alt="image-20220421230647405"></p>
+<p>实现代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void getNext(int* next, const string* s)&#123;</span><br><span class="line">	next[1]=0;</span><br><span class="line">	inti=1,j=0;</span><br><span class="line">	while(i&lt;=s.length)&#123;</span><br><span class="line">		if(j==0 || s[i]==s[j]) next[++i] = ++j;</span><br><span class="line">		else j = next[j]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
     </div>
