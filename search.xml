@@ -56,10 +56,7 @@
 <p>若二者不等，假设next[k]&#x3D;m(k一定小于j)，则有P1…Pm&#x3D;Pk-m+1…Pk</p>
 <p>故，得：<strong>P1…Pm&#x3D;Pk-m+1…Pk&#x3D;pJ-K+1…Pm-k+j-1&#x3D;Pj-m+1…..Pj-1</strong>(根据P1P2…Pk-1&#x3D;Pj-k+1…..Pj-1可得)，即前m-1个字符和后m-1个字符重合，此时，如果Pm &#x3D;Pj，那么next[j+1]&#x3D;m+1,反之则重复上述步骤，继续进行递推。</p>
 <p>还不懂？“偷”几张图看看</p>
-<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230104485.png" alt="image-20220421230104485"></p>
-<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230226429.png" alt="image-20220421230226429"></p>
-<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230343335.png" alt="image-20220421230343335"></p>
-<p><img src="/2022/04/14/KMP%E7%AE%97%E6%B3%95/Users/12628\AppData\Roaming\Typora\typora-user-images\image-20220421230647405.png" alt="image-20220421230647405"></p>
+<p><a href="https://imgtu.com/i/LgFHun"><img src="https://s1.ax1x.com/2022/04/21/LgFHun.png" alt="LgFHun.png"></a><br><a href="https://imgtu.com/i/LgFbBq"><img src="https://s1.ax1x.com/2022/04/21/LgFbBq.png" alt="LgFbBq.png"></a><br><a href="https://imgtu.com/i/LgFqH0"><img src="https://s1.ax1x.com/2022/04/21/LgFqH0.png" alt="LgFqH0.png"></a><br><a href="https://imgtu.com/i/LgFOEV"><img src="https://s1.ax1x.com/2022/04/21/LgFOEV.png" alt="LgFOEV.png"></a></p>
 <p>实现代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void getNext(int* next, const string* s)&#123;</span><br><span class="line">	next[1]=0;</span><br><span class="line">	inti=1,j=0;</span><br><span class="line">	while(i&lt;=s.size())&#123;</span><br><span class="line">		if(j==0 || s[i]==s[j]) next[++i] = ++j;</span><br><span class="line">		else j = next[j]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
