@@ -126,7 +126,7 @@
 <h1 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h1><p>display:none，如同其名字，也就是将整个组件给弄没了，注意，这里的display：none与将该组件从dom树上彻底删除有着很大区别，display:none仅仅是将该组件隐藏，通常用于制作二级菜单：想将其display设置为none，然后当鼠标滑过一级菜单时再将其display改为block。</p>
 <p>display:none可以让比较复杂的界面简洁化，使这个网页（界面）视觉重量减轻。除此之外，在排他算法中display:none也经常用到。</p>
 <hr>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C1.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lgkr5T"><img src="https://s1.ax1x.com/2022/04/21/Lgkr5T.jpg" alt="Lgkr5T.jpg"></a></p>
 <blockquote>
 <p>“we can only see short distance ahead,but we can see plenty there that needs to be none”</p>
 <p>— Alan Turing, <em>Computer scientist</em></p>
@@ -150,25 +150,27 @@
 <p>a、span、br、i、em、strong、label、q、var、cite、code（表示计算机源代码或者其他机器可以阅读的文本内容）什么是Flex布局</p>
 <h1 id="什么是inline-block"><a href="#什么是inline-block" class="headerlink" title="什么是inline-block"></a>什么是inline-block</h1><p>上文提到了display:block和display:inline，其中inline可以排列在一行但无法设置整个组件的高度与宽度,block可以设置组件大小但又只能单独一个组件占一行，为了解决这一尴尬的问题，inline-block孕育而生。</p>
 <p>inline-block（融合行内于块级）结合了inline和block的特点，能够与其他行内元素共享一行的同时可以改变元素的高度以及宽度，同时还可以设置padding和margin。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C2.png" alt="img"></p>
+<p><img src="https://s1.ax1x.com/2022/04/21/Lgkwbq.png" alt="Lgkwbq.png"></p>
+<p><img src="https://s1.ax1x.com/2022/04/21/LgkDaV.png" alt="LgkDaV.png"></p>
 <p>设置为inline-block后，几个元素可以在同一行显示，这个效果跟浮动基本上一样，但也有不同。</p>
 <h2 id="inline-block-Vs-float"><a href="#inline-block-Vs-float" class="headerlink" title="inline-block Vs float"></a>inline-block Vs float</h2><p>相同之处：效果能够基本上达到一样的效果</p>
 <p>不同之处：设置浮动后容易导致父元素高度坍塌，而且float会导致元素脱离文本流；display:inline-block不会使元素脱离文本流。</p>
 <p>我们来对对比一下display：inline-block和float的效果</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C3.png" alt="img"></p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C4.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lgkwbq"><img src="https://s1.ax1x.com/2022/04/21/Lgkwbq.png" alt="Lgkwbq.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lgkdrn"><img src="https://s1.ax1x.com/2022/04/21/Lgkdrn.png" alt="Lgkdrn.png"></a></p>
 <p>设置overfloat:hidden防止父元素高度坍塌</p>
 <p>如果每一个子元素高度相同，那么display:inline-block和float没有什么区别，但是每个子元素高度不同的时候float和inline-block的差距就比较明显了。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C9.png" alt="img"></p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C8.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LgkgxJ"><img src="https://s1.ax1x.com/2022/04/21/LgkgxJ.png" alt="LgkgxJ.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LgkyPU"><img src="https://s1.ax1x.com/2022/04/21/LgkyPU.png" alt="LgkyPU.png"></a></p>
 <p>若要元素排满一行，换行后还要整齐排列，就要子元素的高度一致才行，不然就会出现图三的效果，而inline-block就不会。</p>
 <h2 id="inline-block存在的问题"><a href="#inline-block存在的问题" class="headerlink" title="inline-block存在的问题"></a>inline-block存在的问题</h2><p>大家可以看使用了display:inline-block后，每个组件之间会存在间隙问题（4px)，这个问题其实不是inline-block的问题，而是我们写标签时随手打的回车符（原来是你）。</p>
 <p>去除空隙的方法也很简单，对父元素添加font-size：0，将空白符的大小变成0px，从而消除空隙。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C5.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LgkBV0"><img src="https://s1.ax1x.com/2022/04/21/LgkBV0.png" alt="LgkBV0.png"></a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要使用横向排列，那就大胆的使用inline-block；如果使用文字环绕就要使用浮动了。</p>
 <h1 id="什么是flex"><a href="#什么是flex" class="headerlink" title="什么是flex"></a>什么是flex</h1><p>我们首先来解读一下flex是什么意思。flex就是flexible box的缩写，译为弹性布局，如同其名，弹性布局就是为了给盒型模型提供最大的灵活性。其中，每一个容器都可以指定为flex（行内元素也可：inline-flex)。Webkit为内核的浏览器，则必须加上-webkit前缀（如display: -webkit -flex)</p>
 <p>使用Flex布局的元素称为称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。在设置属性display&#x3D;flex时，需要将其赋值于容器上，项目则不需要。</p>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C6.png" alt="img">默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis)</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lgk6GF"><img src="https://s1.ax1x.com/2022/04/21/Lgk6GF.png" alt="Lgk6GF.png"></a></p>
+<p>默认存在两条主轴：水平的主轴（main axis）和垂直的交叉轴（cross axis)</p>
 <h3 id="Flex-VS-Float"><a href="#Flex-VS-Float" class="headerlink" title="Flex VS Float"></a>Flex VS Float</h3><p>我们经常需要完成将多个照片并排放置的工作，此时比较简单的做法就是设置float，但是float会出现父组件高度坍塌等问题，此时，我们就需要使用flex布局进行图片的放置。</p>
 <h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
 <li>flex-direction</li>
@@ -218,7 +220,7 @@
 <li>space-evently: flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离</li>
 <li>space-around :flex items 之间的距离相等,flex items与cross start 、cross end 之间的距离等于flex items之间的距离的一半</li>
 </ul>
-<p><img src="/2022/04/01/%E7%A5%9E%E5%A5%87%E7%9A%84display/%E7%A5%9E%E5%A5%87%E7%9A%84display%5C7.jpg" alt="img"></p>
+<p>[<img src="https://s1.ax1x.com/2022/04/21/Lgkc24.jpg" alt="Lgkc24.jpg"></p>
 <h3 id="flex项目属性（item属性）"><a href="#flex项目属性（item属性）" class="headerlink" title="flex项目属性（item属性）"></a>flex项目属性（item属性）</h3><h4 id="1-order"><a href="#1-order" class="headerlink" title="1.order"></a>1.order</h4><p>order决定了该项目在容器中的顺序，可以设置为任意整数，默认为0，值越小，排的越靠前。</p>
 <h4 id="2-align-self"><a href="#2-align-self" class="headerlink" title="2. align-self"></a>2. align-self</h4><p>设置该属性可以覆盖容器的设置的align-items，属性值及其对应的效果与align-items一致。</p>
 <h4 id="3-flex-grow"><a href="#3-flex-grow" class="headerlink" title="3.flex-grow"></a>3.flex-grow</h4><p>决定了flex items如何扩展<br>可以设置为任意非父数字（小数，整数 0），默认为0<br>当flex container 在main axis方向上有剩余得size时，flex-grow属性才会有效</p>
