@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-22T07:44:37.826Z</updated>
+  <updated>2022-06-18T13:13:36.260Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2022/06/18/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://example.com/2022/06/18/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</id>
+    <published>2022-06-18T12:58:52.924Z</published>
+    <updated>2022-06-18T13:13:36.260Z</updated>
+    
+    
+    <summary type="html">&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;title: 基础数据与引用数据类型&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;date: 2022-04-04 01:55:24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tags: js&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;categories: javascript&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;基础数据类型：String、Number、Null、Undefine&lt;/p&gt;
+&lt;p&gt;引用数据类型：Object&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>KMP算法</title>
@@ -381,25 +399,6 @@
     
     
     <category term="css" scheme="http://example.com/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS的原型和原型链</title>
-    <link href="http://example.com/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
-    <id>http://example.com/2022/04/01/JS%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/</id>
-    <published>2022-04-01T12:59:07.000Z</published>
-    <updated>2022-04-01T13:05:08.957Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;讲原型的时候，我们应该先要记住以下几个要点，这几个要点是理解原型的关键：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
-    
-    
-    <category term="js" scheme="http://example.com/tags/js/"/>
     
   </entry>
   
