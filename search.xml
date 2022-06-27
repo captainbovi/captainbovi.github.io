@@ -26,7 +26,16 @@
 <p>我们通过一个小demo来揭示一下：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = a;</span><br><span class="line">a++;</span><br><span class="line">console.log(a);</span><br><span class="line">console.log(b);</span><br><span class="line">//输出 2 1</span><br><span class="line"></span><br><span class="line">var obj = new Object();</span><br><span class="line">obj.value = &#x27;crazy&#x27;</span><br><span class="line">var obj2 = obj;</span><br><span class="line">obj.value = &#x27;end&#x27;</span><br><span class="line">console.log(obj);</span><br><span class="line">console.log(obj2);</span><br><span class="line">//输出 &quot;end&quot; &quot;end&quot;</span><br></pre></td></tr></table></figure>
 
-<p>显然，我们</p>
+<p>显然，我们能够看出在所谓的“基础数据”中，一个单独的变量的改变并不会影响到其他值的改变，而在“引用数据”类型中，一个变量的改变将会影响到其他变量（同源变量）。</p>
+<p>而这就跟这两种数据类型在内存中的存在的数据结构有关了。</p>
+<p>JS中的变量都是保存在栈内存中的，其中基本数据类型的值是直接保存在栈内存中的。栈内存中，数据的存储的独立的，所以当上例中a的值发生变化时，b的值并不会受到影响。也就是说，值与值之间是独立存在的，修改一个变量不会影响其他变量。</p>
+<p>而引用数据类型则是保存在堆内存中的，当调用new方法时（如上例中new object())，就会在堆内存中开辟部分空间，同时在栈内存中声明一个变量（如上例中obj），并存其对应的堆内存的地址（指针）。也就是说变量此时保存的是对象的内存地址。当对象的值发生变化时，改变的是对应的堆内存中的值。</p>
+<p>这也就不难理解为什么修改obj.name会影响到obj2.name：在声明obj2时，并没有重新开辟一个堆空间，而只是单纯的将obj的地址进行了拷贝，也就是说obj和obj2指向的地址是相同的，所以修改obj.name会影响到obj2.name。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var obj = new Object();</span><br><span class="line">obj.value = &#x27;crazy&#x27;</span><br><span class="line">var obj2 = obj;</span><br><span class="line">obj2 = null</span><br><span class="line">console.log(obj);</span><br><span class="line">console.log(obj2);</span><br><span class="line">//输出 &quot;crazy&quot; null</span><br></pre></td></tr></table></figure>
+
+<p>同样的，在obj2置为null之前，obj和obj2都是指向同一个对象，obj2置为null，仅仅是将obj2的值置为了null，使obj2与对象断开了连接，不会影响obj的值，也就是此时obj还是指向的生成的对象，故不会影响obj的输出值。</p>
+<p>当然，值得一提的是，当对象与对象进行比较（obj &#x3D;&#x3D; obj2）时，比较的是他们的内存地址（是否指向同一对象）</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JS中的变量都是保存在栈内存中的，基本数据类型保存的是值而引用数据类型保存的是指针。</p>
 ]]></content>
       <categories>
         <category>javascript</category>
