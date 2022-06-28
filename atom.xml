@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-06-27T09:57:35.985Z</updated>
+  <updated>2022-06-28T09:15:30.517Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>==与===</title>
+    <link href="http://example.com/2022/06/28/%E4%B8%8E/"/>
+    <id>http://example.com/2022/06/28/%E4%B8%8E/</id>
+    <published>2022-06-28T09:01:16.000Z</published>
+    <updated>2022-06-28T09:15:30.517Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;js中存在两种比较操作符分别为：&amp;#x3D;&amp;#x3D;和&amp;#x3D;&amp;#x3D;&amp;#x3D;&lt;/p&gt;
+&lt;p&gt;其中&amp;#x3D;&amp;#x3D;&amp;#x3D;是严格比较符，它在对左右两侧进行比较的时候并不会执行类型强制转化，它只在两者完全相同的时候返回true。&lt;/p&gt;
+&lt;p&gt;&amp;#</summary>
+        
+      
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>基础数据与引用数据类型</title>
@@ -375,25 +402,6 @@
     
     
     <summary type="html">&lt;p&gt;在一般设计中，插入图片有两种方式，一是在组件中添加background属性，一是通过&lt;img&gt;组件。两种方式实现自适应的方式大同小异。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="css" scheme="http://example.com/categories/css/"/>
-    
-    
-    <category term="css" scheme="http://example.com/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>居中</title>
-    <link href="http://example.com/2022/04/01/%E5%B1%85%E4%B8%AD/"/>
-    <id>http://example.com/2022/04/01/%E5%B1%85%E4%B8%AD/</id>
-    <published>2022-04-01T13:07:47.000Z</published>
-    <updated>2022-04-02T05:35:14.856Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;居中的方式有很多，其中，有不少是伪居中，具体表现为看样子是居中了，但是详细查看位置后发现其实没有居中，在这里提供两种居中思路：绝对位置居中以及弹性盒子居中&lt;/p&gt;</summary>
     
     
     
