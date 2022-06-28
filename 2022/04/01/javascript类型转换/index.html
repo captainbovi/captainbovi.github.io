@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -105,7 +105,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">7 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -144,11 +144,11 @@
 </ul>
 <h2 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h2><p>你可以使用 <strong>typeof</strong> 操作符来查看 JavaScript 变量的数据类型。</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof` `&quot;John&quot;`         `// 返回 string``typeof` `3.14          ``// 返回 number``typeof` `NaN          ``// 返回 number``typeof` `false`         `// 返回 boolean``typeof` `[1,2,3,4]       ``// 返回 object``typeof` `&#123;name:``&#x27;John&#x27;``, age:34&#125; ``// 返回 object``typeof` `new` `Date()       ``// 返回 object``typeof` `function` `() &#123;&#125;     ``// 返回 function``typeof` `myCar         ``// 返回 undefined (如果 myCar 没有声明)``typeof` `null`          `// 返回 object</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typeof &quot;John&quot;         // 返回 string</span><br><span class="line">typeof 3.14          // 返回 number</span><br><span class="line">typeof null         // 返回 object</span><br></pre></td></tr></table></figure>
 
 <p>请注意：</p>
 <ul>
-<li>NaN 的数据类型是 number</li>
+<li>NaN 的数据类型是 number（NaN实际上指的是一个无效的数字）</li>
 <li>数组(Array)的数据类型是 object</li>
 <li>日期(Date)的数据类型为 object</li>
 <li>null 的数据类型是 object</li>
@@ -157,19 +157,15 @@
 <p>如果对象是 JavaScript Array 或 JavaScript Date ，我们就无法通过 <strong>typeof</strong> 来判断他们的类型，因为都是 返回 object。</p>
 <h2 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h2><p><strong>constructor</strong> 属性返回所有 JavaScript 变量的构造函数。</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;John&quot;``.constructor         ``// 返回函数 String() &#123; [native code] &#125;``(3.14).constructor         ``// 返回函数 Number() &#123; [native code] &#125;``false``.constructor         ``// 返回函数 Boolean() &#123; [native code] &#125;``[1,2,3,4].constructor       ``// 返回函数 Array()  &#123; [native code] &#125;``&#123;name:``&#x27;John&#x27;``, age:34&#125;.constructor ``// 返回函数 Object() &#123; [native code] &#125;``new` `Date().constructor       ``// 返回函数 Date()  &#123; [native code] &#125;``function` `() &#123;&#125;.constructor     ``// 返回函数 Function()&#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;John&quot;.constructor         // 返回函数 String() &#123; [native code] &#125;</span><br><span class="line">(3.14).constructor         // 返回函数 Number() &#123; [native code] &#125;</span><br><span class="line">false.constructor         // 返回函数 Boolean() &#123; [native code] &#125;</span><br><span class="line">[1,2,3,4].constructor       // 返回函数 Array()  &#123; [native code] &#125;</span><br><span class="line">&#123;name:&#x27;John&#x27;, age:34&#125;.constructor // 返回函数 Object() &#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
 
 <p>你可以使用 constructor 属性来查看对象是否为数组 (包含字符串 “Array”)：</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function` `isArray(myArray) &#123;``  ``return` `myArray.constructor.toString().indexOf(``&quot;Array&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function isArray(myArray) &#123;</span><br><span class="line">return myArray.constructor.toString().indexOf(&quot;Array&quot;) &gt; -1;&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<p>你可以使用 constructor 属性来查看对象是否为日期 (包含字符串 “Date”)：</p>
+<p>同理你可以使用 constructor 属性来查看对象是否为日期 (包含字符串 “Date”)：</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function` `isDate(myDate) &#123;``  ``return` `myDate.constructor.toString().indexOf(``&quot;Date&quot;``) &gt; -1;``&#125;</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function isDate(myDate) &#123;</span><br><span class="line">return myDate.constructor.toString().indexOf(&quot;Date&quot;) &gt; -1;&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="JavaScript-类型转换"><a href="#JavaScript-类型转换" class="headerlink" title="JavaScript 类型转换"></a>JavaScript 类型转换</h2><p>JavaScript 变量可以转换为新变量或其他数据类型：</p>
 <ul>
@@ -179,15 +175,12 @@
 <h2 id="将数字转换为字符串"><a href="#将数字转换为字符串" class="headerlink" title="将数字转换为字符串"></a>将数字转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将数字转换为字符串。</p>
 <p>该方法可用于任何类型的数字，字母，变量，表达式：</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(x)     ``// 将变量 x 转换为字符串并返回``String(123)    ``// 将数字 123 转换为字符串并返回``String(100 + 23) ``// 将数字表达式转换为字符串并返回</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String(x)     // 将变量 x 转换为字符串并返回</span><br><span class="line">String(123)    // 将数字 123 转换为字符串并返回</span><br><span class="line">String(100 + 23) // 将数字表达式转换为字符串并返回</span><br></pre></td></tr></table></figure>
 
 <p>Number 方法 <strong>toString()</strong> 也是有同样的效果。</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.toString()``(123).toString()``(100 + 23).toString()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x.toString()</span><br><span class="line">(123).toString()</span><br><span class="line">(100 + 23).toString()</span><br></pre></td></tr></table></figure>
 
-<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以找到更多数字转换为字符串的方法：</p>
 <table>
 <thead>
 <tr>
@@ -209,22 +202,21 @@
 </tr>
 </tbody></table>
 <h2 id="将布尔值转换为字符串"><a href="#将布尔值转换为字符串" class="headerlink" title="将布尔值转换为字符串"></a>将布尔值转换为字符串</h2><p>全局方法 <strong>String()</strong> 可以将布尔值转换为字符串。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(``false``)    ``// 返回 &quot;false&quot;``String(``true``)     ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String(false)    // 返回 &quot;false&quot;</span><br><span class="line">String(true)     // 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
 
 <p>Boolean 方法 <strong>toString()</strong> 也有相同的效果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">false``.toString()   ``// 返回 &quot;false&quot;``true``.toString()   ``// 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">false.toString()   // 返回 &quot;false&quot;</span><br><span class="line">true.toString()   // 返回 &quot;true&quot;</span><br></pre></td></tr></table></figure>
 
 <h2 id="将日期转换为字符串"><a href="#将日期转换为字符串" class="headerlink" title="将日期转换为字符串"></a>将日期转换为字符串</h2><p>Date() 返回字符串。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date() ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date() // 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
 
 <p>全局方法 String() 可以将日期对象转换为字符串。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(``new` `Date()) ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String(new Date()) // 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
 
 <p>Date 方法 <strong>toString()</strong> 也有相同的效果。</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = ``new` `Date()``obj.toString()  ``// 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = new Date()obj.toString()  // 返回 Thu Jul 17 2014 15:38:19 GMT+0200 (W. Europe Daylight Time)</span><br></pre></td></tr></table></figure>
 
-<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/cef9e4a498c14ec5a9cf897eac36f3bf">Date 方法</a> 章节中，你可以查看更多关于日期转换为字符串的函数：</p>
 <table>
 <thead>
 <tr>
@@ -273,9 +265,8 @@
 <p>字符串包含数字(如 “3.14”) 转换为数字 (如 3.14).</p>
 <p>空字符串转换为 0。</p>
 <p>其他的字符串会转换为 NaN (不是个数字)。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(``&quot;3.14&quot;``)  ``// 返回 3.14``Number(``&quot; &quot;``)    ``// 返回 0``Number(``&quot;&quot;``)    ``// 返回 0``Number(``&quot;99 88&quot;``)  ``// 返回 NaN</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Number(&quot;3.14&quot;)  // 返回 3.14</span><br><span class="line">Number(&quot; &quot;)    // 返回0</span><br><span class="line">Number(&quot;99 88&quot;)  // 返回 NaN</span><br></pre></td></tr></table></figure>
 
-<p>在 <a target="_blank" rel="noopener" href="https://www.nowcoder.com/tutorial/10009/30010ec441e142be9f7e941d320d0297">Number 方法</a> 章节中，你可以查看到更多关于字符串转为数字的方法：</p>
 <table>
 <thead>
 <tr>
@@ -294,32 +285,30 @@
 </tbody></table>
 <h2 id="一元运算符"><a href="#一元运算符" class="headerlink" title="一元运算符 +"></a>一元运算符 +</h2><p><strong>Operator +</strong> 可用于将变量转换为数字：</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var` `y = ``&quot;5&quot;``;   ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vary = &quot;5&quot;;  // y 是一个字符串</span><br><span class="line">var x = + y;   // x 是一个数字</span><br></pre></td></tr></table></figure>
 
 <p>如果变量不能转换，它仍然会是一个数字，但值为 NaN (不是一个数字)：</p>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var` `y = ``&quot;John&quot;``;  ``// y 是一个字符串``var` `x = + y;   ``// x 是一个数字 (NaN)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var y = &quot;John&quot;;  // y 是一个字符串</span><br><span class="line">var x = + y;   // x 是一个数字 (NaN)</span><br></pre></td></tr></table></figure>
 
 <h2 id="将布尔值转换为数字"><a href="#将布尔值转换为数字" class="headerlink" title="将布尔值转换为数字"></a>将布尔值转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将布尔值转换为数字。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(``false``)   ``// 返回 0``Number(``true``)   ``// 返回 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Number(false)   // 返回 0</span><br><span class="line">Number(true)   // 返回 1</span><br></pre></td></tr></table></figure>
 
 <h2 id="将日期转换为数字"><a href="#将日期转换为数字" class="headerlink" title="将日期转换为数字"></a>将日期转换为数字</h2><p>全局方法 <strong>Number()</strong> 可将日期转换为数字。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = ``new` `Date();``Number(d)     ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = new Date();Number(d)     // 返回 1404568027739</span><br></pre></td></tr></table></figure>
 
 <p>日期方法 <strong>getTime()</strong> 也有相同的效果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = ``new` `Date();``d.getTime()    ``// 返回 1404568027739</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = new Date();d.getTime()    // 返回 1404568027739</span><br></pre></td></tr></table></figure>
 
 <h2 id="自动转换类型"><a href="#自动转换类型" class="headerlink" title="自动转换类型"></a>自动转换类型</h2><p>当 JavaScript 尝试操作一个 “错误” 的数据类型时，会自动转换为 “正确” 的数据类型。</p>
 <p>以下输出结果不是你所期望的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 + ``null`  `// 返回 5     null 转换为 0``&quot;5&quot;` `+ ``null` `// 返回&quot;5null&quot;  null 转换为 &quot;null&quot;``&quot;5&quot;` `+ 1   ``// 返回 &quot;51&quot;   1 转换为 &quot;1&quot;``&quot;5&quot;` `- 1   ``// 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5 + null  / 返回 5     null 转换为 0</span><br><span class="line">&quot;5&quot; + null // 返回&quot;5null&quot;  null 转换为 &quot;null&quot;</span><br><span class="line">&quot;5&quot; + 1   // 返回 &quot;51&quot;   1 转换为 &quot;1&quot;</span><br><span class="line">&quot;5&quot; - 1   // 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
 
 <h2 id="自动转换为字符串"><a href="#自动转换为字符串" class="headerlink" title="自动转换为字符串"></a>自动转换为字符串</h2><p>当你尝试输出一个对象或一个变量时 JavaScript 会自动调用变量的 toString() 方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(``&quot;demo&quot;``).innerHTML = myVar;` `myVar = &#123;name:``&quot;Fjohn&quot;``&#125; ``// toString 转换为 &quot;[object Object]&quot;``myVar = [1,2,3,4]    ``// toString 转换为 &quot;1,2,3,4&quot;``myVar = ``new` `Date()   ``// toString 转换为 &quot;Fri Jul 18 2014 09:08:55 GMT+0200&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&quot;demo&quot;).innerHTML = myVar; myVar = &#123;name:&quot;Fjohn&quot;&#125; // toString 转换为 &quot;[object Object]&quot;</span><br><span class="line">myVar = [1,2,3,4]    // toString 转换为 &quot;1,2,3,4&quot;</span><br><span class="line">myVar = new Date()  // toString 转换为 &quot;Fri Jul 18 2014 09:08:55 GMT+0200&quot;</span><br></pre></td></tr></table></figure>
 
 <p>数字和布尔值也经常相互转换：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myVar = 123       ``// toString 转换为 &quot;123&quot;``myVar = ``true`      `// toString 转换为 &quot;true&quot;``myVar = ``false`      `// toString 转换为 &quot;false&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myVar = 123       // toString 转换为 &quot;123&quot;</span><br><span class="line">myVar = true      // toString 转换为 &quot;true&quot;</span><br><span class="line">myVar = false      // toString 转换为 &quot;false&quot;</span><br></pre></td></tr></table></figure>
 
 <p>下表展示了使用不同的数值转换为数字(Number), 字符串(String), 布尔值(Boolean)：</p>
 <table>
