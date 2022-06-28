@@ -1440,10 +1440,9 @@
 
 <h2 id="自动转换类型"><a href="#自动转换类型" class="headerlink" title="自动转换类型"></a>自动转换类型</h2><p>当 JavaScript 尝试操作一个 “错误” 的数据类型时，会自动转换为 “正确” 的数据类型。</p>
 <p>以下输出结果不是你所期望的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5 + null  / 返回 5     null 转换为 0</span><br><span class="line">&quot;5&quot; + null // 返回&quot;5null&quot;  null 转换为 &quot;null&quot;</span><br><span class="line">&quot;5&quot; + 1   // 返回 &quot;51&quot;   1 转换为 &quot;1&quot;</span><br><span class="line">&quot;5&quot; - 1   // 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5 + null  / 返回 5     null 转换为 0</span><br><span class="line">&quot;5&quot; + null // 返回&quot;5null&quot;  null 转换为 &quot;null&quot;</span><br><span class="line">&quot;5&quot; + 1   // 返回 &quot;51&quot;   1 转换为 &quot;1&quot;</span><br></pre></td></tr></table></figure>
 
-<p>值得注意的是，使用减号的时候，将会触发相反的转换。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;5&quot;*&quot;10&quot; //返回50</span><br><span class="line">&quot;5&quot;/&quot;10&quot; //返回0.5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;5&quot;*&quot;10&quot; //返回50</span><br><span class="line">&quot;5&quot;/&quot;10&quot; //返回0.5</span><br><span class="line">&quot;5&quot; - 1   // 返回 4     &quot;5&quot; 转换为 5</span><br></pre></td></tr></table></figure>
 
 <p>使用其他运算符号时，则均将值转化为number类型，以此保证运算符能够正常进行运算</p>
 <h2 id="自动转换为字符串"><a href="#自动转换为字符串" class="headerlink" title="自动转换为字符串"></a>自动转换为字符串</h2><p>当你尝试输出一个对象或一个变量时 JavaScript 会自动调用变量的 toString() 方法：</p>
